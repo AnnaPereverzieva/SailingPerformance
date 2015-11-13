@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gui", "Gui\Gui.csproj", "{8DDD521F-7399-4C6F-B5FC-A5D083D83046}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientService", "ClientService\ClientService.csproj", "{5D8E6FA5-8DE3-47F1-9585-69EC60A8F8A5}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DDD521F-7399-4C6F-B5FC-A5D083D83046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDD521F-7399-4C6F-B5FC-A5D083D83046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDD521F-7399-4C6F-B5FC-A5D083D83046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDD521F-7399-4C6F-B5FC-A5D083D83046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D8E6FA5-8DE3-47F1-9585-69EC60A8F8A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D8E6FA5-8DE3-47F1-9585-69EC60A8F8A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D8E6FA5-8DE3-47F1-9585-69EC60A8F8A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D8E6FA5-8DE3-47F1-9585-69EC60A8F8A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
