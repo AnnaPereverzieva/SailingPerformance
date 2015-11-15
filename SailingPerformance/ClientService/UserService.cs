@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using ClientService.GpsServiceReference;
+﻿using System.Threading.Tasks;
 using ClientService.UserServiceReference;
 
 namespace ClientService
@@ -13,17 +11,6 @@ namespace ClientService
             {
                 UserServiceClient client = new UserServiceClient();
                 return client.CheckUser(login, password);
-            });
-            return result;
-        }
-
-        public async Task<string> GetGpsDataByDate(DateTime from, DateTime to)
-        {
-            var result = await Task.Run(() =>
-            {
-                GpsServiceClient client = new GpsServiceClient();
-                var response = client.GetGpsDataByDateAsync(new GetGpsByDateRequest { DateFrom = from, DateTo = to });
-                return response.Result.ErrorMessage;
             });
             return result;
         }

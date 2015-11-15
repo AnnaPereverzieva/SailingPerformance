@@ -26,12 +26,17 @@ namespace Gui
             InitializeComponent();
         }
 
-        private async void BtnCheck_OnClick(object sender, RoutedEventArgs e) // sluzy tylko do sprawdzania serwisu User. TO do usunac
+        private async void BtnCheck_OnClick(object sender, RoutedEventArgs e) // sluzy tylko do sprawdzania serwisu Gps. TO do usunac
         {
-            UserService user = new UserService();
-            //  string time = "02-10-2015 00:05";
-            label.Content = await user.GetGpsDataByDate(DateTime.Now, DateTime.Now);
-
+            GpsService gps = new GpsService();
+            int id = 3;
+            var response = await gps.GetGpsDataByDate(DateTime.Now, DateTime.Now, id);
+            TxtBlock.Text = response.Date.Date + "\n";
+            var data = response.Longitude.Zip(response.Latitude, (n, l) => new { Longitude = n, Latitude = l }).Zip(response.Time, (k,s)=>new  {LongLatitude=k, Time=s});
+            foreach (var nw in data)
+            {
+                TxtBlock.Text += nw.Time + " " + nw.LongLatitude + "\n";
+            }
         }
     }
 }
