@@ -1,4 +1,6 @@
 ﻿using System.ServiceModel;
+using WcfService.Services.GpsService.Requests;
+using WcfService.Services.GpsService.Responses;
 
 namespace WcfService.Services.GpsService
 {
@@ -7,6 +9,8 @@ namespace WcfService.Services.GpsService
     public interface IGpsService
     {
         [OperationContract]
-        string GetGpsDataByDate();
+        GetGpsByDateResponse GetGpsDataByDate(GetGpsByDateRequest request);
+        [OperationContract]
+        GetAllGpsByDateResponse GetAllGpsDataByDate(GetAllGpsByDateRequest request);
     }
 }

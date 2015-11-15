@@ -26,10 +26,12 @@ namespace Gui
             InitializeComponent();
         }
 
-        private  async void BtnCheck_OnClick(object sender, RoutedEventArgs e) // sluzy tylko do sprawdzania serwisu User. TO do usunac
+        private async void BtnCheck_OnClick(object sender, RoutedEventArgs e) // sluzy tylko do sprawdzania serwisu User. TO do usunac
         {
             UserService user = new UserService();
-            label.Content = await user.CheckUser("", "");  
+            //  string time = "02-10-2015 00:05";
+            label.Content = await user.GetGpsDataByDate(DateTime.Now, DateTime.Now);
+
         }
     }
 }

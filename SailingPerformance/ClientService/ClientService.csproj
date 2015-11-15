@@ -45,6 +45,11 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses\UserResponse.cs" />
+    <Compile Include="Service References\GpsServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\UserServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -54,6 +59,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Service References\GpsServiceReference\ClientService.GpsServiceReference.GetAllGpsByDateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GpsServiceReference\ClientService.GpsServiceReference.GetGpsByDateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\GpsServiceReference\GpsService.wsdl" />
+    <None Include="Service References\GpsServiceReference\GpsService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GpsServiceReference\GpsService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GpsServiceReference\GpsService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GpsServiceReference\GpsService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GpsServiceReference\GpsService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GpsServiceReference\GpsService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\UserServiceReference\UserService.wsdl" />
     <None Include="Service References\UserServiceReference\UserService.xsd">
       <SubType>Designer</SubType>
@@ -66,6 +96,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\GpsServiceReference\" />
     <WCFMetadataStorage Include="Service References\UserServiceReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +110,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\UserServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GpsServiceReference\GpsService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GpsServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GpsServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GpsServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
