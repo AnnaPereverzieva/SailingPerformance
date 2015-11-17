@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="34d4b01c-6883-4de0-8426-30d5fac9184d" name="UseCaseDiagram" linkedPackageId="b4539763-7ff5-4ab5-9fb3-eb16c4810e51" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="b152fe58-2af3-4a4c-bde6-16b0fc21725c">
+      <profileInstance Id="e9d47d7a-9bfa-4c46-ae99-4f6871d40e30" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="1d1667a3-18f2-43ba-97fb-9cfdc83419c8">
+      <profileInstance Id="f7860f44-f892-40ed-bb48-5a85bb85b2ee" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="4ff7c89d-a998-46ef-9ddc-1503f0db896f" name="User" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="846c6045-8199-40e7-83b6-5e7df6684656" />
+        <targetEnds>
+          <association Id="bfea9156-d7f7-4651-833b-e2345dd81f77" isDerived="false" sourceEndRoleName="User" targetEndRoleName="rysuj wykres biegunowy dla wybranego jachtu" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="0f3256ed-e6a3-4e89-8fce-e3c1462da1d2" LastKnownName="rysuj wykres biegunowy dla wybranego jachtu" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="082d75c5-7c14-4299-b784-0654947bab01" name="User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="bfa87453-ad84-403d-8d38-562529df7a39" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="220994f0-e9b3-4dad-8b67-94a87eed524a" name="rysuj wykres biegunowy dla wybranego jachtu" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ca496c17-f41f-4294-bf8c-91068a361020" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="9db6d323-412c-4e9b-b56f-9b74cd9549e9" />
+          </association>
+          <association Id="57db603a-70b6-4233-b1c2-9dafd609c9bf" isDerived="false" sourceEndRoleName="User" targetEndRoleName="określ kurs optymalny " isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="82cbd58c-be30-4aed-9fd4-db431d2155b5" LastKnownName="określ kurs optymalny " />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d14578d2-6120-4dc9-aa9f-f2f2ed29136b" name="User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="34fe1d53-41ae-4b42-9dd2-92c11e8f6ba5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4bb85fc5-7139-4995-93e1-55c1d1f0e98f" name="określ kurs optymalny " isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="6aca2d96-d271-45d1-b216-5e52a7405113" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="fc7f16e4-e786-460f-9409-49b133ef3b4d" />
+          </association>
+          <association Id="9f030cd0-e3b1-4d37-bec1-babd1ea648a3" isDerived="false" sourceEndRoleName="User" targetEndRoleName="exportuj raport do doc / excel" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="4d4e415e-17a2-4a44-a225-27e538e04f74" LastKnownName="exportuj raport do doc / excel" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6f99f698-54c8-489a-840d-c76fd2820e57" name="User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c0799beb-1045-42e6-9090-73cd156fd917" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="943e98e6-b626-49af-a5d0-db7ed19a380b" name="exportuj raport do doc / excel" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c9cdca90-c447-4893-8815-3c520014ebc4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="a036ec63-4504-4cde-98d8-8463e2b6f5d7" />
+          </association>
+          <association Id="9776e5a0-c803-45ed-8851-d15a248b18d5" isDerived="false" sourceEndRoleName="User" targetEndRoleName="Importuj dane z excela do bazy danych" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="f7f845d9-6491-433a-87de-81fd8a6406a4" LastKnownName="Importuj dane z excela do bazy danych" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bdce3d9e-0808-4950-a692-0e9ba5970b0c" name="User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="ec337c58-dc38-4d10-b22a-3c8ea0ef9266" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c3e6f3e3-8f06-491d-a909-4873dd1fb599" name="Importuj dane z excela do bazy danych" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="be53f417-d897-4f14-9b4a-bc24d4c83848" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="b8c5de01-60c2-4a84-8dd7-2f5c08c22e6e" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="9ffba817-008a-4786-97e1-471aa7b75d2d" name="GPS / miernik wiatru" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9277fe30-1765-4bb4-85fd-edbf177fc899" />
+        <targetEnds>
+          <association Id="c0883b34-7952-4eed-90ea-e23fa257a0dd" isDerived="false" sourceEndRoleName="GPS" targetEndRoleName="wysylanie danych do servisu" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="2b56d392-b552-4f2d-b4d1-c38511f10820" LastKnownName="wysylanie danych do servisu" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6648d9b2-c76c-4916-9d97-933f3ee3d216" name="GPS" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5bb193ab-dc05-4d73-b1f3-af17e4ce6967" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7c132f6e-3016-4fb7-bbce-9932078488ff" name="wysylanie danych do servisu" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="28f457d0-9133-4ee8-99ed-b58ede5b636d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="77e4279b-5bf9-42e6-b9b4-abf168fc25d7" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="0f3256ed-e6a3-4e89-8fce-e3c1462da1d2" name="rysuj wykres biegunowy dla wybranego jachtu" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c8a36d2e-88f9-4084-8d83-7cd5ca1fbad0" />
+        <subjects>
+          <subsystemMoniker Id="e2c2fa13-d25a-4c95-9c2d-09f6b0d65a8f" LastKnownName="GUI" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="82cbd58c-be30-4aed-9fd4-db431d2155b5" name="określ kurs optymalny " isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a0c75f74-ff9d-4349-9307-1ade4b2a1167" />
+        <subjects>
+          <subsystemMoniker Id="e2c2fa13-d25a-4c95-9c2d-09f6b0d65a8f" LastKnownName="GUI" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="4d4e415e-17a2-4a44-a225-27e538e04f74" name="exportuj raport do doc / excel" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b194ad3d-7556-42ed-88a2-423c02268078" />
+        <subjects>
+          <subsystemMoniker Id="e2c2fa13-d25a-4c95-9c2d-09f6b0d65a8f" LastKnownName="GUI" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="f7f845d9-6491-433a-87de-81fd8a6406a4" name="Importuj dane z excela do bazy danych" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="42e786c1-8309-4cef-b8f1-3c67fd34c86b" />
+        <subjects>
+          <subsystemMoniker Id="e2c2fa13-d25a-4c95-9c2d-09f6b0d65a8f" LastKnownName="GUI" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="d7fe0c69-ad9a-47c0-9adf-0700272505e1" name="Zapis do bazy danych (Entity Framework - Database first) " isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ed90abd9-e472-480a-a197-87b4b73d9757" />
+        <subjects>
+          <subsystemMoniker Id="44f20ab2-ea48-4ace-9792-0614ad5972a7" LastKnownName="Baza danych" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="e7f77713-e091-4878-a3fa-273f1fed258d" name="Service (WCF /WinApi)" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d46406fb-ce0a-4767-a345-5839f9be0e02" />
+        <targetEnds>
+          <association Id="9bdf48c2-17d6-497f-b55a-c3994ac6095c" isDerived="false" sourceEndRoleName="Servis (WCF /WinApi)" targetEndRoleName="Zapis do bazy danych (Entity Framework) " isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="d7fe0c69-ad9a-47c0-9adf-0700272505e1" LastKnownName="Zapis do bazy danych (Entity Framework - Database first) " />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ad128a35-e4c4-43c2-ad12-99dfa54fee88" name="Servis (WCF /WinApi)" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4d22914c-a630-4e51-a234-21bcd447993d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9a829e24-bfe3-4a85-8225-7cb91212abd9" name="Zapis do bazy danych (Entity Framework) " isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="3da8b2cb-cad3-4d4d-9e23-1d3b9c08673e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="48725ee7-05cc-48e3-9035-15cbaab8a993" />
+          </association>
+        </targetEnds>
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="2b56d392-b552-4f2d-b4d1-c38511f10820" name="wysylanie danych do servisu" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="71d51c99-1aa8-43aa-a588-c3bab5ca2183" />
+        <subjects>
+          <subsystemMoniker Id="e7f77713-e091-4878-a3fa-273f1fed258d" LastKnownName="Service (WCF /WinApi)" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="44f20ab2-ea48-4ace-9792-0614ad5972a7" name="Baza danych" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2032f2a3-f220-4b02-9ca6-882feb9f4fe9" />
+        <targetEnds>
+          <association Id="d26303c7-37da-452d-b3a5-7f1e3f8988bc" isDerived="false" sourceEndRoleName="Baza danych" targetEndRoleName="Odczyt z bazy danych" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="55062220-ef42-4a49-a033-4669c4e97afb" LastKnownName="Odczyt z bazy danych" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6495aa1d-c6be-49da-9a3f-1de334a128c1" name="Baza danych" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="555d1870-5caa-4555-962d-40b298a41555" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d5db8962-601f-4268-944d-fbda61b93127" name="Odczyt z bazy danych" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7f556bac-4282-4d05-be66-58239e416a9b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="70238800-5d21-4160-9330-747660e47bbc" />
+          </association>
+        </targetEnds>
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="e2c2fa13-d25a-4c95-9c2d-09f6b0d65a8f" name="GUI" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="08619b61-fa0d-4a51-a53e-bd6993083e3d" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="55062220-ef42-4a49-a033-4669c4e97afb" name="Odczyt z bazy danych" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="08b6c612-db4f-49fd-89c9-e6c9c26fd98c" />
+        <subjects>
+          <subsystemMoniker Id="e2c2fa13-d25a-4c95-9c2d-09f6b0d65a8f" LastKnownName="GUI" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="b4539763-7ff5-4ab5-9fb3-eb16c4810e51" name="Diagrams">
+    <elementDefinition Id="6c4f38f6-88aa-43c5-9888-0db6e9eea421" />
+  </package>
+</useCaseModelRoot>

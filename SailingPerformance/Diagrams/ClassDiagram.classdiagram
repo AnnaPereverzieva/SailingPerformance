@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="8c5c8daf-3162-4b21-8a94-5d0078ab8eeb" name="ClassDiagram" linkedPackageId="43118239-d07a-44c1-97b8-d081efcefc0c" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="1a8cbbc9-fea7-44a5-92df-61cd5040710c">
+      <profileInstance Id="dc51f11e-439f-4801-a943-2c960e507b16" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="21f076fa-d12f-480c-bd5b-739888bcd759">
+      <profileInstance Id="0a17d83a-9bbd-4298-a3ac-27692a2e2a94" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="75921144-cbec-482d-8d96-5b3227231386" name="Jacht" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a5109823-f3c2-4006-a677-085c8580870a" />
+        <suppliersInternal>
+          <dependency Id="58c2b440-90c1-4407-b17a-76abc4f67d85">
+            <interfaceMoniker Id="564bc305-b9de-411b-b7e8-b18588d669a9" LastKnownName="Wykres" />
+            <elementDefinition Id="03048709-830b-4f7e-8ed5-0195122084e6" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association Id="fac4c500-8790-4877-8b17-704f925e674d" isDerived="false" sourceEndRoleName="Jacht" targetEndRoleName="Sesje" isLeaf="false" isAbstract="false">
+            <classMoniker Id="f6acc05e-5bf2-43ab-8481-414ef1bdf463" LastKnownName="Sesja" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5facfc38-b4b9-4dd2-a527-2d7738c6e188" name="Jacht" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="3ae352b1-ea8d-4fe7-bb59-7c0c71b3793e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b1e0d346-d33d-49f1-9902-d5514e4dcc18" name="Sesje" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="fe3dea18-4ceb-46cc-be92-60d9a8312df3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="b46a81c2-44f5-4c3e-b6b2-b08b2c0efa79" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="26cf2803-98b9-493e-8da8-38da1e531394" name="JachtID (GUID)" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="964565c2-b194-410e-8189-d014bd7c2f54" />
+          </property>
+          <property Id="d7488223-7de0-4610-8ca7-d194da12a4a0" name="nazwa" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f118425e-4374-4aea-8f98-b3fcf98df94d" />
+          </property>
+          <property Id="e4141f79-6ffc-4461-b257-9641f81fd748" name="Model" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8a9fec4b-8712-4b17-a913-9da451d3d5c3" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a68abc56-fac5-4068-b3d4-b095c843daaf" name="Database" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4e65c00d-283a-41aa-bc16-7eae191847ee" />
+        <suppliersInternal>
+          <interfaceRealization Id="ec276822-ab6c-499c-b3a8-e81044241871">
+            <interfaceMoniker Id="564bc305-b9de-411b-b7e8-b18588d669a9" LastKnownName="Wykres" />
+            <elementDefinition Id="34fca8d3-ecbc-45cc-ab67-2293d961e3c3" />
+          </interfaceRealization>
+          <dependency Id="fb4a113a-2aa7-4fe3-be9f-824f429ca8d2">
+            <interfaceMoniker Id="67f5a5b9-36d6-462a-bb22-ce3057fa769c" LastKnownName="ISerwis" />
+            <elementDefinition Id="273bc849-ddba-4397-bf22-7b0da73cb394" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association Id="66ff37f6-8297-4822-a546-0b30891b7b41" isDerived="false" sourceEndRoleName="Database" targetEndRoleName="Sesje" isLeaf="false" isAbstract="false">
+            <classMoniker Id="f6acc05e-5bf2-43ab-8481-414ef1bdf463" LastKnownName="Sesja" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="339a3dda-294a-4ffa-bf28-c65615979c03" name="Database" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="e356162f-4c89-41db-903a-2cc5c49838f9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8097e45d-69ec-4b07-b94c-93618f685850" name="Sesje" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="569fbf82-7039-4692-af25-dbb7066913a6" name="Lower" value="1">
+                      <elementDefinition Id="658e7e55-3fb8-4346-bbde-b8240a7bc3f5" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="104c31f5-7398-47d5-ada4-3eec383eeb34" name="Upper" value="*">
+                      <elementDefinition Id="30b72120-ccca-4a65-a542-ac2c6b9823ae" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="0236b69f-024e-43f2-a8da-efa71cdb7321" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="67950294-abc3-4ea4-8890-3ba5f13f08a3" />
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="f555c8fc-e48b-4972-813c-af48aabfb80e" name="Rysuj Wykres Biegunowy" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="41864fe1-cad8-4843-8a0c-dcf520500a4d" />
+          </operation>
+          <operation Id="517add6e-3d72-406f-b20e-0231c77a56b7" name="Okresl Optymalny Kurs - min/max" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="cd11d418-4555-45d1-b472-d4962f8ee656" />
+          </operation>
+          <operation Id="d79bed0b-edc9-4bc1-b4e7-0a70be30a4ed" name="Porównaj dane GPS" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1a564493-7590-41b0-a841-43942ee9124e" />
+          </operation>
+          <operation Id="6af690f7-9cef-431e-baf4-343c91e39d13" name="Eksportuj raport do excela/doc" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="58b63804-88b8-4ddb-9152-b85be331bb13" />
+          </operation>
+          <operation Id="61d257c0-a477-44fe-b4b9-320dabbbf355" name="Generuj raport" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ec5ba257-8e4d-43a1-b86e-e15f06393d22" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="0e5aab95-e8b9-4eee-8a50-db38d5b30c02" name="Odczyt" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="73ae7653-4055-447f-a44d-129832217443" />
+        <ownedAttributesInternal>
+          <property Id="9c298939-f8b3-4be5-9bd7-8ee35520409f" name="wiatr sila" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="55ef5f40-0b29-483c-9a7f-8b4627ec15e6" />
+          </property>
+          <property Id="4112a88c-763e-47dd-9c8b-d2a30e8b0c83" name="wiatr kierunek" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b98e9d09-23a0-4f9c-817e-a58324f5ab53" />
+          </property>
+          <property Id="401c3bf7-522f-4630-a783-9e235c55dce5" name="czas" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="0068021f-5b55-42d8-a335-ba3957dbee31" />
+          </property>
+          <property Id="1d9ee769-21c1-4a62-a9e1-dfe1b60b0b32" name="kurs" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4016400f-f63b-4348-ac4f-989cf91383cb" />
+          </property>
+          <property Id="a42ad8ff-fe20-4ba0-947c-08ee30370667" name="predkosc" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="87153f7e-3e52-409b-8e2f-c711f2bf542b" />
+          </property>
+          <property Id="c637d927-e2f1-463f-b5cb-5916eb83acb3" name="geo dlugosc" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c01a8a77-5143-4c81-81c6-1e5a0a2e56b2" />
+          </property>
+          <property Id="cde289ef-2b77-4b6a-92de-e0b01d5367dc" name="geo szerokosc" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e9c2f5fa-500d-4add-9527-16e9f36ad765" />
+          </property>
+          <property Id="cece269b-26e8-4800-9322-7af573eb36e9" name="geo wysokosc" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b9b31c47-8c6c-4461-af3b-04e68474adf5" />
+          </property>
+          <property Id="da070cb2-3e2b-421b-b853-b26da8aad4d4" name="numer odczytu (GUID)" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="29c9b921-fb04-4cff-ba73-1ab4200ab0db" />
+          </property>
+          <property Id="4e541d92-efa6-4d12-bf6b-5245469ca1f8" name="moment odczytu" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="046896c0-7f31-48b5-822e-417f0323e5e0" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="564bc305-b9de-411b-b7e8-b18588d669a9" name="Wykres" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="74915be8-ab72-4ee3-afb7-f4a7e085246c" />
+        <ownedOperations>
+          <operation Id="86a1bc8a-5a01-4d1a-9b45-3f5816e58035" name="Rysuj Wykres Biegunowy" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ce690292-7b84-459e-a0d9-317a2983e615" />
+          </operation>
+          <operation Id="f6bd4a65-a758-4326-9a4f-3dfae469a971" name="Okresl Optymalny Kurs - min/max" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e821def7-9f04-40a6-9978-83e09fe610ec" />
+          </operation>
+          <operation Id="c8b5e09f-9e1e-431b-a145-a2a573cf290c" name="Porównaj dane GPS" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a2c67165-2fd2-4f7a-ab44-1c05d2be0a4c" />
+          </operation>
+          <operation Id="62c7325a-0ab9-487d-8c9f-1239fe7f7140" name="Eksportuj raport do excela/doc" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9dec12f5-2671-4580-b491-a8ff73dec216" />
+          </operation>
+          <operation Id="6aacf0ef-6a6c-4db9-8f15-f52a7b104668" name="Generuj raport" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9795cb6b-d973-4c0d-8426-511b44c47a0d" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="228c6543-6d09-4651-9a34-ce8965a53a12" name="Serwis" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="495fe83c-605e-4488-b59a-df78ccfa63cb" />
+        <suppliersInternal>
+          <interfaceRealization Id="52b471c8-0abd-48ca-9c44-640f4075a4b1">
+            <interfaceMoniker Id="67f5a5b9-36d6-462a-bb22-ce3057fa769c" LastKnownName="ISerwis" />
+            <elementDefinition Id="302efc5e-3c3c-4ac0-a082-1cc3033cb45d" />
+          </interfaceRealization>
+          <dependency Id="2c086498-ffb0-4e68-b490-fd4b4b477e02">
+            <interfaceMoniker Id="fbad222b-4954-46f4-b7a8-56217708ed51" LastKnownName="IAplikacja urzadzen zewnetrznych" />
+            <elementDefinition Id="e76327f1-007b-4161-87e1-2bc151c89fa3" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property Id="5948e2cb-9799-4364-a8db-e050dd5750a6" name="DataContract" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="bb1855d5-6843-4439-9e23-d853250be2c6" />
+          </property>
+          <property Id="978153a2-d7ca-4e72-83cd-8cb7941a604b" name="ServiceContract" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c0dcb8de-68c9-455b-a845-a558f9c14ef7" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="067de76a-e4ae-4fd4-8817-cd1bf100b84b" name="Zapisz dane do bazy" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="4f605310-41aa-404d-8249-af98b9005d92" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="67f5a5b9-36d6-462a-bb22-ce3057fa769c" name="ISerwis" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="49e7c1a2-2f1f-42e8-9d09-527c7358e4ce" />
+        <ownedOperations>
+          <operation Id="1fafc90f-e7db-4d3c-94ef-c09a88cb88fc" name="Zapisz dane do bazy" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1a2bf5c6-04ad-4fa6-a0ec-e0b01aeea213" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c56ec381-ce4c-4165-b278-f0468d3925bb" name="GPS" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c3489498-65cc-4708-a950-90ba2f4e2e03" />
+        <suppliersInternal>
+          <interfaceRealization Id="93639075-da18-4ce7-bdbb-3c887bac716d">
+            <interfaceMoniker Id="fbad222b-4954-46f4-b7a8-56217708ed51" LastKnownName="IAplikacja urzadzen zewnetrznych" />
+            <elementDefinition Id="20d9a72a-6eca-48c2-adab-a3a1af941c38" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property Id="1f36b7fa-3081-424e-af5a-ecf1a337dff9" name="Dlugosc" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="0c621c3a-6a48-43e6-b374-0d087ecac7af" />
+          </property>
+          <property Id="4701b59e-b009-432b-912d-97a33b57fb51" name="Szerokosc" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a906c3b4-fb0a-4830-b5f5-a11e16de2c10" />
+          </property>
+          <property Id="63768745-dd1c-4f25-8a7d-2a920e53df7b" name="Czas" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8110be8e-8cbd-4b82-9e54-f9bd16d68ceb" />
+          </property>
+          <property Id="2a51e817-c647-4bc7-8045-40a3033bbbf2" name="kurs" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="7a563521-9b4b-4615-abcd-ab994cb2c4be" />
+          </property>
+          <property Id="f030e6a5-0368-46d9-aebb-1cddb77731b5" name="predkosc" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="83df5096-a4e0-4d5f-b597-9e8058ec8aad" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="65f275cd-1953-4514-87f3-b50f5447af83" name="Wyslij dane do Serwisu" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c24ad8a8-2525-4356-bd87-1a8ddc4a4b44" />
+          </operation>
+          <operation Id="2aae5429-1094-494b-9b4c-3868f5e1dbf6" name="Konwertuj do XML" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ba7bd2b6-b408-409d-b062-f6a0b669a2ab" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2446689e-1215-4644-8ed2-3793553f12c5" name="Miernik Wiatru" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="352a8661-b99c-4095-b5ac-8c2b9dcb5889" />
+        <suppliersInternal>
+          <interfaceRealization Id="6a23f3d7-ae1e-41e7-b5c0-a5debbbb8346">
+            <interfaceMoniker Id="fbad222b-4954-46f4-b7a8-56217708ed51" LastKnownName="IAplikacja urzadzen zewnetrznych" />
+            <elementDefinition Id="ae4aaaab-2f19-48eb-982c-0887e92af1ca" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property Id="f0d5faa5-149e-45cd-9eaa-8a7411f2cebf" name="sila wiatru" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5da248a5-0d9f-4b1a-bb55-fe996db411a7" />
+          </property>
+          <property Id="79e7c62e-de9f-4b76-ac78-96b0fd6077ac" name="kierunek wiatru" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5e1d0614-60eb-4525-9ab3-2cdc05c775ad" />
+          </property>
+          <property Id="4ef0b96b-99ff-4d8c-9c5d-c77444feee43" name="czas" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5e70197b-d44c-48ab-93ac-80255e765e87" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="ddb2de2c-838a-4326-ac93-81acb41e9a94" name="Wyslij dane do Serwisu" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a2b11481-704a-4904-898c-d9f789f83be5" />
+          </operation>
+          <operation Id="57e9469c-eef7-4c8c-99b0-fb7967810f50" name="Konwertuj do XML" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="fcfb5e49-f17f-4373-ab75-39cc06f3bafe" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="fbad222b-4954-46f4-b7a8-56217708ed51" name="IAplikacja urzadzen zewnetrznych" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="35f4c0eb-a059-4e5c-80d9-9ec432f745b1" />
+        <ownedOperations>
+          <operation Id="84b9b024-f2e0-4563-a516-ceed58e91d9a" name="Wyslij dane do Serwisu" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="830ebed2-d128-4497-987b-5a639b03b065" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="f6acc05e-5bf2-43ab-8481-414ef1bdf463" name="Sesja" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a13d064e-ba81-40de-a9e5-5d1d56e3ccd1" />
+        <targetEnds>
+          <association Id="c5c90e06-532a-4829-ac2d-b435bfef9d1f" isDerived="false" sourceEndRoleName="Sesje" targetEndRoleName="Odczyty" isLeaf="false" isAbstract="false">
+            <classMoniker Id="0e5aab95-e8b9-4eee-8a50-db38d5b30c02" LastKnownName="Odczyt" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="453d37e7-907f-4710-b928-bc5e39e4da7d" name="Sesje" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="a2dea4a6-63c6-4023-b242-d3371c2895b4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9e832379-bcf6-4745-b69d-6686bbb6b669" name="Odczyty" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="f10cb764-58bc-429c-9b26-6913eb8de221" name="Lower" value="1">
+                      <elementDefinition Id="71d00c26-072e-4823-9d51-f99304ec1f1a" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="fcd7bf98-aea9-41e1-b056-9779b74a5801" name="Upper" value="*">
+                      <elementDefinition Id="af52ea7a-06a2-4720-ba9b-04a1a2873765" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="e7581954-a2a8-4dac-baa8-f9513dccab4b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="05a6ed15-c208-414c-a583-3022bac2bccc" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="1fc4392b-ce17-447e-a29c-11c2a818c935" name="Numer sesji (GUID)" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5c5dd8e1-de7e-44aa-a22f-e41749b9f055" />
+          </property>
+          <property Id="95a89f2e-8ba2-49e2-8ed6-db5ea86e4cc1" name="poczatek sesji (Unix time)" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f9dc2d95-dae0-4a61-9b89-907e3e1a82af" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="43118239-d07a-44c1-97b8-d081efcefc0c" name="Diagrams">
+    <elementDefinition Id="6c4f38f6-88aa-43c5-9888-0db6e9eea421" />
+  </package>
+</logicalClassDesignerModel>
