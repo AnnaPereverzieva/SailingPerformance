@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClientService;
+using Gui.ViewModel;
 
 namespace Gui
 {
@@ -24,19 +25,20 @@ namespace Gui
         public MainWindow()
         {
             InitializeComponent();
+            DataContext=new ChartViewModel();
         }
 
         private async void BtnCheck_OnClick(object sender, RoutedEventArgs e) // sluzy tylko do sprawdzania serwisu Gps. TO do usunac
         {
-            GpsService gps = new GpsService();
-            int id = 3;
-            var response = await gps.GetGpsDataByDate(DateTime.Now, DateTime.Now, id);
-            TxtBlock.Text = response.Date.Date + "\n";
-            var data = response.Longitude.Zip(response.Latitude, (n, l) => new { Longitude = n, Latitude = l }).Zip(response.Time, (k,s)=>new  {LongLatitude=k, Time=s});
-            foreach (var nw in data)
-            {
-                TxtBlock.Text += nw.Time + " " + nw.LongLatitude + "\n";
-            }
+            //GpsService gps = new GpsService();
+            //int id = 3;
+            //var response = await gps.GetGpsDataByDate(DateTime.Now, DateTime.Now, id);
+            //TxtBlock.Text = response.Date.Date + "\n";
+            //var data = response.Longitude.Zip(response.Latitude, (n, l) => new { Longitude = n, Latitude = l }).Zip(response.Time, (k,s)=>new  {LongLatitude=k, Time=s});
+            //foreach (var nw in data)
+            //{
+            //    TxtBlock.Text += nw.Time + " " + nw.LongLatitude + "\n";
+            //}
         }
     }
 }

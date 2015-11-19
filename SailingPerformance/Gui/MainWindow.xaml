@@ -3,32 +3,14 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                      xmlns:local="clr-namespace:Gui"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:oxy="http://oxyplot.org/wpf"
                       Title="MainWindow"
                       Width="852"
                       Height="350"
                       mc:Ignorable="d">
     <Grid>
-        <Button x:Name="BtnCheck"
-                Width="100"
-                Margin="10,10,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="BtnCheck_OnClick"
-                Content="get gps data" />
-
-        <TextBox x:Name="TxtBlock"
-                 Width="672"
-                 Height="283"
-                 Margin="115,26,0,0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 RenderTransformOrigin="0.46,-0.577"
-                 ScrollViewer.CanContentScroll="True"
-                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto" />
-
-
+        <oxy:Plot x:Name="Plot1" Title="A Graph" Model="{Binding PlotModel}" Margin="10" >
+        </oxy:Plot>
     </Grid>
 </controls:MetroWindow>
