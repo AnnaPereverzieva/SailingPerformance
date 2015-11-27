@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ClientService.Model;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Extensions;
@@ -12,6 +13,7 @@ namespace Gui.ViewModel
     public class ChartViewModel
     {
         public PlotModel PlotModel { get; set; }
+        public LineSeries LineSeries  { get; set; }
         private readonly List<OxyColor> Colors = new List<OxyColor>
                                             {
                                                 OxyColors.Green,
@@ -30,14 +32,27 @@ namespace Gui.ViewModel
                                                        MarkerType.Cross
                                                    };
 
-        public ChartViewModel()
+        public ChartViewModel(List<DataGps> list, double windStrength, double windDirection)
         {
             PlotModel = new PlotModel();
-            SetUpModel();
+            SetUpModel(list,  windStrength, windDirection);
         }
 
-        private void SetUpModel()
+        public void DrawChart(List<DataGps> list, double windStrength, double windDirection)
         {
+            foreach (var item in list)
+            {
+                double pointX = Math.Cos((90 - item.DirectionWind) / (180 / Math.PI)) * item.Speed;
+                double pointY = Math.Sin((90 - item.DirectionWind) / (180 / Math.PI)) * item.Speed;
+                LineSeries.Points.Add(new DataPoint(pointX, pointY));
+            }
+            PlotModel.Series.Add(LineSeries);
+
+        }
+
+        public void SetUpModel(List<DataGps> list, double windStrength, double windDirection)
+        {
+            LineSeries = new LineSeries();
             PlotModel.LegendTitle = "Legend";
             PlotModel.LegendOrientation = LegendOrientation.Horizontal;
             PlotModel.LegendPlacement = LegendPlacement.Outside;
@@ -49,26 +64,32 @@ namespace Gui.ViewModel
             //PlotModel.Axes.Add(dateAxis);
             //var valueAxis = new LinearAxis(AxisPosition.Left, 0) { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
             //PlotModel.Axes.Add(valueAxis);
-            PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, -10, 20));
-            PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, -10,20));
+            PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, 0, 4));
+            PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, -4, 4));
+            DrawChart(list, windStrength, windDirection);
+
+     
+
+
+
             //  PlotModel.Series.Add(new FunctionSeries(Math.Cos, -20, 40, 0.1, "cos(x)"));
-            List<double> ListX = new List<double> { 5, 2, 9, 8, 7, 3 };
-            LineSeries ll = new LineSeries();
-            for (int i = 0; i < 20; i++)
-            {
-                ll.Points.Add(new DataPoint(i,i+6));
-            }
-            for (int i = 0; i < 20; i++)
-            {
-                ll.Points.Add(new DataPoint(i, i - 6));
-            }
+            //List<double> ListX = new List<double> { 5, 2, 9, 8, 7, 3 };
+            //LineSeries ll = new LineSeries();
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    ll.Points.Add(new DataPoint(i, i + 6));
+            //}
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    ll.Points.Add(new DataPoint(i, i - 6));
+            //}
 
-            PlotModel.Series.Add(ll);
+            //PlotModel.Series.Add(ll);
 
 
 
-            List<double> ListY = new List<double> { 5, 2, 9, 8, 7, 3 };
-          //  PlotModel.AddScatterSeries(ListX, ListY);
+            //List<double> ListY = new List<double> { 5, 2, 9, 8, 7, 3 };
+            //  PlotModel.AddScatterSeries(ListX, ListY);
 
 
             //var scatterSeries = new ScatterSeries { MarkerType = MarkerType.Circle };
@@ -80,8 +101,8 @@ namespace Gui.ViewModel
             //    var size = r.Next(5, 15);
             //    var colorValue = r.Next(100, 1000);
             //    scatterSeries.Points.Add(new ScatterPoint(x, y, 10, colorValue));
-            //}            //PlotModel.Series.Add(scatterSeries);
-
+            //}
+            //PlotModel.Series.Add(scatterSeries);
         }
 
     }

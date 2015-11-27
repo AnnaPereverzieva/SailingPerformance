@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using ClientService.Model;
 using Spire.Xls;
@@ -7,7 +8,7 @@ namespace ClientService.Services
 {
     public class ReadExcelService
     {
-        public List<DataGps> GetData(string path)
+        public List<DataGps> LoadData(string path)
         {
             Workbook workbook = new Workbook();
             List<DataGps> DataGpsList=new List<DataGps>();
@@ -18,8 +19,8 @@ namespace ClientService.Services
             for (int i = 0; i < 19; i++)
             {
                 var dataGps=new DataGps();
-                dataGps.Speed=(double)dataTable.Rows[i]["predkosc"];
-                dataGps.DirectionWind = (double)dataTable.Rows[i]["kurs"];
+                dataGps.Speed=Convert.ToDouble(dataTable.Rows[i]["predkosc"]) ;
+                dataGps.DirectionWind = Convert.ToDouble(dataTable.Rows[i]["kurs"]);
                 DataGpsList.Add(dataGps);
             }
             return DataGpsList;

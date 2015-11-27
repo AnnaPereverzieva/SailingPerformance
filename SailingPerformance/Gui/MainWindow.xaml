@@ -12,14 +12,16 @@
     <Grid>
         <oxy:Plot x:Name="Plot1"
                   Title="A Graph"
-                  Margin="190,141,10,10"
-                  Model="{Binding PlotModel}" />
+                  Margin="23,40,38,10"
+                  Model="{Binding ChartViewModel.PlotModel,
+                                  UpdateSourceTrigger=PropertyChanged,
+                                  Mode=TwoWay}" />
         <Button x:Name="button"
                 Width="75"
-                Margin="70,49,0,0"
+                Margin="23,10,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Click="button_Click"
-                Content="Button" />
+                Command="{Binding DrawAction}"
+                Content="Rysuj" />
     </Grid>
 </controls:MetroWindow>

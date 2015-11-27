@@ -9,7 +9,5 @@ namespace ClientService.Model
         public double Longitude { get; set; }
         public double Latitude { get; set; }
         public double DirectionWind { get; set; }
-        public double PointX { get; set; }
-        public double PointY { get; set; }
     }
 }
