@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClientService;
 using Gui.ViewModel;
+using LinqToExcel;
+using Spire.Xls;
 
 namespace Gui
 {
@@ -28,17 +31,9 @@ namespace Gui
             DataContext=new ChartViewModel();
         }
 
-        private async void BtnCheck_OnClick(object sender, RoutedEventArgs e) // sluzy tylko do sprawdzania serwisu Gps. TO do usunac
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-            //GpsService gps = new GpsService();
-            //int id = 3;
-            //var response = await gps.GetGpsDataByDate(DateTime.Now, DateTime.Now, id);
-            //TxtBlock.Text = response.Date.Date + "\n";
-            //var data = response.Longitude.Zip(response.Latitude, (n, l) => new { Longitude = n, Latitude = l }).Zip(response.Time, (k,s)=>new  {LongLatitude=k, Time=s});
-            //foreach (var nw in data)
-            //{
-            //    TxtBlock.Text += nw.Time + " " + nw.LongLatitude + "\n";
-            //}
+         
         }
     }
 }

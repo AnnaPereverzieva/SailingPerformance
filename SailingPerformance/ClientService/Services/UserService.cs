@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ClientService.UserServiceReference;
 
-namespace ClientService
+namespace ClientService.Services
 {
     public class UserService
     {
@@ -15,4 +15,6 @@ namespace ClientService
             return result;
         }
     }
+
+  
 }

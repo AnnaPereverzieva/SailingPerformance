@@ -4,7 +4,7 @@ using AutoMapper;
 using ClientService.GpsServiceReference;
 using ClientService.Responses;
 
-namespace ClientService
+namespace ClientService.Services
 {
     public class GpsService
     {

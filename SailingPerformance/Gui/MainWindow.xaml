@@ -10,7 +10,16 @@
                       Height="350"
                       mc:Ignorable="d">
     <Grid>
-        <oxy:Plot x:Name="Plot1" Title="A Graph" Model="{Binding PlotModel}" Margin="10" >
-        </oxy:Plot>
+        <oxy:Plot x:Name="Plot1"
+                  Title="A Graph"
+                  Margin="190,141,10,10"
+                  Model="{Binding PlotModel}" />
+        <Button x:Name="button"
+                Width="75"
+                Margin="70,49,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="button_Click"
+                Content="Button" />
     </Grid>
 </controls:MetroWindow>
