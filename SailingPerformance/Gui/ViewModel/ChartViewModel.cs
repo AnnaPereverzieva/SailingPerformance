@@ -72,7 +72,8 @@ namespace Gui.ViewModel
 
 
 
-            //  PlotModel.Series.Add(new FunctionSeries(Math.Cos, -20, 40, 0.1, "cos(x)"));
+            //  PlotModel.Series.Add(new FunctionSeries(Math.Cos, -20, 40, 0.1, "cos(x)"));
+
             //List<double> ListX = new List<double> { 5, 2, 9, 8, 7, 3 };
             //LineSeries ll = new LineSeries();
             //for (int i = 0; i < 20; i++)
