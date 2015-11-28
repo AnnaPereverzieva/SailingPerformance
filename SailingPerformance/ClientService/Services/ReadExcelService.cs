@@ -16,7 +16,7 @@ namespace ClientService.Services
             Worksheet sheet = workbook.Worksheets[0];
 
             DataTable dataTable = sheet.ExportDataTable();
-            for (int i = 0; i < 19; i++)
+            for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 var dataGps=new DataGps();
                 dataGps.Speed=Convert.ToDouble(dataTable.Rows[i]["predkosc"]) ;
