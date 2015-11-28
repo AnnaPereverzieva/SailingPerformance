@@ -34,6 +34,14 @@
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Spire.Common, Version=1.2.289.7040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
       <HintPath>..\packages\Spire.XLS.7.8.43\lib\net40\Spire.Common.dll</HintPath>
       <Private>True</Private>
@@ -51,6 +59,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -64,96 +73,27 @@
   <ItemGroup>
     <Compile Include="AutoMapper\AutoMapperConfiguration.cs" />
     <Compile Include="Model\DataGps.cs" />
+    <Compile Include="Services\DbService.cs" />
     <Compile Include="Services\GpsService.cs" />
     <Compile Include="Responses\GpsSingleByDateResponse.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses\UserResponse.cs" />
-    <Compile Include="Service References\GpsServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\UserServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Services\ReadExcelService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Service References\GpsServiceReference\ClientService.GpsServiceReference.GetAllGpsByDateResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\GpsServiceReference\ClientService.GpsServiceReference.GetGpsByDateResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\GpsServiceReference\GpsService.wsdl" />
-    <None Include="Service References\GpsServiceReference\GpsService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GpsServiceReference\GpsService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GpsServiceReference\GpsService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GpsServiceReference\GpsService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GpsServiceReference\GpsService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GpsServiceReference\GpsService5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserServiceReference\UserService.wsdl" />
-    <None Include="Service References\UserServiceReference\UserService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserServiceReference\UserService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\GpsServiceReference\" />
-    <WCFMetadataStorage Include="Service References\UserServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UserServiceReference\UserService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UserServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UserServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UserServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\GpsServiceReference\GpsService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\GpsServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\GpsServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\GpsServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <ProjectReference Include="..\Dal\Dal.csproj">
+      <Project>{5a0dec74-b64b-4489-b315-35359b6220ed}</Project>
+      <Name>Dal</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

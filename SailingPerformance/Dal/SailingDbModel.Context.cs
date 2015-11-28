@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Data.Entity.ModelConfiguration.Conventions;
+
 namespace Dal
 {
     using System;
@@ -22,7 +24,7 @@ namespace Dal
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+           modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
     
         public virtual DbSet<Boat> Boats { get; set; }

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ClientService.GpsServiceReference;
+
 using ClientService.Model;
 using ClientService.Responses;
 
@@ -14,7 +14,7 @@ namespace ClientService.AutoMapper
 
         private static void ConfigureUserMapping()
         {
-            Mapper.CreateMap<GetGpsByDateResponse,GpsSingleByDateResponse>();           
+          //  Mapper.CreateMap<GetGpsByDateResponse,GpsSingleByDateResponse>();           
         }
     }
 }
