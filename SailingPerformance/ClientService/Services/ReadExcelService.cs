@@ -12,7 +12,7 @@ namespace ClientService.Services
         {
             Workbook workbook = new Workbook();
             List<DataGps> DataGpsList=new List<DataGps>();
-            workbook.LoadFromFile(@"C:\Work\Anna_st\Programowanie\SailingPerfomanceS\SailingPerformance\Gui\DataExcel\DataGps.xlsx", ExcelVersion.Version2013);
+            workbook.LoadFromFile(@"K:\Jasiek\Desctop\III_Rok\Projekt_zespolowy\SailingPerformance\SailingPerformance\Gui\DataExcel\DataGps.xlsx", ExcelVersion.Version2013);
             Worksheet sheet = workbook.Worksheets[0];
 
             DataTable dataTable = sheet.ExportDataTable();
