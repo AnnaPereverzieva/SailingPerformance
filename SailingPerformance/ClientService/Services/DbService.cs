@@ -27,7 +27,7 @@ namespace ClientService.Services
             {
                 var boat = new Boat
                 {
-                    Model ="RSX45", Name = "Titanik1", IdBoat = GuidExtensions.Increment(Guid.Empty)
+                    Model ="RSX45", Name = "Titanik1", IdBoat = GuidExtensions.Increment(new Guid("00000000-0000-0000-0000-000000000001"))
 
                 };
                 db.Boats.Add(boat);
