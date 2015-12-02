@@ -6,19 +6,19 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:oxy="http://oxyplot.org/wpf"
                       Title="Sailing performance"
-                      Width="852"
-                      Height="500"
+                      MinWidth="850"
+                      MinHeight="510"
                       mc:Ignorable="d">
     <controls:MetroWindow.Resources>
         <Style x:Key="CbxProperties" TargetType="{x:Type Control}">
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Width" Value="120"/>
-            <Setter Property="Height" Value="20"/>
+            <!--<Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="20"/>-->
         </Style>
         <Style x:Key="BtnProperties" TargetType="{x:Type Control}">
-            <Setter Property="Width" Value="120"/>
-            <Setter Property="Margin" Value="0,0,0,15"/>
-            <Setter Property="Height" Value="20"/>
+            <!--<Setter Property="Width" Value="120"/>-->
+            <!--<Setter Property="Margin" Value="0,0,0,15"/>-->
+            <!--<Setter Property="Height" Value="20"/>-->
         </Style>
         <Style x:Key="LblProperties" TargetType="{x:Type Control}">
             <Setter Property="FontSize" Value="12"/>
@@ -42,83 +42,141 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-
-        <oxy:Plot Grid.Column="1"
-                  Grid.ColumnSpan="2"
-                  Grid.RowSpan="2"
+        <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="3" BorderBrush="Red" Margin="5"/>
+        <oxy:Plot Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"         
                   x:Name="Plot1"
                   Title="A Graph"
+
                   Margin="10"
                   Model="{Binding ChartViewModel.PlotModel,
                                   UpdateSourceTrigger=PropertyChanged,
                                   Mode=TwoWay}" />
-        <WrapPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
-            <Label Content="Nazwa łodzi:"/>
-            <ComboBox x:Name="CbxBoat" 
+        <DockPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <Label Content="Optymalny kurs [deg]:"/>
+            <TextBox x:Name="TxbOptCourse"
+                     Text="{Binding OpitmalCourse}" IsReadOnly="True"/>
+        </DockPanel>
+
+        <DockPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
+            <Label DockPanel.Dock="Top" Content="Nazwa łodzi:"/>
+            <ComboBox DockPanel.Dock="Top"
+                      x:Name="CbxBoat"                      
                       ItemsSource="{Binding BoatList}"
                       SelectedIndex="{Binding SelectedIndexBoat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Content="Data:"/>
-            <ComboBox x:Name="CbxDate"
+            <Label DockPanel.Dock="Top" Content="Data, zakres od:"/>
+            <ComboBox x:Name="CbxDateFrom"
+                      DockPanel.Dock="Top"
                       ItemsSource="{Binding DateList}"
                       SelectedIndex="{Binding SelectedIndexDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Content="Nr sesji:"/>
-            <ComboBox x:Name="CbxSession"
-                      ItemsSource="{Binding SessionList}"
+            <Label DockPanel.Dock="Top" Content="Data, zakres do:"/>
+            <ComboBox x:Name="CbxDate"
+                      DockPanel.Dock="Top"
+                      ItemsSource="{Binding DateList}"
                       SelectedIndex="{Binding SelectedIndexDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button x:Name="BtnDrawGraph"
-                    Margin="0,20,0,20"
-                    Command="{Binding DrawAction}">
-                <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Rysuj wykres</TextBlock>
-            </Button>
-            <Label Content="Optymalny kurs:"/>
-            <TextBox x:Name="TxbOptCourse"
-                     Text="{Binding OpitmalCourse}"/>
+            <Label DockPanel.Dock="Top" Content="Nr sesji:"/>
+            <ComboBox x:Name="CbxSession"
+                      DockPanel.Dock="Top"
+                      VerticalAlignment="Top"
+                      ItemsSource="{Binding SessionList}"
+                      SelectedIndex="{Binding SelectedIndexDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22"/>
+        </DockPanel>
 
-        </WrapPanel>
-        <WrapPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,18">
-            <Button x:Name="BtnImportFromExcel"
-                    Command="{Binding ImportExcelDataCommand}">
-                <TextBlock TextWrapping="Wrap" FontSize="10" FontWeight="Bold">Importuj dane z Excela</TextBlock>
-            </Button>
-            <Button x:Name="BtnExportToExcel"
-                    Command="{Binding SaveToExlsCommand}">
-                <TextBlock TextWrapping="Wrap" FontSize="10" FontWeight="Bold">Exportuj dane do Excela</TextBlock>
-            </Button>
-            <Button x:Name="BtnSaveToExcel"
-                    Command="{Binding SaveToExlsCommand}">
-                <TextBlock TextWrapping="Wrap" FontSize="10" FontWeight="Bold">Generuj raport .doc</TextBlock>
-            </Button>
-        </WrapPanel>
+        <DockPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Border>
+                    <Button x:Name="BtnImportFromExcel"
+                            Margin="5"
+                            Grid.Row="0"
+                            DockPanel.Dock="Top"
+                            VerticalAlignment="Stretch"
+                            Command="{Binding ImportExcelDataCommand}">
+                        <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Importuj dane z Excela</TextBlock>
+                    </Button>
+                </Border>
+                <Border Grid.Row="1">
+                    <Button x:Name="BtnExportToExcel"
+                            Margin="5"
+                            
+                            DockPanel.Dock="Top"
+                            VerticalAlignment="Stretch"
+                            Command="{Binding SaveToExlsCommand}">
+                        <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Exportuj dane do Excela</TextBlock>
+                    </Button>
+                </Border>
+                <Border Grid.Row="2">
+                    <Button x:Name="BtnSaveToExcel"
+                            Margin="5"
+                            
+                            DockPanel.Dock="Top"
+                            VerticalAlignment="Stretch"
+                            Command="{Binding SaveToExlsCommand}">
+                        <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Generuj raport .doc</TextBlock>
+                    </Button>
+                </Border>
+            </Grid>
+        </DockPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <Slider Margin="20,10"  
-                        Width="250" 
+            <DockPanel>
+                <Slider DockPanel.Dock="Left"
+                        Margin="10,10"  
+                        Width="220" 
                         Height="20" 
                         TickPlacement="BottomRight"
                         TickFrequency="{Binding }"/>
+                <Button Height="30" Width="30" Margin="10,0,0,0" 
+                        x:Name="BtnLessWind">
+                    <Image Source="pack://application:,,,/Images/oneLess.jpg"/>
+                </Button>
+                <Button DockPanel.Dock="Left" Height="30" Width="30" Margin="10,0,0,0" 
+                        x:Name="BtnMoreWind">
+                    <Image Source="pack://application:,,,/Images/oneMore.jpg"/>
+                </Button>
+            </DockPanel>
             <DockPanel VerticalAlignment="Center">
-                <Label Content="Siła wiatru: " DockPanel.Dock="Left" Margin="20,0,0,0"/>
+                <Label Content="Siła wiatru [m/s]: " DockPanel.Dock="Left" Margin="20,0,0,0"/>
                 <TextBox DockPanel.Dock="Right"
                          Width="Auto"
-                         TextAlignment="Left"
-                         BorderThickness="0" 
-                         IsReadOnly="True" />
+                         TextAlignment="Left" />
             </DockPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center">
-                <Slider Margin="20,10"  
-                        Width="250" 
+            <DockPanel>
+                <Slider DockPanel.Dock="Left"
+                        Margin="10,10"  
+                        Width="220" 
                         Height="20" 
                         TickPlacement="BottomRight"
                         TickFrequency="{Binding }"/>
+                <Button Height="30" Width="30" Margin="10,0,0,0" 
+                        x:Name="BtnLessDegWind">
+                    <Image Source="pack://application:,,,/Images/oneLess.jpg"/>
+                </Button>
+                <Button DockPanel.Dock="Left" Height="30" Width="30" Margin="10,0,0,0" 
+                        x:Name="BtnMoreDegWind">
+                    <Image Source="pack://application:,,,/Images/oneMore.jpg"/>
+                </Button>
+            </DockPanel>
             <DockPanel VerticalAlignment="Center">
-                <Label Content="Kierunek wiatru: " DockPanel.Dock="Left" Margin="20,0,0,0"/>
+                <Label Content="Kierunek wiatru [deg]: " DockPanel.Dock="Left" Margin="20,0,0,0"/>
                 <TextBox DockPanel.Dock="Right"
                          Width="Auto"
-                         TextAlignment="Left"
-                         BorderThickness="0" 
-                         IsReadOnly="True"/>
+                         TextAlignment="Left" />
             </DockPanel>
         </StackPanel>
-        
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button x:Name="BtnDrawGraph"
+                    Margin="0,0,0,15"
+                    Width="250"
+                    Height="30"
+                    Command="{Binding DrawAction}">
+                <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Rysuj wykres</TextBlock>
+            </Button>
+        </StackPanel>
+
     </Grid>
 </controls:MetroWindow>
