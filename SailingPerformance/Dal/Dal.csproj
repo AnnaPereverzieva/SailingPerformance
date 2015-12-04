@@ -52,59 +52,59 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Boat.cs">
-      <DependentUpon>SailingDbModel.tt</DependentUpon>
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GPSData.cs">
-      <DependentUpon>SailingDbModel.tt</DependentUpon>
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SailingDbModel.Context.cs">
+    <Compile Include="SailingDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SailingDbModel.Context.tt</DependentUpon>
+      <DependentUpon>SailingDataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SailingDbModel.cs">
+    <Compile Include="SailingDataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SailingDbModel.tt</DependentUpon>
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="SailingDbModel.Designer.cs">
+    <Compile Include="SailingDataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SailingDbModel.edmx</DependentUpon>
+      <DependentUpon>SailingDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Session.cs">
-      <DependentUpon>SailingDbModel.tt</DependentUpon>
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>SailingDbModel.tt</DependentUpon>
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="SailingDbModel.edmx">
+    <EntityDeploy Include="SailingDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SailingDbModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>SailingDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="SailingDbModel.edmx.diagram">
-      <DependentUpon>SailingDbModel.edmx</DependentUpon>
+    <None Include="SailingDataModel.edmx.diagram">
+      <DependentUpon>SailingDataModel.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SailingDbModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SailingDbModel.edmx</DependentUpon>
-      <LastGenOutput>SailingDbModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="SailingDbModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SailingDbModel.edmx</DependentUpon>
-      <LastGenOutput>SailingDbModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="SailingDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SailingDataModel.edmx</DependentUpon>
+      <LastGenOutput>SailingDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SailingDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SailingDataModel.edmx</DependentUpon>
+      <LastGenOutput>SailingDataModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
