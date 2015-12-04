@@ -77,7 +77,6 @@
     <Content Include="Common\11.txt" />
     <Content Include="Services\BoatService\BoatService.svc" />
     <Content Include="Services\GpsService\GpsService.svc" />
-    <Content Include="Services\UserService\UserService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -94,11 +93,7 @@
     <Compile Include="Services\GpsService\IGpsService.cs" />
     <Compile Include="Services\GpsService\Requests\PutDataRequest.cs" />
     <Compile Include="Services\GpsService\Requests\GetGpsByDateResponse.cs" />
-    <Compile Include="Services\UserService\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\UserService\UserService.svc.cs">
-      <DependentUpon>UserService.svc</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,7 +14,8 @@ namespace WcfService.Services.BoatService
         private readonly IBoatRepository _repositoryBoat;
         public BoatService()
         {
-            var context = new SailingDbContext();
+            SailingDbContext context = new SailingDbContext();
+           // context.Database.Connection= "data source=H-PEREVERZIEVA2;initial catalog=SailingManagerDB;Integrated Security=True;Connect Timeout=35;Encrypt=False;TrustServerCertificate=False";
             _repositoryBoat = new BoatRepsitory(context);
             _unitOfWork = new UnitOfWork(context);
         }

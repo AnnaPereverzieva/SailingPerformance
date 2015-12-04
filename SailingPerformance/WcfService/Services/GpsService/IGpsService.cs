@@ -7,9 +7,6 @@ namespace WcfService.Services.GpsService
     [ServiceContract]
     public interface IGpsService
     {
-        [OperationContract]
-        GetGpsByDateResponse GetGpsDataByDate(GetGpsByDateRequest request);
-        [OperationContract]
-        GetAllGpsByDateResponse GetAllGpsDataByDate(GetAllGpsByDateRequest request);
+       
     }
 }

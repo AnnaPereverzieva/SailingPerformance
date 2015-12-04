@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using Tracker.BoatService;
 
 namespace Tracker
 {
@@ -23,6 +11,15 @@ namespace Tracker
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnAddBoat_Click(object sender, RoutedEventArgs e)
+        {
+            var client=new BoatServiceClient();
+            BaseResponse response=client.AddBoatResponse(new BoatRequest {Name = "Ola", Model = "hgj"});
+            Txb.Text= response.ErrorMessage.ToString();
+
+            client.Close();
         }
     }
 }
