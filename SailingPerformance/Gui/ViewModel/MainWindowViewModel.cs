@@ -19,9 +19,9 @@ namespace Gui.ViewModel
         private void DrawChart()
         {
             var readExcel = new ReadExcelService();
-            //  var list = readExcel.LoadData("");
-            //  ChartViewModel = new ChartViewModel(list, 10, 2);
-            var db =new  DbService();
+              var list = readExcel.LoadData("");
+              ChartViewModel = new ChartViewModel(list, 10, 2);
+         //   var db =new  DbService();
 
         }
     }
