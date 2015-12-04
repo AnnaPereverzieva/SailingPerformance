@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using WcfService.Services.GpsService.Requests;
-using WcfService.Services.GpsService.Responses;
 using System.IO;
 using System.Linq;
 using System.Net.Mime;

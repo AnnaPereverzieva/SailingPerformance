@@ -58,6 +58,11 @@
       <DependentUpon>SailingDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BoatRepsitory.cs" />
+    <Compile Include="Repositories\Contracts\IBoatRepository.cs" />
+    <Compile Include="Repositories\Contracts\IRepository.cs" />
+    <Compile Include="Repositories\Contracts\IUnitOfWork.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="SailingDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

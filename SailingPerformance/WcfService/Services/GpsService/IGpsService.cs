@@ -1,6 +1,5 @@
 ﻿using System.ServiceModel;
 using WcfService.Services.GpsService.Requests;
-using WcfService.Services.GpsService.Responses;
 
 namespace WcfService.Services.GpsService
 {

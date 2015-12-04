@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Web;
 
-namespace WcfService.Services.GpsService.Responses
+namespace WcfService.Services.GpsService.Requests
 {
     [DataContract]
-    public class GetGpsByDateResponse : BaseResponse
+    public class PutDataRequest
     {
+        [DataMember]
+        public string IdBoat { get; set; }
         [DataMember]
         public DateTime Date { get; set; }
         [DataMember]

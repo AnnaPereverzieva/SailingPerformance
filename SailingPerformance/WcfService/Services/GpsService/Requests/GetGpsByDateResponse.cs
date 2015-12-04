@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace WcfService.Services.GpsService.Responses
+namespace WcfService.Services.GpsService.Requests
 {
     [DataContract]
-    public class GetAllGpsByDateResponse:BaseResponse
+    public class GetGpsByDateRequest
     {
-        [DataMember]
-        public string Id { get; set; }
         [DataMember]
         public DateTime Date { get; set; }
         [DataMember]
