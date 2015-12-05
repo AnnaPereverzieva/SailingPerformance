@@ -18,7 +18,6 @@ namespace Dal
         public SailingDbContext()
             : base("name=SailingDbContext")
         {
-          //  Database.Connection.ConnectionString= "data source=H-PEREVERZIEVA2;initial catalog=SailingManagerDB;Integrated Security=True;Connect Timeout=35;Encrypt=False;TrustServerCertificate=False";
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

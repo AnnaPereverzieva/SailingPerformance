@@ -8,9 +8,27 @@
         Width="525"
         Height="350"
         mc:Ignorable="d">
-    <Grid >
-        <Button x:Name="btnAddBoat" Content="AddBoat" HorizontalAlignment="Left" Margin="104,31,0,0" VerticalAlignment="Top" Width="75" Click="btnAddBoat_Click"/>
-        <Button x:Name="btnAddData" Content="AddData" HorizontalAlignment="Left" Margin="104,69,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBlock x:Name="Txb" HorizontalAlignment="Left" Margin="198,42,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="200" Width="309"/>
+    <Grid>
+        <Button x:Name="btnAddBoat"
+                Width="75"
+                Margin="104,31,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="btnAddBoat_Click"
+                Content="AddBoat" />
+        <Button x:Name="btnAddData"
+                Width="75"
+                Margin="104,69,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="AddData" />
+        <TextBlock x:Name="Txb"
+                   Width="309"
+                   Height="200"
+                   Margin="198,42,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="TextBlock"
+                   TextWrapping="Wrap" />
     </Grid>
 </Window>
