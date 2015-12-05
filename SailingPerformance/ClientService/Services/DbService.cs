@@ -23,16 +23,16 @@ namespace ClientService.Services
     {
         public DbService()
         {
-            using (var db = new SailingContext())
-            {
-                var boat = new Boat
-                {
-                    Model ="RSX45", Name = "Titanik1", IdBoat = GuidExtensions.Increment(new Guid("00000000-0000-0000-0000-000000000001"))
+            //using (var db = new SailingContext())
+            //{
+            //    var boat = new Boat
+            //    {
+            //        Model ="RSX45", Name = "Titanik1", IdBoat = GuidExtensions.Increment(new Guid("00000000-0000-0000-0000-000000000001"))
 
-                };
-                db.Boats.Add(boat);
-                db.SaveChanges();
-            }
+            //    };
+            //    db.Boats.Add(boat);
+            //    db.SaveChanges();
+            //}
         }
       
     }

@@ -23,6 +23,9 @@ namespace Tracker.BoatService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdBoatField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ModelField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -35,6 +38,19 @@ namespace Tracker.BoatService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid IdBoat {
+            get {
+                return this.IdBoatField;
+            }
+            set {
+                if ((this.IdBoatField.Equals(value) != true)) {
+                    this.IdBoatField = value;
+                    this.RaisePropertyChanged("IdBoat");
+                }
             }
         }
         
@@ -78,6 +94,7 @@ namespace Tracker.BoatService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseResponse", Namespace="http://schemas.datacontract.org/2004/07/WcfService")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Tracker.BoatService.GetBoatResponse))]
     public partial class BaseResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -135,15 +152,56 @@ namespace Tracker.BoatService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetBoatResponse", Namespace="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService")]
+    [System.SerializableAttribute()]
+    public partial class GetBoatResponse : Tracker.BoatService.BaseResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BoatService.IBoatService")]
     public interface IBoatService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/AddBoatResponse", ReplyAction="http://tempuri.org/IBoatService/AddBoatResponseResponse")]
-        Tracker.BoatService.BaseResponse AddBoatResponse(Tracker.BoatService.BoatRequest boatRequest);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/AddBoat", ReplyAction="http://tempuri.org/IBoatService/AddBoatResponse")]
+        Tracker.BoatService.BaseResponse AddBoat(Tracker.BoatService.BoatRequest boatRequest);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/AddBoatResponse", ReplyAction="http://tempuri.org/IBoatService/AddBoatResponseResponse")]
-        System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> AddBoatResponseAsync(Tracker.BoatService.BoatRequest boatRequest);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/AddBoat", ReplyAction="http://tempuri.org/IBoatService/AddBoatResponse")]
+        System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> AddBoatAsync(Tracker.BoatService.BoatRequest boatRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/UpdateBoat", ReplyAction="http://tempuri.org/IBoatService/UpdateBoatResponse")]
+        Tracker.BoatService.BaseResponse UpdateBoat(Tracker.BoatService.BoatRequest boatRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/UpdateBoat", ReplyAction="http://tempuri.org/IBoatService/UpdateBoatResponse")]
+        System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> UpdateBoatAsync(Tracker.BoatService.BoatRequest boatRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/DeleteBoat", ReplyAction="http://tempuri.org/IBoatService/DeleteBoatResponse")]
+        Tracker.BoatService.BaseResponse DeleteBoat(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/DeleteBoat", ReplyAction="http://tempuri.org/IBoatService/DeleteBoatResponse")]
+        System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> DeleteBoatAsync(System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/GetBoatId", ReplyAction="http://tempuri.org/IBoatService/GetBoatIdResponse")]
+        Tracker.BoatService.GetBoatResponse GetBoatId(Tracker.BoatService.BoatRequest boatRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/GetBoatId", ReplyAction="http://tempuri.org/IBoatService/GetBoatIdResponse")]
+        System.Threading.Tasks.Task<Tracker.BoatService.GetBoatResponse> GetBoatIdAsync(Tracker.BoatService.BoatRequest boatRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -173,12 +231,36 @@ namespace Tracker.BoatService {
                 base(binding, remoteAddress) {
         }
         
-        public Tracker.BoatService.BaseResponse AddBoatResponse(Tracker.BoatService.BoatRequest boatRequest) {
-            return base.Channel.AddBoatResponse(boatRequest);
+        public Tracker.BoatService.BaseResponse AddBoat(Tracker.BoatService.BoatRequest boatRequest) {
+            return base.Channel.AddBoat(boatRequest);
         }
         
-        public System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> AddBoatResponseAsync(Tracker.BoatService.BoatRequest boatRequest) {
-            return base.Channel.AddBoatResponseAsync(boatRequest);
+        public System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> AddBoatAsync(Tracker.BoatService.BoatRequest boatRequest) {
+            return base.Channel.AddBoatAsync(boatRequest);
+        }
+        
+        public Tracker.BoatService.BaseResponse UpdateBoat(Tracker.BoatService.BoatRequest boatRequest) {
+            return base.Channel.UpdateBoat(boatRequest);
+        }
+        
+        public System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> UpdateBoatAsync(Tracker.BoatService.BoatRequest boatRequest) {
+            return base.Channel.UpdateBoatAsync(boatRequest);
+        }
+        
+        public Tracker.BoatService.BaseResponse DeleteBoat(System.Guid id) {
+            return base.Channel.DeleteBoat(id);
+        }
+        
+        public System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> DeleteBoatAsync(System.Guid id) {
+            return base.Channel.DeleteBoatAsync(id);
+        }
+        
+        public Tracker.BoatService.GetBoatResponse GetBoatId(Tracker.BoatService.BoatRequest boatRequest) {
+            return base.Channel.GetBoatId(boatRequest);
+        }
+        
+        public System.Threading.Tasks.Task<Tracker.BoatService.GetBoatResponse> GetBoatIdAsync(Tracker.BoatService.BoatRequest boatRequest) {
+            return base.Channel.GetBoatIdAsync(boatRequest);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Tracker.BoatService;
 
 namespace Tracker
@@ -16,8 +17,13 @@ namespace Tracker
         private void btnAddBoat_Click(object sender, RoutedEventArgs e)
         {
             var client=new BoatServiceClient();
-            BaseResponse response=client.AddBoatResponse(new BoatRequest {Name = "Ola", Model = "hgj"});
-            Txb.Text= response.ErrorMessage.ToString();
+            GetBoatResponse response=client.GetBoatId(new BoatRequest {Name = "Frosia", Model = "hgj"});
+            Txb.Text = response.IsSuccess.ToString();
+            Guid g = response.Id;
+            BaseResponse response1 = client.DeleteBoat(g);
+            if (response1.ErrorMessage!=string.Empty)
+            Txb.Text += response.ErrorMessage;
+            Txb.Text += response1.IsSuccess.ToString();
 
             client.Close();
         }

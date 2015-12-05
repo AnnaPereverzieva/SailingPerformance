@@ -3,6 +3,8 @@ using AutoMapper;
 using Dal;
 using Dal.Repositories;
 using Dal.Repositories.Contracts;
+using WcfService.AutoMapper;
+using WcfService.Common;
 
 namespace WcfService.Services.BoatService
 {
@@ -11,25 +13,26 @@ namespace WcfService.Services.BoatService
     public class BoatService : IBoatService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IBoatRepository _repositoryBoat;
+        private readonly BoatRepository _repositoryBoat;
         public BoatService()
         {
             SailingDbContext context = new SailingDbContext();
-           // context.Database.Connection= "data source=H-PEREVERZIEVA2;initial catalog=SailingManagerDB;Integrated Security=True;Connect Timeout=35;Encrypt=False;TrustServerCertificate=False";
-            _repositoryBoat = new BoatRepsitory(context);
+            _repositoryBoat = new BoatRepository(context);
             _unitOfWork = new UnitOfWork(context);
+            AutoMapperConfiguration.Configuration();
         }
-        public BaseResponse AddBoatResponse(BoatRequest boatRequest)
+        public BaseResponse AddBoat(BoatRequest boatRequest)
         {
             var response = new BaseResponse();
             try
             {
                 _unitOfWork.BeginTransaction();
-                bool check = _repositoryBoat.CheckBoat(boatRequest.Model, boatRequest.Name);
-
-                if (check)
+                var check = _repositoryBoat.GetGuidBoat(boatRequest.Model, boatRequest.Name);
+                if (check == Guid.Empty)
                 {
-                    var boat = Mapper.Map<Boat>(boatRequest);
+                    Boat boat = Mapper.Map<Boat>(boatRequest);
+                    GuidExtensions guid = new GuidExtensions();
+                    boat.IdBoat = guid.Increment(_repositoryBoat.GetGuidLastBoat());
                     _repositoryBoat.Add(boat);
                     _unitOfWork.Commit();
                     response.IsSuccess = true;
@@ -38,7 +41,84 @@ namespace WcfService.Services.BoatService
                 {
                     _unitOfWork.Commit();
                     response.IsSuccess = false;
+                    response.ErrorMessage = "Łódka o takiej nazwie i modelu juz istnieje";
                 }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.ErrorMessage = ex.ToString();
+            }
+            return response;
+        }
+
+        public BaseResponse UpdateBoat(BoatRequest boatRequest)
+        {
+            var response = new BaseResponse();
+            try
+            {
+                _unitOfWork.BeginTransaction();
+                var check = _repositoryBoat.GetGuidBoat(boatRequest.Model, boatRequest.Name);
+                if (check != Guid.Empty)
+                {
+                    Boat boat = Mapper.Map<Boat>(boatRequest);
+                    _repositoryBoat.Update(boat);
+                    _unitOfWork.Commit();
+                    response.IsSuccess = true;
+                }
+                else
+                {
+                    _unitOfWork.Commit();
+                    response.IsSuccess = false;
+                    response.ErrorMessage = "Łódka o takiej nazwie i modelu nie istnieje";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.ErrorMessage = ex.ToString();
+            }
+            return response;
+        }
+
+        public GetBoatResponse GetBoatId(BoatRequest boatRequest)
+        {
+            var response = new GetBoatResponse();
+            try
+            {
+                _unitOfWork.BeginTransaction();
+                var check = _repositoryBoat.GetGuidBoat(boatRequest.Model, boatRequest.Name);
+                if (check != Guid.Empty)
+                {
+                    response.Id = check;
+                    _unitOfWork.Commit();
+                    response.IsSuccess = true;
+                }
+                else
+                {
+                    _unitOfWork.Commit();
+                    response.IsSuccess = false;
+                    response.ErrorMessage = "Nie istnieje łódki o takim id";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.ErrorMessage = ex.ToString();
+            }
+            return response;
+        }
+
+        public BaseResponse DeleteBoat(Guid id)
+        {
+            var response = new BaseResponse();
+            try
+            {
+                _unitOfWork.BeginTransaction();
+                var obj = new Boat {IdBoat = id};
+                _repositoryBoat.Delete(obj);
+                _unitOfWork.Commit();
+                response.IsSuccess = true;
             }
             catch (Exception ex)
             {

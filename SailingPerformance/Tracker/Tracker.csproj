@@ -114,6 +114,9 @@
     <None Include="Service References\BoatService\Tracker.BoatService.BaseResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BoatService\Tracker.BoatService.GetBoatResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

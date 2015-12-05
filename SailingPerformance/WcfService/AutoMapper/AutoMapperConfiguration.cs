@@ -8,7 +8,7 @@ namespace WcfService.AutoMapper
     {
         public static void Configuration()
         {
-            Mapper.CreateMap<Boat, BoatRequest>();
+            Mapper.CreateMap<BoatRequest, Boat>();            
         }
     }
 }

@@ -8,22 +8,79 @@
       <xsd:import schemaLocation="http://localhost:65025/Services/BoatService/BoatService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WcfService" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IBoatService_AddBoatResponse_InputMessage">
+  <wsdl:message name="IBoatService_AddBoat_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddBoat" />
+  </wsdl:message>
+  <wsdl:message name="IBoatService_AddBoat_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddBoatResponse" />
   </wsdl:message>
-  <wsdl:message name="IBoatService_AddBoatResponse_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddBoatResponseResponse" />
+  <wsdl:message name="IBoatService_UpdateBoat_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBoat" />
+  </wsdl:message>
+  <wsdl:message name="IBoatService_UpdateBoat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBoatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBoatService_DeleteBoat_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBoat" />
+  </wsdl:message>
+  <wsdl:message name="IBoatService_DeleteBoat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBoatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBoatService_GetBoatId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBoatId" />
+  </wsdl:message>
+  <wsdl:message name="IBoatService_GetBoatId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBoatIdResponse" />
   </wsdl:message>
   <wsdl:portType name="IBoatService">
-    <wsdl:operation name="AddBoatResponse">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBoatService/AddBoatResponse" message="tns:IBoatService_AddBoatResponse_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBoatService/AddBoatResponseResponse" message="tns:IBoatService_AddBoatResponse_OutputMessage" />
+    <wsdl:operation name="AddBoat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBoatService/AddBoat" message="tns:IBoatService_AddBoat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBoatService/AddBoatResponse" message="tns:IBoatService_AddBoat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBoat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBoatService/UpdateBoat" message="tns:IBoatService_UpdateBoat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBoatService/UpdateBoatResponse" message="tns:IBoatService_UpdateBoat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBoat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBoatService/DeleteBoat" message="tns:IBoatService_DeleteBoat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBoatService/DeleteBoatResponse" message="tns:IBoatService_DeleteBoat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBoatId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBoatService/GetBoatId" message="tns:IBoatService_GetBoatId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBoatService/GetBoatIdResponse" message="tns:IBoatService_GetBoatId_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IBoatService" type="tns:IBoatService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="AddBoatResponse">
-      <soap:operation soapAction="http://tempuri.org/IBoatService/AddBoatResponse" style="document" />
+    <wsdl:operation name="AddBoat">
+      <soap:operation soapAction="http://tempuri.org/IBoatService/AddBoat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBoat">
+      <soap:operation soapAction="http://tempuri.org/IBoatService/UpdateBoat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBoat">
+      <soap:operation soapAction="http://tempuri.org/IBoatService/DeleteBoat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBoatId">
+      <soap:operation soapAction="http://tempuri.org/IBoatService/GetBoatId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

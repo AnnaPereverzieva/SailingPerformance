@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:65025/Services/BoatService/BoatService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:65025/Services/BoatService/BoatService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WcfService" />
   <xs:complexType name="BoatRequest">
     <xs:sequence>
+      <xs:element minOccurs="0" name="IdBoat" type="ser:guid" />
       <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BoatRequest" nillable="true" type="tns:BoatRequest" />
+  <xs:complexType name="GetBoatResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/WcfService" base="q1:BaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Id" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetBoatResponse" nillable="true" type="tns:GetBoatResponse" />
 </xs:schema>

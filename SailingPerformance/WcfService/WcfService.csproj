@@ -82,9 +82,11 @@
   <ItemGroup>
     <Compile Include="AutoMapper\AutoMapperConfiguration.cs" />
     <Compile Include="BaseResponse.cs" />
+    <Compile Include="Common\GuidExtensions.cs" />
     <Compile Include="Services\BoatService\BoatService.svc.cs">
       <DependentUpon>BoatService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Services\BoatService\GetBoatResponse.cs" />
     <Compile Include="Services\BoatService\IBoatService.cs" />
     <Compile Include="Services\BoatService\BoatRequest.cs" />
     <Compile Include="Services\GpsService\GpsService.svc.cs">

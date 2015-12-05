@@ -2,17 +2,60 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:65025/Services/BoatService/BoatService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService" />
   <xs:import schemaLocation="http://localhost:65025/Services/BoatService/BoatService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WcfService" />
-  <xs:element name="AddBoatResponse">
+  <xs:import schemaLocation="http://localhost:65025/Services/BoatService/BoatService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:element name="AddBoat">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService" minOccurs="0" name="boatRequest" nillable="true" type="q1:BoatRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddBoatResponseResponse">
+  <xs:element name="AddBoatResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="AddBoatResponseResult" nillable="true" type="q2:BaseResponse" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="AddBoatResult" nillable="true" type="q2:BaseResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateBoat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService" minOccurs="0" name="boatRequest" nillable="true" type="q3:BoatRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateBoatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="UpdateBoatResult" nillable="true" type="q4:BaseResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteBoat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q5:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteBoatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="DeleteBoatResult" nillable="true" type="q6:BaseResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBoatId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService" minOccurs="0" name="boatRequest" nillable="true" type="q7:BoatRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBoatIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService" minOccurs="0" name="GetBoatIdResult" nillable="true" type="q8:GetBoatResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

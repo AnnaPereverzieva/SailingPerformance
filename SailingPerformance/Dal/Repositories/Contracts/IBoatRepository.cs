@@ -1,7 +1,10 @@
-﻿namespace Dal.Repositories.Contracts
+﻿using System;
+
+namespace Dal.Repositories.Contracts
 {
     public interface IBoatRepository:IRepository<Boat>
     {
-        bool CheckBoat(string model, string name);
+        Guid GetGuidBoat(string model, string name);
+        Guid GetGuidLastBoat();
     }
 }

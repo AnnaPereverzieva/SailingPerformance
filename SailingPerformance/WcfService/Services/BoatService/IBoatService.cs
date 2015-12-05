@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 
 namespace WcfService.Services.BoatService
 {
@@ -12,6 +8,12 @@ namespace WcfService.Services.BoatService
     public interface IBoatService
     {
         [OperationContract]
-        BaseResponse AddBoatResponse(BoatRequest boatRequest);
+        BaseResponse AddBoat(BoatRequest boatRequest);
+        [OperationContract]
+        BaseResponse UpdateBoat(BoatRequest boatRequest);
+        [OperationContract]
+        BaseResponse DeleteBoat(Guid id);
+        [OperationContract]
+        GetBoatResponse GetBoatId(BoatRequest boatRequest);
     }
 }
