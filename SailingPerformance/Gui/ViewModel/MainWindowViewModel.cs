@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows.Input;
+using ClientService.Model;
 using ClientService.Services;
+using Gui.Common;
 using Microsoft.Expression.Interactivity.Core;
 using PropertyChanged;
 
