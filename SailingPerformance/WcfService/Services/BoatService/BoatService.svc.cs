@@ -109,14 +109,13 @@ namespace WcfService.Services.BoatService
             return response;
         }
 
-        public BaseResponse DeleteBoat(Guid id)
+        public BaseResponse DeleteBoat(DeleteBoatRequest request)
         {
             var response = new BaseResponse();
             try
             {
                 _unitOfWork.BeginTransaction();
-                var obj = new Boat {IdBoat = id};
-                _repositoryBoat.Delete(obj);
+                _repositoryBoat.Delete(new Boat { IdBoat = request.Id, Name = "Frosia", Model = "hgj"});
                 _unitOfWork.Commit();
                 response.IsSuccess = true;
             }

@@ -27,7 +27,7 @@ namespace Dal.Repositories
 
         public void Delete(Boat entity)
         {
-            _sailingDbContext.Boats.Remove(entity);
+            _sailingDbContext.Entry(entity).State=EntityState.Deleted;
         }
 
         public Guid GetGuidBoat(string model, string name)

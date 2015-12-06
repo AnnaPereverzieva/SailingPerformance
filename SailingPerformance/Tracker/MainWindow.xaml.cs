@@ -20,7 +20,7 @@ namespace Tracker
             GetBoatResponse response=client.GetBoatId(new BoatRequest {Name = "Frosia", Model = "hgj"});
             Txb.Text = response.IsSuccess.ToString();
             Guid g = response.Id;
-            BaseResponse response1 = client.DeleteBoat(g);
+            BaseResponse response1 = client.DeleteBoat(new DeleteBoatRequest {Id=g});
             if (response1.ErrorMessage!=string.Empty)
             Txb.Text += response.ErrorMessage;
             Txb.Text += response1.IsSuccess.ToString();

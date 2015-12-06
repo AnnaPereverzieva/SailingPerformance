@@ -12,7 +12,7 @@ namespace WcfService.Services.BoatService
         [OperationContract]
         BaseResponse UpdateBoat(BoatRequest boatRequest);
         [OperationContract]
-        BaseResponse DeleteBoat(Guid id);
+        BaseResponse DeleteBoat(DeleteBoatRequest id);
         [OperationContract]
         GetBoatResponse GetBoatId(BoatRequest boatRequest);
     }

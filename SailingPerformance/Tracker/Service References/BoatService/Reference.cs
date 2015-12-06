@@ -175,6 +175,51 @@ namespace Tracker.BoatService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteBoatRequest", Namespace="http://schemas.datacontract.org/2004/07/WcfService.Services.BoatService")]
+    [System.SerializableAttribute()]
+    public partial class DeleteBoatRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BoatService.IBoatService")]
     public interface IBoatService {
@@ -192,10 +237,10 @@ namespace Tracker.BoatService {
         System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> UpdateBoatAsync(Tracker.BoatService.BoatRequest boatRequest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/DeleteBoat", ReplyAction="http://tempuri.org/IBoatService/DeleteBoatResponse")]
-        Tracker.BoatService.BaseResponse DeleteBoat(System.Guid id);
+        Tracker.BoatService.BaseResponse DeleteBoat(Tracker.BoatService.DeleteBoatRequest id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/DeleteBoat", ReplyAction="http://tempuri.org/IBoatService/DeleteBoatResponse")]
-        System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> DeleteBoatAsync(System.Guid id);
+        System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> DeleteBoatAsync(Tracker.BoatService.DeleteBoatRequest id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBoatService/GetBoatId", ReplyAction="http://tempuri.org/IBoatService/GetBoatIdResponse")]
         Tracker.BoatService.GetBoatResponse GetBoatId(Tracker.BoatService.BoatRequest boatRequest);
@@ -247,11 +292,11 @@ namespace Tracker.BoatService {
             return base.Channel.UpdateBoatAsync(boatRequest);
         }
         
-        public Tracker.BoatService.BaseResponse DeleteBoat(System.Guid id) {
+        public Tracker.BoatService.BaseResponse DeleteBoat(Tracker.BoatService.DeleteBoatRequest id) {
             return base.Channel.DeleteBoat(id);
         }
         
-        public System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> DeleteBoatAsync(System.Guid id) {
+        public System.Threading.Tasks.Task<Tracker.BoatService.BaseResponse> DeleteBoatAsync(Tracker.BoatService.DeleteBoatRequest id) {
             return base.Channel.DeleteBoatAsync(id);
         }
         

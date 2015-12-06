@@ -10,6 +10,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BoatRequest" nillable="true" type="tns:BoatRequest" />
+  <xs:complexType name="DeleteBoatRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteBoatRequest" nillable="true" type="tns:DeleteBoatRequest" />
   <xs:complexType name="GetBoatResponse">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/WcfService" base="q1:BaseResponse">
