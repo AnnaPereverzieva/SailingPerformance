@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-
 using ClientService.Model;
-using ClientService.Responses;
+using Dal;
 
 namespace ClientService.AutoMapper
 {
@@ -9,12 +8,12 @@ namespace ClientService.AutoMapper
     {
         public static void Configure()
         {
-            ConfigureUserMapping();
+            ConfigureBoatMapping();
         }
 
-        private static void ConfigureUserMapping()
+        public static void ConfigureBoatMapping()
         {
-          //  Mapper.CreateMap<GetGpsByDateResponse,GpsSingleByDateResponse>();           
+            Mapper.CreateMap<Boat, BoatDto>();
         }
     }
 }

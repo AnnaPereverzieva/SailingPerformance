@@ -12,7 +12,7 @@
     <Grid>
         <oxy:Plot x:Name="Plot1"
                   Title="A Graph"
-                  Margin="23,40,38,10"
+                  Margin="204,40,38,10"
                   Model="{Binding ChartViewModel.PlotModel,
                                   UpdateSourceTrigger=PropertyChanged,
                                   Mode=TwoWay}" />
@@ -23,5 +23,30 @@
                 VerticalAlignment="Top"
                 Command="{Binding DrawAction}"
                 Content="Rysuj" />
+        <Button Width="75"
+                Margin="121,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding GetBoatsCommand}"
+                Content="GetBoats" />
+        <ListBox Width="153"
+                 Height="225"
+                 Margin="23,64,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 ItemsSource="{Binding BoatsCollection}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock>
+                            <Run Text="{Binding Name}" />
+                            <Run Text="   " />
+                            <Run Text="{Binding Model}" />
+
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </controls:MetroWindow>
