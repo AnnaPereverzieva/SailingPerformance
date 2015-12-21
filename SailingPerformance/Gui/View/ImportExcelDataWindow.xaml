@@ -1,0 +1,40 @@
+﻿<Window x:Class="Gui.View.ImportExcelDataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gui.View"
+        mc:Ignorable="d"
+        Title="Importowanie danych z Excela" Height="130" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" >
+            <Button DockPanel.Dock="Right" 
+                VerticalAlignment="Center"
+                Height="20" 
+                FontSize="8" 
+                Width="60" 
+                FontWeight="Medium" 
+                Padding="0" 
+                Content="Wyszukaj" 
+                Margin="10"
+                Command="{Binding SearchCommand}"/>
+            <TextBox Grid.Row="1"
+                     DockPanel.Dock="Left" 
+                     VerticalAlignment="Center" 
+                     Height="20" 
+                     Margin="10,0"
+                     Text="{Binding FilePath}"/>
+        </DockPanel>
+        <DockPanel Grid.Row="1">
+            <Grid Margin="10">
+                <Button DockPanel.Dock="Left" Content="Wczytaj"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" />
+                <Button DockPanel.Dock="Right" Content="Anuluj" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" />
+            </Grid>
+        </DockPanel>
+
+    </Grid>
+</Window>
