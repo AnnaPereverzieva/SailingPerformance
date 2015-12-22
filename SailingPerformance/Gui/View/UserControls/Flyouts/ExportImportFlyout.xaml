@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Gui.View.UserControls.Flyouts.ExportImportFlyout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Gui.View.UserControls.Flyouts"
+             mc:Ignorable="d" >
+    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Border>
+                <Button x:Name="BtnImportFromExcel"
+                        Margin="5"
+                        Grid.Row="0"
+                        DockPanel.Dock="Top"
+                        VerticalAlignment="Stretch"
+                        Command="{Binding ImportExcelDataCommand}"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+                    <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Importuj dane z Excela</TextBlock>
+
+                </Button>
+            </Border>
+            <Border Grid.Row="1">
+                <Button x:Name="BtnExportToExcel"
+                        Margin="5"
+                        DockPanel.Dock="Top"
+                        VerticalAlignment="Stretch"
+                        Command="{Binding SaveToExlsCommand}"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+                    <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Exportuj dane do Excela</TextBlock>
+                </Button>
+            </Border>
+            <Border Grid.Row="2">
+                <Button x:Name="BtnSaveToExcel"
+                        Margin="5"                            
+                        DockPanel.Dock="Top"
+                        VerticalAlignment="Stretch"
+                        Command="{Binding SaveToExlsCommand}"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+                    <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Generuj raport .doc</TextBlock>
+                </Button>
+            </Border>
+        </Grid>
+    </DockPanel>
+</UserControl>
