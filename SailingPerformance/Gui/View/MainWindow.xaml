@@ -5,6 +5,7 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:oxy="http://oxyplot.org/wpf"
+                      xmlns:localFlyouts="clr-namespace:Gui.View.UserControls.Flyouts"
                       Title="Sailing performance"
                       MinWidth="860"
                       MinHeight="560"
@@ -31,9 +32,38 @@
 
 
     </controls:MetroWindow.Resources>
+
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout x:Name="FlyoutDataSelection"
+                             Position="Right"
+                             Header="Filtrowanie danych"
+                             Width="Auto">
+                <localFlyouts:DataSelectionFlyout/>
+            </controls:Flyout>
+
+            <controls:Flyout x:Name="FlyoutWindSelection"
+                             Position="Right"
+                             Header="Kierunek i siła wiatru"
+                             Width="Auto">
+                <localFlyouts:WindSelectionFlyout/>
+            </controls:Flyout>
+
+            <controls:Flyout x:Name="FlyoutExportImport"
+                             Position="Right"
+                             Header="Export i import danych"
+                             Width="Auto">
+                <localFlyouts:ExportImportFlyout/>
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
+
+
+
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width=".4*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
@@ -58,87 +88,46 @@
                      Text="{Binding OpitmalCourse}" IsReadOnly="True"/>
         </DockPanel>
 
-        <DockPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
+        <DockPanel Grid.Column="0" Grid.RowSpan="4" Margin="0,0,30,0" >
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
+                <ToggleButton x:Name="BtnDataSelection"
+                              Grid.Row="0"
+                              Content="Wybór danych"
+                              FontSize="12"
+                              IsChecked="{Binding ElementName=FlyoutDataSelection, Path=IsOpen}" Cursor="Hand">
+                    <ToggleButton.LayoutTransform>
+                        <RotateTransform Angle="-90"/>
+                    </ToggleButton.LayoutTransform>
+                </ToggleButton>
+                <ToggleButton Grid.Row="1"
+                              x:Name="BtnWindSelection"
+                              Content="Parametry wiatru"
+                              FontSize="12"
+                              IsChecked="{Binding ElementName=FlyoutWindSelection, Path=IsOpen}" Cursor="Hand">
+                    <ToggleButton.LayoutTransform>
+                        <RotateTransform Angle="-90"/>
+                    </ToggleButton.LayoutTransform>
 
-                <Label Grid.Row="0" VerticalAlignment="Bottom" Content="Nazwa łodzi:"/>
-                <ComboBox Grid.Row="1"
-                      VerticalAlignment="Top"
-                      x:Name="CbxBoat"
-                      ItemsSource="{Binding BoatList}"
-                      SelectedIndex="{Binding SelectedIndexBoat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Grid.Row="2" VerticalAlignment="Bottom" Content="Data, zakres od:"/>
-                <ComboBox x:Name="CbxDateFrom"
-                      Grid.Row="3"
-                      VerticalAlignment="Top"
-                      ItemsSource="{Binding DateList}"
-                      SelectedIndex="{Binding SelectedIndexDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Grid.Row="4" VerticalAlignment="Bottom" Content="Data, zakres do:"/>
-                <ComboBox x:Name="CbxDate"
-                      Grid.Row="5"
-                      VerticalAlignment="Top"
-                      ItemsSource="{Binding DateList}"
-                      SelectedIndex="{Binding SelectedIndexDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Grid.Row="6" VerticalAlignment="Bottom" Content="Nr sesji:"/>
-                <ComboBox x:Name="CbxSession"
-                      Grid.Row="7"
-                      VerticalAlignment="Top"
-                      ItemsSource="{Binding SessionList}"
-                      SelectedIndex="{Binding SelectedIndexDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22"/>
+                </ToggleButton>
+                <ToggleButton Grid.Row="2"
+                              x:Name="BtnExportImport"
+                              Content="Export/Import danych"
+                              FontSize="12"
+                              IsChecked="{Binding ElementName=FlyoutExportImport, Path=IsOpen}" Cursor="Hand">
+                    <ToggleButton.LayoutTransform>
+                        <RotateTransform Angle="-90"/>
+                    </ToggleButton.LayoutTransform>
+
+                </ToggleButton>
             </Grid>
         </DockPanel>
 
-        <DockPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-                <Border>
-                    <ToggleButton x:Name="BtnImportFromExcel"
-                            Margin="5"
-                            Grid.Row="0"
-                            DockPanel.Dock="Top"
-                            VerticalAlignment="Stretch"
-                            Command="{Binding ImportExcelDataCommand}">
-                        <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Importuj dane z Excela</TextBlock>
-                    </ToggleButton>
-                </Border>
-                <Border Grid.Row="1">
-                    <ToggleButton x:Name="BtnExportToExcel"
-                            Margin="5"
-                            
-                            DockPanel.Dock="Top"
-                            VerticalAlignment="Stretch"
-                            Command="{Binding SaveToExlsCommand}">
-                        <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Exportuj dane do Excela</TextBlock>
-                    </ToggleButton>
-                </Border>
-                <Border Grid.Row="2">
-                    <ToggleButton x:Name="BtnSaveToExcel"
-                            Margin="5"
-                            
-                            DockPanel.Dock="Top"
-                            VerticalAlignment="Stretch"
-                            Command="{Binding SaveToExlsCommand}">
-                        <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Generuj raport .doc</TextBlock>
-                    </ToggleButton>
-                </Border>
-            </Grid>
-        </DockPanel>
-        <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Margin="0,0,10,0">
+        <!--<DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Margin="0,0,10,0">
             <Grid DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -195,7 +184,7 @@
                     <Slider Grid.Column="0" DockPanel.Dock="Bottom"
                         Margin="10,0,0,0"
                         TickPlacement="BottomRight"
-                        TickFrequency="{Binding }"/>
+                        TickFrequency="{Binding }" />
                     <DockPanel DockPanel.Dock="Top" Margin="10,2,0,2">
                         <Label HorizontalAlignment="Left"
                                Padding="0"/>
@@ -229,7 +218,7 @@
                        Margin="20,0,0,0" />
                 <TextBox Grid.Column="1" TextAlignment="Left" />
             </Grid>
-        </DockPanel>
+        </DockPanel>-->
 
 
         <DockPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3">

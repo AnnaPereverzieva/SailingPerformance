@@ -123,11 +123,21 @@
     <Compile Include="ViewModel\ChartViewModel.cs" />
     <Compile Include="ViewModel\ImportExcelDataViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="View\UserControls\Flyouts\ExportImportFlyout.xaml.cs">
+      <DependentUpon>ExportImportFlyout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Flyouts\WindSelectionFlyout.xaml.cs">
+      <DependentUpon>WindSelectionFlyout.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\CreateDocReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ExportExcelDataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\Flyouts\DataSelectionFlyout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,6 +159,9 @@
     <Compile Include="View\ExportExcelDataWindow.xaml.cs">
       <DependentUpon>ExportExcelDataWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\Flyouts\DataSelectionFlyout.xaml.cs">
+      <DependentUpon>DataSelectionFlyout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ImportExcelDataWindow.xaml.cs">
       <DependentUpon>ImportExcelDataWindow.xaml</DependentUpon>
     </Compile>
@@ -156,6 +169,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\UserControls\Flyouts\ExportImportFlyout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\Flyouts\WindSelectionFlyout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
