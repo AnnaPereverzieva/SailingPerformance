@@ -30,7 +30,7 @@
                         Margin="5"
                         DockPanel.Dock="Top"
                         VerticalAlignment="Stretch"
-                        Command="{Binding SaveToExlsCommand}"
+                        Command="{Binding SaveToExcelCommand}"
                         Style="{StaticResource AccentedSquareButtonStyle}">
                     <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Exportuj dane do Excela</TextBlock>
                 </Button>
