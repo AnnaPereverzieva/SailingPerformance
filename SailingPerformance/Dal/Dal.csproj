@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5D8E6FA5-8DE3-47F1-9585-69EC60A8F8A5}</ProjectGuid>
+    <ProjectGuid>{5A0DEC74-B64B-4489-B315-35359B6220ED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClientService</RootNamespace>
-    <AssemblyName>ClientService</AssemblyName>
+    <RootNamespace>Dal</RootNamespace>
+    <AssemblyName>Dal</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -42,27 +38,11 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Spire.Common, Version=1.2.289.7040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
-      <HintPath>..\packages\Spire.XLS.7.8.43\lib\net40\Spire.Common.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Spire.License, Version=1.3.5.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Spire.XLS.7.8.43\lib\net40\Spire.License.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Spire.Pdf, Version=3.5.126.7040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
-      <HintPath>..\packages\Spire.XLS.7.8.43\lib\net40\Spire.Pdf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Spire.XLS, Version=7.8.43.7040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
-      <HintPath>..\packages\Spire.XLS.7.8.43\lib\net40\Spire.XLS.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,28 +51,65 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapper\AutoMapperConfiguration.cs" />
-    <Compile Include="Model\BoatDto.cs" />
-    <Compile Include="Model\DataGps.cs" />
-    <Compile Include="Responses\GpsSingleByDateResponse.cs" />
-    <Compile Include="Model\User.cs" />
+    <Compile Include="Boat.cs">
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GPSData.cs">
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Responses\UserResponse.cs" />
-    <Compile Include="Services\BoatService.cs" />
-    <Compile Include="Services\ReadExcelService.cs" />
+    <Compile Include="Repositories\BoatRepository.cs" />
+    <Compile Include="Repositories\Contracts\IBoatRepository.cs" />
+    <Compile Include="Repositories\Contracts\IRepository.cs" />
+    <Compile Include="Repositories\Contracts\IUnitOfWork.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="SailingDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SailingDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SailingDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SailingDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SailingDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Session.cs">
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="SailingDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SailingDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SailingDataModel.edmx.diagram">
+      <DependentUpon>SailingDataModel.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dal\Dal.csproj">
-      <Project>{5a0dec74-b64b-4489-b315-35359b6220ed}</Project>
-      <Name>Dal</Name>
-    </ProjectReference>
+    <Content Include="SailingDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SailingDataModel.edmx</DependentUpon>
+      <LastGenOutput>SailingDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SailingDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SailingDataModel.edmx</DependentUpon>
+      <LastGenOutput>SailingDataModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

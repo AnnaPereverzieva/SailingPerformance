@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8b4a9ec8-690e-49d8-9ec0-aef0aae41c1f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:65025/Services/BoatService/BoatService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BoatService.xsd" MetadataType="Schema" ID="a3ff810e-057f-46dd-8650-0ea555c0bded" SourceId="1" SourceUrl="http://localhost:65025/Services/BoatService/BoatService.svc?xsd=xsd0" />
+    <MetadataFile FileName="BoatService1.xsd" MetadataType="Schema" ID="c05e7f62-b8f3-4547-9e91-e4c7b919ec28" SourceId="1" SourceUrl="http://localhost:65025/Services/BoatService/BoatService.svc?xsd=xsd3" />
+    <MetadataFile FileName="BoatService2.xsd" MetadataType="Schema" ID="3f6c668f-db7f-43f9-9092-38feec9dafa2" SourceId="1" SourceUrl="http://localhost:65025/Services/BoatService/BoatService.svc?xsd=xsd1" />
+    <MetadataFile FileName="BoatService.wsdl" MetadataType="Wsdl" ID="5ceb9c89-513d-473f-ac54-62681fa901fc" SourceId="1" SourceUrl="http://localhost:65025/Services/BoatService/BoatService.svc?wsdl" />
+    <MetadataFile FileName="BoatService.disco" MetadataType="Disco" ID="3a9c2a7a-28a3-4f2f-86c1-fb2058d74f67" SourceId="1" SourceUrl="http://localhost:65025/Services/BoatService/BoatService.svc?disco" />
+    <MetadataFile FileName="BoatService3.xsd" MetadataType="Schema" ID="99d97d38-b521-4eb4-956f-4d309bad50b5" SourceId="1" SourceUrl="http://localhost:65025/Services/BoatService/BoatService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

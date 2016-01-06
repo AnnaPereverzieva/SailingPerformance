@@ -41,7 +41,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -62,36 +75,50 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Common\11.txt" />
+    <Content Include="Services\BoatService\BoatService.svc" />
     <Content Include="Services\GpsService\GpsService.svc" />
-    <Content Include="Services\UserService\UserService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\AutoMapperConfiguration.cs" />
     <Compile Include="BaseResponse.cs" />
+    <Compile Include="Common\GuidExtensions.cs" />
+    <Compile Include="Services\BoatService\BoatService.svc.cs">
+      <DependentUpon>BoatService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Services\BoatService\DeleteBoatRequest.cs" />
+    <Compile Include="Services\BoatService\GetBoatResponse.cs" />
+    <Compile Include="Services\BoatService\IBoatService.cs" />
+    <Compile Include="Services\BoatService\BoatRequest.cs" />
     <Compile Include="Services\GpsService\GpsService.svc.cs">
       <DependentUpon>GpsService.svc</DependentUpon>
     </Compile>
     <Compile Include="Services\GpsService\IGpsService.cs" />
-    <Compile Include="Services\GpsService\Requests\GetAllGpsByDateRequest.cs" />
-    <Compile Include="Services\GpsService\Requests\GetGpsByDateRequest.cs" />
-    <Compile Include="Services\GpsService\Responses\GetAllGpsByDateResponse.cs" />
-    <Compile Include="Services\GpsService\Responses\GetGpsByDateResponse.cs" />
-    <Compile Include="Services\UserService\IUserService.cs" />
+    <Compile Include="Services\GpsService\Requests\PutDataRequest.cs" />
+    <Compile Include="Services\GpsService\Requests\GetGpsByDateResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\UserService\UserService.svc.cs">
-      <DependentUpon>UserService.svc</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dal\Dal.csproj">
+      <Project>{5a0dec74-b64b-4489-b315-35359b6220ed}</Project>
+      <Name>Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tracker\Tracker.csproj">
+      <Project>{02bd9b0c-0be2-45e5-92e1-9b46b61d31f8}</Project>
+      <Name>Tracker</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

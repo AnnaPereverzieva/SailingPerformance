@@ -1,7 +1,11 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+
+using System.Collections.ObjectModel;
+
 using System.Windows.Input;
 using ClientService.Model;
 using ClientService.Services;
@@ -18,6 +22,7 @@ namespace Gui.ViewModel
     {
         public ChartViewModel ChartViewModel { get; set; }
         public ICommand DrawAction { get; set; }
+
         public ICommand ImportExcelDataCommand { get; set; }
         public ICommand SaveToExcelCommand { get; set; }
         public MainWindowViewModel()
@@ -45,6 +50,21 @@ namespace Gui.ViewModel
                 filePath = openFileDialog.FileName;
 
         
+
+
+        public ICommand GetBoatsCommand { get; set; }
+        public ObservableCollection<BoatDto> BoatsCollection { get; set; }
+
+        public MainWindowViewModel()
+        {
+            DrawAction = new ActionCommand(DrawChart);
+            GetBoatsCommand = new ActionCommand(GetBoats);
+        }
+
+        private void GetBoats()
+        {
+            var boatService = new BoatService();
+            BoatsCollection=new ObservableCollection<BoatDto>(boatService.GetBoats());
 
         }
 
