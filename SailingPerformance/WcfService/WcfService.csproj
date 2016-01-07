@@ -94,7 +94,7 @@
       <DependentUpon>GpsService.svc</DependentUpon>
     </Compile>
     <Compile Include="Services\GpsService\IGpsService.cs" />
-    <Compile Include="Services\GpsService\Requests\PutDataRequest.cs" />
+    <Compile Include="Services\GpsService\Requests\AddDataRequest.cs" />
     <Compile Include="Services\GpsService\Requests\GetGpsByDateResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

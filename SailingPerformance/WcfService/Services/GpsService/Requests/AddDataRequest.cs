@@ -5,16 +5,16 @@ using System.Runtime.Serialization;
 namespace WcfService.Services.GpsService.Requests
 {
     [DataContract]
-    public class GetGpsByDateRequest
+    public class AddDataRequest
     {
         [DataMember]
-        public Guid IdSession { get; set; }
+        public Guid IdBoat { get; set; }
         [DataMember]
         public DateTime SecondsFromStart { get; set; }
         [DataMember]
         public double BoatSpeed { get; set; }
         [DataMember]
-        public double BoatDirection { get; set; }
+        public double BoatDirection{ get; set; }
         [DataMember]
         public double WindSpeed { get; set; }
         [DataMember]
