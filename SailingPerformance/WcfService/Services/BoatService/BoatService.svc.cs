@@ -32,7 +32,7 @@ namespace WcfService.Services.BoatService
                 {
                     Boat boat = Mapper.Map<Boat>(boatRequest);
                     GuidExtensions guid = new GuidExtensions();
-                    boat.IdBoat = guid.Increment(_repositoryBoat.GetGuidLastBoat());
+                 //   boat.IdBoat = guid.Increment(_repositoryBoat.GetGuidLastBoat());
                     _repositoryBoat.Add(boat);
                     _unitOfWork.Commit();
                     response.IsSuccess = true;

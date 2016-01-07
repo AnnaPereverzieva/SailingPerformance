@@ -17,13 +17,13 @@ namespace Tracker
         private void btnAddBoat_Click(object sender, RoutedEventArgs e)
         {
             var client=new BoatServiceClient();
-            GetBoatResponse response=client.GetBoatId(new BoatRequest {Name = "Frosia", Model = "hgj"});
+            BaseResponse response=client.AddBoat(new BoatRequest {Name = "Volk", Model = "Gfg6790"});
             Txb.Text = response.IsSuccess.ToString();
-            Guid g = response.Id;
-            BaseResponse response1 = client.DeleteBoat(new DeleteBoatRequest {Id=g});
-            if (response1.ErrorMessage!=string.Empty)
+          //  Guid g = response.Id;
+          //  BaseResponse response1 = client.DeleteBoat(new DeleteBoatRequest {Id=g});
+            if (response.ErrorMessage!=string.Empty)
             Txb.Text += response.ErrorMessage;
-            Txb.Text += response1.IsSuccess.ToString();
+            Txb.Text += response.IsSuccess.ToString();
 
             client.Close();
         }
