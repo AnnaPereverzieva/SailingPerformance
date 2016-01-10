@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Web;
 
 namespace WcfService.Services.GpsService.Requests
 {
     [DataContract]
-    public class GetGpsByDateRequest
+    public class GpsData
     {
-        [DataMember]
-        public Guid IdSession { get; set; }
         [DataMember]
         public DateTime SecondsFromStart { get; set; }
         [DataMember]

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Dal;
 using WcfService.Services.BoatService;
+using WcfService.Services.SessionService;
 
 namespace WcfService.AutoMapper
 {
@@ -8,7 +9,8 @@ namespace WcfService.AutoMapper
     {
         public static void Configuration()
         {
-            Mapper.CreateMap<BoatRequest, Boat>();            
+            Mapper.CreateMap<BoatRequest, Boat>();
+            Mapper.CreateMap<AddSessionRequest, Session>();
         }
     }
 }

@@ -4,7 +4,6 @@ using Dal;
 using Dal.Repositories;
 using Dal.Repositories.Contracts;
 using WcfService.AutoMapper;
-using WcfService.Common;
 
 namespace WcfService.Services.BoatService
 {

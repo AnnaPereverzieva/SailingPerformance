@@ -7,5 +7,6 @@ namespace Dal.Repositories.Contracts
     {
         Guid GetGuidBoat(string model, string name);
         List<Boat> GetBoats();
+        bool IsExistBoat(Guid idBoat);
     }
 }
