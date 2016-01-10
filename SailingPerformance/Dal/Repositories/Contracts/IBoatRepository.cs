@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Dal.Repositories.Contracts
 {
@@ -6,5 +7,6 @@ namespace Dal.Repositories.Contracts
     {
         Guid GetGuidBoat(string model, string name);
         Guid GetGuidLastBoat();
+        List<Boat> GetBoats();
     }
 }
