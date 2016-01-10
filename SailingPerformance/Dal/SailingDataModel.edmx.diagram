@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a9e18638a9de464fafceeecd0a6ef2d8" Name="Diagram1">
+      <Diagram DiagramId="21ffa241a7bd4134890853a6f6522990" Name="Diagram1">
         <EntityTypeShape EntityType="SailingManagerDBModel.Boat" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SailingManagerDBModel.GPSData" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="SailingManagerDBModel.Session" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SailingManagerDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SailingManagerDBModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="SailingManagerDBModel.FK_Sessions_Boats" ManuallyRouted="false" />
         <AssociationConnector Association="SailingManagerDBModel.FK_GPSData_Sessions" ManuallyRouted="false" />
       </Diagram>

@@ -24,6 +24,6 @@ namespace Dal
         public string GeoHeight { get; set; }
         public string GeoWidth { get; set; }
     
-        public virtual Session Session { get; set; }
+        public virtual Session Sessions { get; set; }
     }
 }

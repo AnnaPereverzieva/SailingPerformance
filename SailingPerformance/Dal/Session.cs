@@ -17,7 +17,7 @@ namespace Dal
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Session()
         {
-            this.GPSDatas = new HashSet<GPSData>();
+            this.GPSData = new HashSet<GPSData>();
         }
     
         public System.Guid IdSession { get; set; }
@@ -25,8 +25,8 @@ namespace Dal
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> StopDate { get; set; }
     
-        public virtual Boat Boat { get; set; }
+        public virtual Boat Boats { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GPSData> GPSDatas { get; set; }
+        public virtual ICollection<GPSData> GPSData { get; set; }
     }
 }

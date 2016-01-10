@@ -31,6 +31,7 @@ namespace WcfService.Services.BoatService
                 if (check == Guid.Empty)
                 {
                     Boat boat = Mapper.Map<Boat>(boatRequest);
+                    boat.IdBoat=Guid.NewGuid();
                     _repositoryBoat.Add(boat);
                     _unitOfWork.Commit();
                     response.IsSuccess = true;

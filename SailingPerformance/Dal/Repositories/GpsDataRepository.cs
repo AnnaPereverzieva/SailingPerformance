@@ -16,12 +16,12 @@ namespace Dal.Repositories
         }
         public void Add(GPSData entity)
         {
-            _sailingDbContext.GPSDatas.Add(entity);
+            _sailingDbContext.GPSData.Add(entity);
         }
 
         public void Update(GPSData entity)
         {
-            _sailingDbContext.GPSDatas.AddOrUpdate(entity);
+            _sailingDbContext.GPSData.AddOrUpdate(entity);
         }
 
         public void Delete(GPSData entity)
