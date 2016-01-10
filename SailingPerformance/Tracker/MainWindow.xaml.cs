@@ -17,7 +17,7 @@ namespace Tracker
         private void btnAddBoat_Click(object sender, RoutedEventArgs e)
         {
             var client=new BoatServiceClient();
-            BaseResponse response=client.AddBoat(new BoatRequest {Name = "Volk", Model = "Gfg6790"});
+            BaseResponse response=client.AddBoat(new BoatRequest {Name = "Marina", Model = "Gjj6790"});
             Txb.Text = response.IsSuccess.ToString();
           //  Guid g = response.Id;
           //  BaseResponse response1 = client.DeleteBoat(new DeleteBoatRequest {Id=g});

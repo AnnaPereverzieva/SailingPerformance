@@ -48,13 +48,5 @@ namespace Dal.Repositories
             if (obj != null) return obj.IdBoat;
             return Guid.Empty;
         }
-
-        public Guid GetGuidLastBoat()
-        {
-            var obj = _sailingDbContext.Boats.ToArray().LastOrDefault();
-            if (obj != null)
-                return obj.IdBoat;
-            return Guid.Empty;
-        }
     }
 }
