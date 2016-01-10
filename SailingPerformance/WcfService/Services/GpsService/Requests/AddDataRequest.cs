@@ -7,6 +7,10 @@ namespace WcfService.Services.GpsService.Requests
     [DataContract]
     public class AddDataRequest
     {
+        public AddDataRequest()
+        {
+            GpsDataList=new List<GpsData>();
+        }
         [DataMember]
         public Guid IdBoat { get; set; }
         [DataMember]

@@ -20,8 +20,8 @@ namespace WcfService.Services.GpsService.Requests
         [DataMember]
         public double WindDirection { get; set; }
         [DataMember]
-        public double GeoHeight { get; set; }
+        public string GeoHeight { get; set; }
         [DataMember]
-        public double GeoWidth { get; set; }
+        public string GeoWidth { get; set; }
     }
 }

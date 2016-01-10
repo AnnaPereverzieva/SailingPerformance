@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Dal;
 using WcfService.Services.BoatService;
+using WcfService.Services.GpsService.Requests;
 using WcfService.Services.SessionService;
 
 namespace WcfService.AutoMapper
@@ -11,6 +12,7 @@ namespace WcfService.AutoMapper
         {
             Mapper.CreateMap<BoatRequest, Boat>();
             Mapper.CreateMap<AddSessionRequest, Session>();
+            Mapper.CreateMap<GpsData, GPSData>();
         }
     }
 }

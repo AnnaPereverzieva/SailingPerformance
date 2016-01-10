@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using Tracker.BoatService;
+using Tracker.GpsServiceReference;
 using Tracker.ServiceReference;
 
 namespace Tracker
@@ -34,6 +38,47 @@ namespace Tracker
             Txb.Text += response.IsSuccess.ToString();
           
             client.Close();
+        }
+
+        private void btnAddData_Click(object sender, RoutedEventArgs e)
+        {
+             var client=new GpsServiceClient();
+            AddDataRequest request=new AddDataRequest();
+            request.IdBoat = new Guid("5608fc44-abb7-e511-82af-acb57d99b460");
+
+            string[] dataGridPagerStyle = File.ReadAllLines(@"C:\Users\hpereverzieva\Desktop\11.txt");
+            request.GpsDataList= new GpsData[60];
+            try
+            {
+                for (int i = 0; i < dataGridPagerStyle.Count(); i++)
+                {
+                    string entry = dataGridPagerStyle[i];
+                    string item = entry.Substring(0, entry.IndexOf(";", StringComparison.Ordinal));
+                    request.GpsDataList[i]=new GpsData();
+                    request.GpsDataList[i].SecondsFromStart = Convert.ToDateTime(item);
+
+
+                    entry = entry.Remove(0, entry.IndexOf(";", StringComparison.Ordinal) + 1);
+                    item = entry.Substring(0, entry.IndexOf(";", StringComparison.Ordinal));
+                    request.GpsDataList[i].GeoWidth =item;
+
+                    entry = entry.Remove(0, entry.IndexOf(";", StringComparison.Ordinal) + 1);
+                    item = entry.Substring(0, entry.IndexOf(";", StringComparison.Ordinal));
+                    request.GpsDataList[i].GeoHeight = item;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            var response =client.AddData(request);
+            Txb.Text += "koniec!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+            Txb.Text += response.ErrorMessage;
+            Txb.Text += response.IsSuccess.ToString();
+
+            client.Close();
+
         }
     }
 }

@@ -42,7 +42,7 @@ namespace WcfService.Services.SessionService
                 {
                     _unitOfWork.Commit();
                     response.IsSuccess = false;
-                    response.ErrorMessage = "Łódkę o takim id nie istnieje";
+                    response.ErrorMessage = "Łódki o takim id nie istnieje";
                 }             
             }
             catch (Exception ex)

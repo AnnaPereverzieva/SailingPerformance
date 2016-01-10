@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/WcfService.Services.GpsService.Requests" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfService.Services.GpsService.Requests" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:65025/Services/GpsService/GpsService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="AddDataRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GpsDataList" nillable="true" type="tns:ArrayOfGpsData" />
+      <xs:element minOccurs="0" name="IdBoat" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AddDataRequest" nillable="true" type="tns:AddDataRequest" />
+  <xs:complexType name="ArrayOfGpsData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GpsData" nillable="true" type="tns:GpsData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGpsData" nillable="true" type="tns:ArrayOfGpsData" />
+  <xs:complexType name="GpsData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BoatDirection" type="xs:double" />
+      <xs:element minOccurs="0" name="BoatSpeed" type="xs:double" />
+      <xs:element minOccurs="0" name="GeoHeight" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GeoWidth" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SecondsFromStart" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WindDirection" type="xs:double" />
+      <xs:element minOccurs="0" name="WindSpeed" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GpsData" nillable="true" type="tns:GpsData" />
+</xs:schema>
