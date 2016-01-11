@@ -21,7 +21,8 @@
                 Margin="10,42,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="AddData" />
+                Content="AddData" Click="btnAddData_Click" />
+     
         <TextBox x:Name="Txb"
                    Width="605"
                    Height="368"

@@ -19,8 +19,8 @@ namespace ClientService.Services
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 var dataGps=new DataGps();
-                dataGps.Speed=Convert.ToDouble(dataTable.Rows[i]["predkosc"]) ;
-                dataGps.DirectionWind = Convert.ToDouble(dataTable.Rows[i]["kurs"]);
+                dataGps.BoatSpeed=Convert.ToDouble(dataTable.Rows[i]["predkosc"]) ;
+                dataGps.WindDirection = Convert.ToDouble(dataTable.Rows[i]["kurs"]);
                 DataGpsList.Add(dataGps);
             }
             return DataGpsList;

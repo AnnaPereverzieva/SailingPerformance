@@ -7,6 +7,7 @@ namespace WcfService.Services.GpsService
     [ServiceContract]
     public interface IGpsService
     {
-       
+        [OperationContract]
+        BaseResponse AddData(AddDataRequest addDataRequest);
     }
 }

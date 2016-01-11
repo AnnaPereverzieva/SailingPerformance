@@ -85,12 +85,20 @@
     <Compile Include="Session.cs">
       <DependentUpon>SailingDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>SailingDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
       <DependentUpon>SailingDataModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <EntityDeploy Include="SailingDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

@@ -4,7 +4,6 @@ using Dal;
 using Dal.Repositories;
 using Dal.Repositories.Contracts;
 using WcfService.AutoMapper;
-using WcfService.Common;
 
 namespace WcfService.Services.BoatService
 {
@@ -31,8 +30,7 @@ namespace WcfService.Services.BoatService
                 if (check == Guid.Empty)
                 {
                     Boat boat = Mapper.Map<Boat>(boatRequest);
-                 //   GuidExtensions guid = new GuidExtensions();
-                 //   boat.IdBoat = guid.Increment(_repositoryBoat.GetGuidLastBoat());
+                    boat.IdBoat=Guid.NewGuid();
                     _repositoryBoat.Add(boat);
                     _unitOfWork.Commit();
                     response.IsSuccess = true;
@@ -115,7 +113,7 @@ namespace WcfService.Services.BoatService
             try
             {
                 _unitOfWork.BeginTransaction();
-                _repositoryBoat.Delete(new Boat { IdBoat = request.Id, Name = "Frosia", Model = "hgj"});
+                _repositoryBoat.Delete(new Boat { IdBoat = new Guid("BF1D73AB-356C-48F8-94EA-34F872EC3535") });
                 _unitOfWork.Commit();
                 response.IsSuccess = true;
             }

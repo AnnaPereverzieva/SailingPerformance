@@ -6,7 +6,7 @@ namespace Dal.Repositories.Contracts
     public interface IBoatRepository:IRepository<Boat>
     {
         Guid GetGuidBoat(string model, string name);
-        Guid GetGuidLastBoat();
         List<Boat> GetBoats();
+        bool IsExistBoat(Guid idBoat);
     }
 }

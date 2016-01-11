@@ -30,12 +30,12 @@ namespace Dal.Repositories
             _sailingDbContext.Entry(entity).State = EntityState.Deleted;
         }
 
-        public List<Session> GetSessions(DateTime start, DateTime stop)
+        public List<Session> GetSessions(DateTime start, DateTime stop, Guid idBoat)
         {
             List<Session> listSessions;
             using (_sailingDbContext = new SailingDbContext())
             {
-                listSessions = _sailingDbContext.Sessions.Where(x => x.StartDate >= start && x.StopDate <= stop).ToList();
+                listSessions = _sailingDbContext.Sessions.Where(x => x.StartDate >= start && x.StopDate <= stop && x.IdBoat==idBoat).ToList();
             }
             return listSessions;
         }

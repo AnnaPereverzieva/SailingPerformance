@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Linq;
 using Dal.Repositories.Contracts;
 
 namespace Dal.Repositories
@@ -16,23 +17,26 @@ namespace Dal.Repositories
         }
         public void Add(GPSData entity)
         {
-            _sailingDbContext.GPSDatas.Add(entity);
+            _sailingDbContext.GPSData.Add(entity);
         }
 
         public void Update(GPSData entity)
         {
-            _sailingDbContext.GPSDatas.AddOrUpdate(entity);
+            _sailingDbContext.GPSData.AddOrUpdate(entity);
         }
 
         public void Delete(GPSData entity)
         {
             _sailingDbContext.Entry(entity).State = EntityState.Deleted;
         }
-
-
-        public List<GPSData> GetGpsData(List<Guid> idSessions)
+        public List<GPSData> GetGpsData(Guid idSession)
         {
-            throw new NotImplementedException();
+            List<GPSData> data;
+            using (_sailingDbContext = new SailingDbContext())
+            {
+                data = _sailingDbContext.GPSData.Where(x=>x.IdSession==idSession).ToList();
+            }
+            return data;
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace WcfService.Services.GpsService.Requests
+namespace WcfService.Services.GpsService.Responses
 {
     [DataContract]
     public class GetGpsByDateRequest

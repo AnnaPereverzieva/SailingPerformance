@@ -42,18 +42,17 @@ namespace Dal.Repositories
             return listBoats;
         }
 
+        public bool IsExistBoat(Guid idBoat)
+        {
+            var boat =_sailingDbContext.Boats.FirstOrDefault(x => x.IdBoat == idBoat);
+            if (boat != null) return true;
+            return false;
+        }
+
         public Guid GetGuidBoat(string model, string name)
         {
             var obj = _sailingDbContext.Boats.FirstOrDefault(n => n.Model == model || n.Name == name);
             if (obj != null) return obj.IdBoat;
-            return Guid.Empty;
-        }
-
-        public Guid GetGuidLastBoat()
-        {
-            var obj = _sailingDbContext.Boats.ToArray().LastOrDefault();
-            if (obj != null)
-                return obj.IdBoat;
             return Guid.Empty;
         }
     }

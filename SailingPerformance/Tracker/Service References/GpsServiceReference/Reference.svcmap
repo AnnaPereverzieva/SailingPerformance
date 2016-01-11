@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d46e7fed-1538-4153-a28f-e8f8c8fc5ee6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:65025/Services/GpsService/GpsService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GpsService.wsdl" MetadataType="Wsdl" ID="fe797020-07b4-4cd3-8abf-02797218c209" SourceId="1" SourceUrl="http://localhost:65025/Services/GpsService/GpsService.svc?wsdl" />
+    <MetadataFile FileName="GpsService.disco" MetadataType="Disco" ID="cf8ef817-f328-47da-af79-15a73f89a2f8" SourceId="1" SourceUrl="http://localhost:65025/Services/GpsService/GpsService.svc?disco" />
+    <MetadataFile FileName="GpsService.xsd" MetadataType="Schema" ID="7c98d226-c4b9-4b3d-86fc-a79ecc116284" SourceId="1" SourceUrl="http://localhost:65025/Services/GpsService/GpsService.svc?xsd=xsd3" />
+    <MetadataFile FileName="GpsService1.xsd" MetadataType="Schema" ID="fe12829b-5bc0-49e3-b872-5ede282c9612" SourceId="1" SourceUrl="http://localhost:65025/Services/GpsService/GpsService.svc?xsd=xsd2" />
+    <MetadataFile FileName="GpsService2.xsd" MetadataType="Schema" ID="c8e6690b-24cf-415a-99e5-df428d2bf319" SourceId="1" SourceUrl="http://localhost:65025/Services/GpsService/GpsService.svc?xsd=xsd1" />
+    <MetadataFile FileName="GpsService3.xsd" MetadataType="Schema" ID="b65af65d-34bb-49ad-9810-d15108a17cd6" SourceId="1" SourceUrl="http://localhost:65025/Services/GpsService/GpsService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
