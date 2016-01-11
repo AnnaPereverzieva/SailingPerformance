@@ -73,7 +73,7 @@ namespace Tracker
                 MessageBox.Show(ex.ToString());
             }
             var response =client.AddData(request);
-            Txb.Text += "koniec!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+            Txb.Text += "koniec!!!!!!!";
             Txb.Text += response.ErrorMessage;
             Txb.Text += response.IsSuccess.ToString();
 

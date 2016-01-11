@@ -39,12 +39,5 @@ namespace Dal.Repositories
             }
             return listSessions;
         }
-
-        //public Guid GetGuidLastSession()
-        //{
-        //    if(_sailingDbContext.Sessions.ToArray().Any())
-        //    return _sailingDbContext.Sessions.ToArray().LastOrDefault().IdSession;
-        //    return Guid.Empty;
-        //}
     }
 }

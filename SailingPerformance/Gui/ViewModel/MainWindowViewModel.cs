@@ -15,6 +15,7 @@ namespace Gui.ViewModel
         public ICommand DrawAction { get; set; }
         public ICommand GetBoatsCommand { get; set; }
         public ObservableCollection<BoatDto> BoatsCollection { get; set; }
+        public ObservableCollection<SessionDto> SessionCollection { get; set; }
 
         public MainWindowViewModel()
         {
@@ -26,6 +27,10 @@ namespace Gui.ViewModel
         {
             var boatService = new BoatService();
             BoatsCollection=new ObservableCollection<BoatDto>(boatService.GetBoats());
+
+            var sessionService=new SessionService();
+            SessionCollection = new ObservableCollection<SessionDto>(sessionService.GetSessions(DateTime.ParseExact("2008-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
+                            System.Globalization.CultureInfo.InvariantCulture), DateTime.Now, new Guid("5608FC44-ABB7-E511-82AF-ACB57D99B460")));
         }
 
         private void DrawChart()

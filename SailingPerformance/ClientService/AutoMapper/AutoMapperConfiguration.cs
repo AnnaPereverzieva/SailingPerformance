@@ -14,6 +14,7 @@ namespace ClientService.AutoMapper
         public static void ConfigureBoatMapping()
         {
             Mapper.CreateMap<Boat, BoatDto>();
+            Mapper.CreateMap<Session, SessionDto>();
         }
     }
 }
