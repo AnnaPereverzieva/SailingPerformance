@@ -16,6 +16,7 @@ namespace Gui.ViewModel
         public ICommand GetBoatsCommand { get; set; }
         public ObservableCollection<BoatDto> BoatsCollection { get; set; }
         public ObservableCollection<SessionDto> SessionCollection { get; set; }
+        public ObservableCollection<DataGps> DataCollection { get; set; }
 
         public MainWindowViewModel()
         {
@@ -31,6 +32,8 @@ namespace Gui.ViewModel
             var sessionService=new SessionService();
             SessionCollection = new ObservableCollection<SessionDto>(sessionService.GetSessions(DateTime.ParseExact("2008-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
                             System.Globalization.CultureInfo.InvariantCulture), DateTime.Now, new Guid("5608FC44-ABB7-E511-82AF-ACB57D99B460")));
+          var dataService=new GpsDataService();
+            DataCollection=new ObservableCollection<DataGps>(dataService.GetSessions(new Guid("4ADAEDD9-DAB7-E511-82AF-ACB57D99B460")));
         }
 
         private void DrawChart()

@@ -42,8 +42,8 @@ namespace Gui.ViewModel
         {
             foreach (var item in list)
             {
-                double pointX = Math.Cos((90 - item.DirectionWind) / (180 / Math.PI)) * item.Speed;
-                double pointY = Math.Sin((90 - item.DirectionWind) / (180 / Math.PI)) * item.Speed;
+                double pointX = Math.Cos((90 - item.WindDirection) / (180 / Math.PI)) * item.BoatSpeed;
+                double pointY = Math.Sin((90 - item.WindDirection) / (180 / Math.PI)) * item.BoatSpeed;
                 LineSeries.Points.Add(new DataPoint(pointX, pointY));
             }
             PlotModel.Series.Add(LineSeries);

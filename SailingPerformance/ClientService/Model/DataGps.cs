@@ -4,10 +4,13 @@ namespace ClientService.Model
 {
     public class DataGps
     {
-        public DateTime Date { get; set; }
-        public double Speed { get; set; }
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
-        public double DirectionWind { get; set; }
+        public Guid IdSession { get; set; }
+        public DateTime SecondsFromStart { get; set; }
+        public double BoatSpeed { get; set; }
+        public double BoatDirection { get; set; }
+        public double WindSpeed { get; set; }
+        public double WindDirection { get; set; }
+        public string GeoHeight { get; set; }
+        public string GeoWidth { get; set; }
     }
 }

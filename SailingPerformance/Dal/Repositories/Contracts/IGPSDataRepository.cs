@@ -5,6 +5,6 @@ namespace Dal.Repositories.Contracts
 {
     public interface IGpsDataRepository:IRepository<GPSData>
     {
-        List<GPSData> GetGpsData(List<Guid> idSessions );
+        List<GPSData> GetGpsData(Guid idSession);
     }
 }

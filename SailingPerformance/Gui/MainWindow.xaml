@@ -43,29 +43,45 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <ListBox Width="153"
-        	Height="225"
-        	Margin="23,64,0,0"
-        	HorizontalAlignment="Left"
-        	VerticalAlignment="Top"
-        	ItemsSource="{Binding BoatsCollection}">
+                 Height="225"
+                 Margin="23,64,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 ItemsSource="{Binding BoatsCollection}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock><Run Text="{Binding Name}" /><Run Text=" "/><Run Text="   " /><Run Text=" "/><Run Text="{Binding Model}" /></TextBlock>
+                        <TextBlock><Run Text="{Binding Name}" /><Run Text=" " /><Run Text="   " /><Run Text=" " /><Run Text="{Binding Model}" />
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Width="153"
+                 Height="225"
+                 Margin="331,64,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 ItemsSource="{Binding SessionCollection}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock><Run Text="{Binding IdSession}" /><Run Text=" " /><Run Text="   " /><Run Text=" " /><Run Text="{Binding Model}" />
+                        </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <ListBox Width="153"
         	Height="225"
-        	Margin="331,64,0,0"
+        	Margin="582,64,0,0"
         	HorizontalAlignment="Left"
         	VerticalAlignment="Top"
-        	ItemsSource="{Binding SessionCollection}">
+        	ItemsSource="{Binding DataCollection}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock><Run Text="{Binding IdSession}" /><Run Text=" "/><Run Text="   " /><Run Text=" "/><Run Text="{Binding Model}" /></TextBlock>
+                        <TextBlock><Run Text="{Binding GeoHeight}" /><Run Text=" " /><Run Text="   " /><Run Text=" " /><Run Text="{Binding Model}" /></TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

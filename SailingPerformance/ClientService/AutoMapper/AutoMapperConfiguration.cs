@@ -15,6 +15,7 @@ namespace ClientService.AutoMapper
         {
             Mapper.CreateMap<Boat, BoatDto>();
             Mapper.CreateMap<Session, SessionDto>();
+            Mapper.CreateMap<GPSData, DataGps>();
         }
     }
 }
