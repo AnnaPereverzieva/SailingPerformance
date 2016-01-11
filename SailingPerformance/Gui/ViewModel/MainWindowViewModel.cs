@@ -1,18 +1,11 @@
 ﻿using System;
-
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-
 using System.Collections.ObjectModel;
 
 using System.Windows.Input;
 using ClientService.Model;
 using ClientService.Services;
-using Gui.Common;
 using Microsoft.Expression.Interactivity.Core;
 using PropertyChanged;
-using Gui.View;
 using Microsoft.Win32;
 
 namespace Gui.ViewModel
@@ -30,6 +23,8 @@ namespace Gui.ViewModel
             DrawAction=new ActionCommand(DrawChart);
             ImportExcelDataCommand = new ActionCommand(ImportExcel);
             SaveToExcelCommand = new ActionCommand(SaveExcel);
+            DrawAction = new ActionCommand(DrawChart);
+            GetBoatsCommand = new ActionCommand(GetBoats);
         }
 
         private void SaveExcel()
@@ -48,8 +43,9 @@ namespace Gui.ViewModel
             openFileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;xlsx|All files (*.*)| *.*";
             if (openFileDialog.ShowDialog() == true)
                 filePath = openFileDialog.FileName;
+        }
 
-        
+
 
 
         public ICommand GetBoatsCommand { get; set; }
@@ -57,11 +53,7 @@ namespace Gui.ViewModel
         public ObservableCollection<SessionDto> SessionCollection { get; set; }
         public ObservableCollection<DataGps> DataCollection { get; set; }
 
-        public MainWindowViewModel()
-        {
-            DrawAction = new ActionCommand(DrawChart);
-            GetBoatsCommand = new ActionCommand(GetBoats);
-        }
+    
 
         private void GetBoats()
         {
