@@ -16,13 +16,13 @@ namespace ClientService.Services
             Worksheet sheet = workbook.Worksheets[0];
 
             DataTable dataTable = sheet.ExportDataTable();
-            for (int i = 0; i < dataTable.Rows.Count; i++)
+            for (int i = 0; i < 19; i++)
             {
                 var dataGps=new DataGps();
-                dataGps.BoatSpeed=Convert.ToDouble(dataTable.Rows[i]["predkosc"]) ;
+                dataGps.BoatSpeed = Convert.ToDouble(dataTable.Rows[i]["predkosc"]);
                 dataGps.BoatDirection = Convert.ToDouble(dataTable.Rows[i]["kurs"]);
-                dataGps.WindDirection = Convert.ToDouble(dataTable.Rows[i]["kierunek_wiatru"]);
-                dataGps.WindSpeed = Convert.ToDouble(dataTable.Rows[i]["sila_wiatru"]);
+                // dataGps.WindDirection = Convert.ToDouble(dataTable.Rows[i]["kierunek_wiatru"]);
+                // dataGps.WindSpeed = Convert.ToDouble(dataTable.Rows[i]["sila_wiatru"]);
                 DataGpsList.Add(dataGps);
             }
             return DataGpsList;

@@ -21,8 +21,10 @@ namespace Gui.ViewModel
         private DateTime _startDate;
         private int _selectedIndexBoat;
         private int _selectedIndexSession;
+        private string _dataOrigin;
 
         public bool isDataComplete { get; set; }
+
 
 
         public ChartViewModel ChartViewModel { get; set; }
@@ -37,9 +39,14 @@ namespace Gui.ViewModel
         public ICommand SaveToExcelCommand { get; set; }
         public ICommand AcceptDataCommand { get; set; }
 
-        public double WindSpeed { get; set; }
-        public double WindDirection { get; set; }
+        public double WindSpeedMin { get; set; }
+        public double WindSpeedMax { get; set; }
+        public double WindDirectionMin { get; set; }
+        public double WindDirectionMax { get; set; }
+
         public double OptimalDirection { get; set; }
+
+        List<DataGps> DataGpsList { get; set; }
 
         public DateTime EndDate
         {
@@ -77,10 +84,9 @@ namespace Gui.ViewModel
 
         public MainWindowViewModel()
         {
-            DrawAction =new ActionCommand(DrawChart);
             ImportExcelDataCommand = new ActionCommand(ImportExcel);
             SaveToExcelCommand = new ActionCommand(SaveExcel);
-            DrawAction = new ActionCommand(DrawChart);
+            DrawAction = new RelayCommand(DrawChart, IsDataComplete);
             GetBoatsCommand = new ActionCommand(GetBoats);
             AcceptDataCommand = new RelayCommand(AcceptData, IsDataComplete);
             GetBoats();
@@ -89,8 +95,6 @@ namespace Gui.ViewModel
             GetSessions();
             SelectedIndexSession = 0;
             GetData();
-            WindDirection = 10;
-            WindSpeed = 2;
         }
 
         private void SaveExcel()
@@ -145,45 +149,67 @@ namespace Gui.ViewModel
 
 
         }
-
-        private void AcceptData(object obj)
-        {
-            throw new NotImplementedException();
-        }
-
         private bool IsDataComplete(object obj)
         {
             return isDataComplete;
         }
 
-
-        private void DrawChart()
+        private void AcceptData(object obj)
         {
+            _dataOrigin = "selectedData";
 
-            var readExcel = new ReadExcelService();
-            var list = readExcel.LoadData(@"C:\Users\malgo\Downloads\DaneDoOptymalizacjiŁodzi.xlsx");
-            var listToInterpolate = new List<PointD>();
-            double apparentWind = 0, newApparentWind = 0;
+            var gpsDataService = new GpsDataService();
+            var selectedSession = SessionCollection[SelectedIndexSession];
+            Dictionary<float, float> windSpeedMinMax = new Dictionary<float, float>(gpsDataService.GetWindSpeedMinMax(selectedSession.IdSession));
+            WindSpeedMin = windSpeedMinMax.Keys.First();
+            WindSpeedMax = windSpeedMinMax.Values.First();
+            Dictionary<float, float> windDirectionMinMax = new Dictionary<float, float>(gpsDataService.GetWindDirectionMinMax(selectedSession.IdSession));
+            WindDirectionMin = windDirectionMinMax.Keys.First();
+            WindDirectionMax = windDirectionMinMax.Values.First();
+        }
 
-            
-            foreach (var x in list)
+        private void LoadSelectedData()
+        {
+            foreach (var item in DataCollection)
             {
-                var direction = x.WindDirection - x.BoatDirection;
-                if (direction < 0)
-                    direction = direction*(-1);
+                var dataGps = new DataGps();
+                dataGps.BoatDirection = item.BoatDirection;
+                dataGps.BoatSpeed = item.BoatSpeed;
+                DataGpsList.Add(dataGps);
+            }
+        }
 
-                //obliczanie wiatru pozornego dla obecnych danych
-                apparentWind = Math.Sqrt(Math.Pow(x.WindSpeed,2) + Math.Pow(x.BoatSpeed,2) + 2*x.WindSpeed*x.BoatSpeed*Math.Cos(direction));
+        private void DrawChart(object obj)
+        {
+            DataGpsList = new List<DataGps>();
+            ReadExcelService readExcel;
 
-                var newDirection = WindDirection - x.BoatDirection;
-                if (newDirection < 0)
-                    newDirection = direction * (-1);
-                
-                //obliczanie wiatru pozornego dla nowych danych
-                newApparentWind = Math.Sqrt(Math.Pow(WindSpeed, 2) + Math.Pow(x.BoatSpeed, 2) + 2 * WindSpeed * x.BoatSpeed * Math.Cos(newDirection));
-                
-                double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * (x.BoatSpeed - (apparentWind - newApparentWind)); //odejmuję różnicę siły wiatru pozornego poprzedniego od nowego
-                double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * (x.BoatSpeed - (apparentWind - newApparentWind)); //a potem tą różnicę odejmuję od prędkości łodzi
+            switch (_dataOrigin)
+            {
+                case "excel":
+                    readExcel = new ReadExcelService();
+                    DataGpsList = readExcel.LoadData(@"K:\Jasiek\Desctop\III_Rok\Projekt_zespolowy\SalingPerformance\SailingPerformance\DaneDoOptymalizacjiŁodzi.xlsx");
+                    CalculatePoints();
+                    break;
+                case "selectedData":
+                    LoadSelectedData();
+                    CalculatePoints();
+                    break;
+                default:
+                    break;
+            }        
+        }
+
+
+        private void CalculatePoints()
+        {
+            var listToInterpolate = new List<PointD>();
+
+            foreach (var x in DataGpsList)
+            {
+
+                double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
+                double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
                 listToInterpolate.Add(new PointD(pointX, pointY));
             }
 
@@ -192,5 +218,37 @@ namespace Gui.ViewModel
 
             ChartViewModel = new ChartViewModel(listToInterpolate);
         }
+
+        //private void CalculatePoints()
+        //{
+        //    var listToInterpolate = new List<PointD>();
+        //    double apparentWind = 0, newApparentWind = 0;
+
+        //    foreach (var x in DataGpsList)
+        //    {
+        //        var direction = x.WindDirection - x.BoatDirection;
+        //        if (direction < 0)
+        //            direction = direction * (-1);
+
+        //        //obliczanie wiatru pozornego dla obecnych danych
+        //        apparentWind = Math.Sqrt(Math.Pow(x.WindSpeed, 2) + Math.Pow(x.BoatSpeed, 2) + 2 * x.WindSpeed * x.BoatSpeed * Math.Cos(direction));
+
+        //        var newDirection = WindDirection - x.BoatDirection;
+        //        if (newDirection < 0)
+        //            newDirection = direction * (-1);
+
+        //        //obliczanie wiatru pozornego dla nowych danych
+        //        newApparentWind = Math.Sqrt(Math.Pow(WindSpeed, 2) + Math.Pow(x.BoatSpeed, 2) + 2 * WindSpeed * x.BoatSpeed * Math.Cos(newDirection));
+
+        //        double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * (x.BoatSpeed - (apparentWind - newApparentWind)); //odejmuję różnicę siły wiatru pozornego poprzedniego od nowego
+        //        double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * (x.BoatSpeed - (apparentWind - newApparentWind)); //a potem tą różnicę odejmuję od prędkości łodzi
+        //        listToInterpolate.Add(new PointD(pointX, pointY));
+        //    }
+
+        //    //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
+        //    //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate); na razie nie działa!
+
+        //    ChartViewModel = new ChartViewModel(listToInterpolate);
+        //}
     }
 }

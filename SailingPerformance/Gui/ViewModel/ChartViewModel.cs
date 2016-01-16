@@ -64,8 +64,21 @@ namespace Gui.ViewModel
             //var valueAxis = new LinearAxis(AxisPosition.Left, 0) { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
             //PlotModel.Axes.Add(valueAxis);
 
-            PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, 0, 4));
-            PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, -4, 4));
+           // PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, 0, 4));
+            PlotModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
+                Minimum = 0,
+                Maximum = 4
+
+            });
+            //PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, -4, 4));
+            PlotModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Minimum = -4,
+                Maximum = 4
+            });
 
             DrawChart(list);
 

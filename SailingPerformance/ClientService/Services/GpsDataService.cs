@@ -20,5 +20,19 @@ namespace ClientService.Services
             List<GPSData> list = repository.GetGpsData(idSession);
             return Mapper.Map<List<DataGps>>(list);
         }
+        public Dictionary<float, float> GetWindSpeedMinMax(Guid idSession)
+        {
+            var repository = new GpsDataRepository();
+            Dictionary<float, float> windSpeedMinMax = new Dictionary<float, float>(repository.GetWindSpeedMinMax(idSession));
+            return windSpeedMinMax;
+            
+        }
+        public Dictionary<float, float> GetWindDirectionMinMax(Guid idSession)
+        {
+            var repository = new GpsDataRepository();
+            Dictionary<float, float> windDirectionMinMax = new Dictionary<float, float>(repository.GetWindDirectionMinMax(idSession));
+            return windDirectionMinMax;
+
+        }
     }
 }
