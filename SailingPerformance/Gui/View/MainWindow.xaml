@@ -127,8 +127,8 @@
 
         <DockPanel Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <Label Content="Optymalny kurs [deg]:"/>
-            <TextBox x:Name="TxbOptCourse" Width="Auto"
-                     Text="{Binding OpitmalCourse}" IsReadOnly="True"/>
+            <TextBox x:Name="TxbOptCourse" Width="37"
+                     Text="{Binding OptimalDirection}" IsReadOnly="True" RenderTransformOrigin="0.5,0.5"/>
         </DockPanel>
  
 

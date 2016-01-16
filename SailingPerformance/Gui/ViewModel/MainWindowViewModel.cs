@@ -181,6 +181,7 @@ namespace Gui.ViewModel
 
         private void DrawChart(object obj)
         {
+
             DataGpsList = new List<DataGps>();
             ReadExcelService readExcel;
 
@@ -205,17 +206,31 @@ namespace Gui.ViewModel
         {
             var listToInterpolate = new List<PointD>();
 
+            double distaceFromAxisStart = 0, maxDistance = 0, optimalDirection = 0;
+
             foreach (var x in DataGpsList)
             {
 
                 double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
                 double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
+
                 listToInterpolate.Add(new PointD(pointX, pointY));
+                
+                // liczy odległość od początku ukłądu współrzędnych
+                // tam gdzie odległość jest największa kurs jest optymalny
+                distaceFromAxisStart = Math.Sqrt(Math.Pow(pointX, 2) + Math.Pow(pointY, 2));
+                if (distaceFromAxisStart > maxDistance)
+                {
+                    maxDistance = distaceFromAxisStart;
+                    optimalDirection = x.BoatDirection;
+                }
             }
+            
 
             //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
-            //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate); na razie nie działa!
+            //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!
 
+            OptimalDirection = optimalDirection;
             ChartViewModel = new ChartViewModel(listToInterpolate);
         }
 
