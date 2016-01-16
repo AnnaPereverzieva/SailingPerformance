@@ -24,6 +24,7 @@
                 Width="200"
                 VerticalAlignment="Center"
                 Cursor="Hand"
+                Value="{Binding WindSpeed}"
                 Style="{DynamicResource FlatSlider}"/>
         <Label Grid.Column="0" HorizontalAlignment="Left" 
                VerticalAlignment="Center"
@@ -46,7 +47,9 @@
                 Width="200"
                 VerticalAlignment="Center"
                 Cursor="Hand"
-                Style="{DynamicResource FlatSlider}"/>
+                Value ="{Binding WindDirection}"
+                Style="{DynamicResource FlatSlider}" 
+                Maximum="180"/>
 
         <Label Grid.Column="0" Grid.Row="3"
                HorizontalAlignment="Left" 
@@ -59,7 +62,7 @@
         <Label Grid.Column="0" Grid.Row="4"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
-               Content="Kierunek wiatru [m/s]: "
+               Content="Kierunek wiatru [stopnie]: "
                Margin="20,0,0,0"/>
         
         <controls:NumericUpDown Grid.Column="1" Grid.Row="4"/>

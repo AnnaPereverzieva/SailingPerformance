@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ClientService.Model;
+using Gui.Common;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Extensions;
@@ -32,25 +33,23 @@ namespace Gui.ViewModel
                                                        MarkerType.Cross
                                                    };
 
-        public ChartViewModel(List<DataGps> list, double windStrength, double windDirection)
+        public ChartViewModel(List<PointD> list)
         {
             PlotModel = new PlotModel();
-            SetUpModel(list,  windStrength, windDirection);
+            SetUpModel(list);
         }
 
-        public void DrawChart(List<DataGps> list, double windStrength, double windDirection)
+        public void DrawChart(List<PointD> list)
         {
-            foreach (var item in list)
+            foreach (var point in list)
             {
-                double pointX = Math.Cos((90 - item.WindDirection) / (180 / Math.PI)) * item.BoatSpeed;
-                double pointY = Math.Sin((90 - item.WindDirection) / (180 / Math.PI)) * item.BoatSpeed;
-                LineSeries.Points.Add(new DataPoint(pointX, pointY));
+               LineSeries.Points.Add(new DataPoint(point.X, point.Y));
             }
             PlotModel.Series.Add(LineSeries);
 
         }
 
-        public void SetUpModel(List<DataGps> list, double windStrength, double windDirection)
+        public void SetUpModel(List<PointD> list)
         {
             LineSeries = new LineSeries();
             PlotModel.LegendTitle = "Legend";
@@ -68,7 +67,7 @@ namespace Gui.ViewModel
             PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, 0, 4));
             PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, -4, 4));
 
-            DrawChart(list, windStrength, windDirection);
+            DrawChart(list);
 
      
 

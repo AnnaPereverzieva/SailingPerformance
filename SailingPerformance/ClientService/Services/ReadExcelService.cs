@@ -12,7 +12,7 @@ namespace ClientService.Services
         {
             Workbook workbook = new Workbook();
             List<DataGps> DataGpsList=new List<DataGps>();
-            workbook.LoadFromFile(@"K:\Jasiek\Desctop\III_Rok\Projekt_zespolowy\SailingPerformance\SailingPerformance\Gui\DataExcel\DataGps.xlsx", ExcelVersion.Version2013);
+            workbook.LoadFromFile(path, ExcelVersion.Version2013);
             Worksheet sheet = workbook.Worksheets[0];
 
             DataTable dataTable = sheet.ExportDataTable();
@@ -20,7 +20,9 @@ namespace ClientService.Services
             {
                 var dataGps=new DataGps();
                 dataGps.BoatSpeed=Convert.ToDouble(dataTable.Rows[i]["predkosc"]) ;
-                dataGps.WindDirection = Convert.ToDouble(dataTable.Rows[i]["kurs"]);
+                dataGps.BoatDirection = Convert.ToDouble(dataTable.Rows[i]["kurs"]);
+                dataGps.WindDirection = Convert.ToDouble(dataTable.Rows[i]["kierunek_wiatru"]);
+                dataGps.WindSpeed = Convert.ToDouble(dataTable.Rows[i]["sila_wiatru"]);
                 DataGpsList.Add(dataGps);
             }
             return DataGpsList;

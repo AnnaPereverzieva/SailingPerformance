@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Gui.View.UserControls.Flyouts"
+             xmlns:forms="clr-namespace:Eto.Forms;assembly=Eto"
              mc:Ignorable="d" 
              >
     <Grid>
@@ -25,25 +26,26 @@
                 <ComboBox Grid.Row="1"
                       VerticalAlignment="Top"
                       x:Name="CbxBoat"
-                      ItemsSource="{Binding BoatList}"
+                      ItemsSource="{Binding BoatsCollection}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="IdBoat"
                       SelectedIndex="{Binding SelectedIndexBoat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Row="2" VerticalAlignment="Bottom" Content="Data, zakres od:"/>
-                <ComboBox x:Name="CbxDateFrom"
-                      Grid.Row="3"
-                      VerticalAlignment="Top"
-                      ItemsSource="{Binding DateList}"
-                      SelectedIndex="{Binding SelectedIndexDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker HorizontalAlignment="Left"
+                            Margin="0" Grid.Row="3" 
+                            SelectedDate="{Binding StartDate,Mode=TwoWay}"
+                            VerticalAlignment="Top"/>  
                 <Label Grid.Row="4" VerticalAlignment="Bottom" Content="Data, zakres do:"/>
-                <ComboBox x:Name="CbxDate"
-                      Grid.Row="5"
-                      VerticalAlignment="Top"
-                      ItemsSource="{Binding DateList}"
-                      SelectedIndex="{Binding SelectedIndexDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker HorizontalAlignment="Left"
+                            Margin="0" Grid.Row="5" 
+                            SelectedDate="{Binding EndDate,Mode=TwoWay}"
+                            VerticalAlignment="Top"/>
                 <Label Grid.Row="6" VerticalAlignment="Bottom" Content="Nr sesji:"/>
                 <ComboBox x:Name="CbxSession"
                       Grid.Row="7"
                       VerticalAlignment="Top"
-                      ItemsSource="{Binding SessionList}"
+                      ItemsSource="{Binding Session}"
+                      DisplayMemberPath="IdSession"
                       SelectedIndex="{Binding SelectedIndexDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22"/>
             </Grid>
         </DockPanel>

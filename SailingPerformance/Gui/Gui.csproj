@@ -124,6 +124,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\Interpolation.cs" />
+    <Compile Include="Common\PointD.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="ViewModel\ChartViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -199,6 +200,10 @@
     <ProjectReference Include="..\ClientService\ClientService.csproj">
       <Project>{5d8e6fa5-8de3-47f1-9585-69ec60a8f8a5}</Project>
       <Name>ClientService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dal\Dal.csproj">
+      <Project>{5A0DEC74-B64B-4489-B315-35359B6220ED}</Project>
+      <Name>Dal</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

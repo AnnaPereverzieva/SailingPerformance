@@ -16,7 +16,7 @@ namespace ClientService.Services
         public List<BoatDto> GetBoats()
         {
             var repository=new BoatRepository();
-            List<Boat> list =repository.GetBoats();
+            List<Boat> list = repository.GetBoats();
             return Mapper.Map<List<BoatDto>>(list);          
         }
     }
