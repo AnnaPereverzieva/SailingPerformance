@@ -39,5 +39,19 @@ namespace Dal.Repositories
             }
             return listSessions;
         }
+
+        public Dictionary<DateTime, DateTime> GetStartEndDate(Guid idBoat)
+        {
+            DateTime startDate;
+            DateTime endDate;
+            Dictionary<DateTime, DateTime> startEndDates = new Dictionary<DateTime, DateTime>();
+            using (_sailingDbContext = new SailingDbContext())
+            {
+                startDate = (DateTime)_sailingDbContext.Sessions.Where(x => x.IdBoat == idBoat).Select(x => x.StartDate).Min();
+                endDate = (DateTime)_sailingDbContext.Sessions.Where(x => x.IdBoat == idBoat).Select(x => x.StopDate).Max();
+                startEndDates.Add(startDate, endDate);                
+            }
+            return startEndDates;
+        }
     }
 }
