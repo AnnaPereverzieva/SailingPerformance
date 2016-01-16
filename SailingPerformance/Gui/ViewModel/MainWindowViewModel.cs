@@ -76,7 +76,8 @@ namespace Gui.ViewModel
             DrawAction = new ActionCommand(DrawChart);
             GetBoatsCommand = new ActionCommand(GetBoats);
             GetBoats();
-            SelectedIndexBoat = 0;
+            if(BoatsCollection.Count > 0)
+                SelectedIndexBoat = 0;
             EndDate = DateTime.Now;
             StartDate = DateTime.Now.AddMonths(-1);
             WindDirection = 10;
@@ -122,25 +123,25 @@ namespace Gui.ViewModel
         {
             var sessionService = new SessionService();
             var selectedBoat = BoatsCollection[SelectedIndexBoat];
-            SessionCollection = new ObservableCollection<SessionDto>(sessionService.GetSessions(StartDate, EndDate,selectedBoat.IdBoat));
+            if(selectedBoat != null)
+                SessionCollection = new ObservableCollection<SessionDto>(sessionService.GetSessions(StartDate, EndDate,selectedBoat.IdBoat));
         }
 
         private void GetData()
         {
             var dataService = new GpsDataService();
             var selectedSession = SessionCollection[SelectedIndexSession];
-            DataCollection = new ObservableCollection<DataGps>(dataService.GetSessions(selectedSession.IdSession));
+            if(selectedSession != null)
+                DataCollection = new ObservableCollection<DataGps>(dataService.GetSessions(selectedSession.IdSession));
         }
 
         private void DrawChart()
         {
-
             var readExcel = new ReadExcelService();
             var list = readExcel.LoadData(@"C:\Users\malgo\Downloads\DaneDoOptymalizacjiŁodzi.xlsx");
             var listToInterpolate = new List<PointD>();
-            double apparentWind = 0, newApparentWind = 0;
-
-            
+            double apparentWind = 0, newApparentWind = 0, 
+                distaceFromAxisStart = 0,maxDistance = 0, optimalDirection = 0;
             foreach (var x in list)
             {
                 var direction = x.WindDirection - x.BoatDirection;
@@ -160,11 +161,21 @@ namespace Gui.ViewModel
                 double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * (x.BoatSpeed - (apparentWind - newApparentWind)); //odejmuję różnicę siły wiatru pozornego poprzedniego od nowego
                 double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * (x.BoatSpeed - (apparentWind - newApparentWind)); //a potem tą różnicę odejmuję od prędkości łodzi
                 listToInterpolate.Add(new PointD(pointX, pointY));
+          
+                // liczy odległość od początku ukłądu współrzędnych
+                // tam gdzie odległość jest największa kurs jest optymalny
+                distaceFromAxisStart = Math.Sqrt(Math.Pow(pointX,2) + Math.Pow(pointY, 2));
+                if (distaceFromAxisStart > maxDistance)
+                {
+                    maxDistance = distaceFromAxisStart;
+                    optimalDirection = x.BoatDirection;
+                }
             }
 
             //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
-            //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate); na razie nie działa!
+            //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!
 
+            OptimalDirection = optimalDirection;
             ChartViewModel = new ChartViewModel(listToInterpolate);
         }
     }

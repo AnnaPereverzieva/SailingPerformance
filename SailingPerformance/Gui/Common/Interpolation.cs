@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Documents;
 
 namespace Gui.Common
 {
@@ -22,46 +20,40 @@ namespace Gui.Common
         /// <summary>
         /// Class constructor.
         /// </summary>
-        /// <param name="list">Collection of known points for further interpolation.
+        /// <param name="nodes">Collection of known points for further interpolation.
         /// Should contain at least two items.</param>
-        public SplineInterpolator(List<PointD> list)
+        public SplineInterpolator(IDictionary<double, double> nodes)
         {
-            if (list == null)
+            if (nodes == null)
             {
-                throw new ArgumentNullException("function");
+                throw new ArgumentNullException("nodes");
             }
 
-            var count = list.Count;
+            var n = nodes.Count;
 
-            if (count < 2)
+            if (n < 2)
             {
                 throw new ArgumentException("At least two point required for interpolation.");
             }
 
-            _x = new double[count];
-            _y = new double[count];
+            _x = nodes.Keys.ToArray();
+            _y = nodes.Values.ToArray();
 
-            for (int i = 0; i < list.Count; i++)
-            {
-                _x[i] = list[i].X;
-                _y[i] = list[i].Y;
-            }
+            _a = new double[n];
+            _h = new double[n];
 
-            _a = new double[count];
-            _h = new double[count];
-
-            for (int i = 1; i < count; i++)
+            for (int i = 1; i < n; i++)
             {
                 _h[i] = _x[i] - _x[i - 1];
             }
 
-            if (count > 2)
+            if (n > 2)
             {
-                var sub = new double[count - 1];
-                var diag = new double[count - 1];
-                var sup = new double[count - 1];
+                var sub = new double[n - 1];
+                var diag = new double[n - 1];
+                var sup = new double[n - 1];
 
-                for (int i = 1; i <= count - 2; i++)
+                for (int i = 1; i <= n - 2; i++)
                 {
                     diag[i] = (_h[i] + _h[i + 1]) / 3;
                     sup[i] = _h[i + 1] / 6;
@@ -69,9 +61,7 @@ namespace Gui.Common
                     _a[i] = (_y[i + 1] - _y[i]) / _h[i + 1] - (_y[i] - _y[i - 1]) / _h[i];
                 }
 
-                GaussSolver(sub, diag, sup, ref _a, count - 2);
-
-                InterpolateCoordinates(list);
+                GaussSolver(sub, diag, sup, ref _a, n - 2);
             }
         }
 
@@ -80,20 +70,19 @@ namespace Gui.Common
         /// </summary>
         /// <param name="coordinates">Data for refactoring</param>
         /// <returns>Refactored coordinates for chart</returns>
-        public List<PointD> InterpolateCoordinates(List<PointD> coordinates)
+        public List<PointD> InterpolateCoordinates(Dictionary<double, double> coordinates, double accuracy)
         {
             List<PointD> refactored = new List<PointD>();
-            var accuracy = 0.01;
 
             var scaler = new SplineInterpolator(coordinates);
-            var start = coordinates.First().X;
-            var end = coordinates.Last().X;
+            var start = coordinates.First().Key;
+            var end = coordinates.Last().Key;
             var step = (end - start) / accuracy;
 
             for (var x = start; x <= end; x += step)
             {
                 var y = scaler.GetValue(x);
-                refactored.Add(new PointD {X = x, Y = y});
+                refactored.Add(new PointD(x, y));
             }
 
             return refactored;
@@ -104,7 +93,7 @@ namespace Gui.Common
         /// </summary>
         /// <param name="key">Argument value for interpolation. Must be within 
         /// the interval bounded by lowest ang highest <see cref="_x"/> values.</param>
-        public double GetValue(double xValue)
+        public double GetValue(double key)
         {
             int gap = 0;
             var previous = double.MinValue;
@@ -114,14 +103,14 @@ namespace Gui.Common
             // contain the biggest z value among the known samples, left of the unknown z
             for (int i = 0; i < _x.Length; i++)
             {
-                if (_x[i] < xValue && _x[i] > previous)
+                if (_x[i] < key && _x[i] > previous)
                 {
                     previous = _x[i];
                     gap = i + 1;
                 }
             }
 
-            var x1 = xValue - previous;
+            var x1 = key - previous;
             var x2 = _h[gap] - x1;
 
             return ((-_a[gap - 1] / 6 * (x2 + _h[gap]) * x1 + _y[gap - 1]) * x2 +
