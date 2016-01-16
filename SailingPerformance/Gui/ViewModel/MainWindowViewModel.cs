@@ -10,6 +10,7 @@ using Gui.Common;
 using Microsoft.Expression.Interactivity.Core;
 using PropertyChanged;
 using Microsoft.Win32;
+using Dal.Repositories;
 
 namespace Gui.ViewModel
 {
@@ -21,11 +22,21 @@ namespace Gui.ViewModel
         private int _selectedIndexBoat;
         private int _selectedIndexSession;
 
-        public ChartViewModel ChartViewModel { get; set; }
-        public ICommand DrawAction { get; set; }
+        public bool isDataComplete { get; set; }
 
+
+        public ChartViewModel ChartViewModel { get; set; }
+
+        public ObservableCollection<BoatDto> BoatsCollection { get; set; }
+        public ObservableCollection<SessionDto> SessionCollection { get; set; }
+        public ObservableCollection<DataGps> DataCollection { get; set; }
+
+        public ICommand DrawAction { get; set; }
+        public ICommand GetBoatsCommand { get; set; }
         public ICommand ImportExcelDataCommand { get; set; }
         public ICommand SaveToExcelCommand { get; set; }
+        public ICommand AcceptDataCommand { get; set; }
+
         public double WindSpeed { get; set; }
         public double WindDirection { get; set; }
         public double OptimalDirection { get; set; }
@@ -33,20 +44,12 @@ namespace Gui.ViewModel
         public DateTime EndDate
         {
             get { return _endDate; }
-            set
-            {
-                _endDate = value;
-                GetSessions();
-            }
+            set { _endDate = value; }
         }
 
         public DateTime StartDate {
             get { return _startDate; }
-            set
-            {
-                _startDate = value;
-                GetSessions();
-            }
+            set { _startDate = value; }
         }
 
         public int SelectedIndexBoat {
@@ -54,6 +57,7 @@ namespace Gui.ViewModel
             set
             {
                 _selectedIndexBoat = value;
+                GetStartEndDates();
                 GetSessions();
             }
         }
@@ -63,23 +67,28 @@ namespace Gui.ViewModel
             get { return _selectedIndexSession; }
             set
             {
-                _selectedIndexSession = value;
+                if (value < 0)
+                    _selectedIndexSession = 0;
+                else
+                    _selectedIndexSession = value;
                 GetData();
             }
         }
 
         public MainWindowViewModel()
         {
-            DrawAction=new ActionCommand(DrawChart);
+            DrawAction =new ActionCommand(DrawChart);
             ImportExcelDataCommand = new ActionCommand(ImportExcel);
             SaveToExcelCommand = new ActionCommand(SaveExcel);
             DrawAction = new ActionCommand(DrawChart);
             GetBoatsCommand = new ActionCommand(GetBoats);
+            AcceptDataCommand = new RelayCommand(AcceptData, IsDataComplete);
             GetBoats();
-            if(BoatsCollection.Count > 0)
-                SelectedIndexBoat = 0;
-            EndDate = DateTime.Now;
-            StartDate = DateTime.Now.AddMonths(-1);
+            SelectedIndexBoat = 0;
+            GetStartEndDates();
+            GetSessions();
+            SelectedIndexSession = 0;
+            GetData();
             WindDirection = 10;
             WindSpeed = 2;
         }
@@ -101,47 +110,62 @@ namespace Gui.ViewModel
             if (openFileDialog.ShowDialog() == true)
                 filePath = openFileDialog.FileName;
         }
-
-
-
-
-        public ICommand GetBoatsCommand { get; set; }
-        public ObservableCollection<BoatDto> BoatsCollection { get; set; }
-        public ObservableCollection<SessionDto> SessionCollection { get; set; }
-        public ObservableCollection<DataGps> DataCollection { get; set; }
-
-    
-
+                
         private void GetBoats()
         {
             var boatService = new BoatService();
-
             BoatsCollection = new ObservableCollection<BoatDto>(boatService.GetBoats());
+        }
+
+        private void GetStartEndDates()
+        {
+            var sessionService = new SessionService();
+            var selectedBoat = BoatsCollection[SelectedIndexBoat];
+            Dictionary<DateTime, DateTime> startEndDates = new Dictionary<DateTime, DateTime>(sessionService.GetStartEndDates(selectedBoat.IdBoat));
+            StartDate = startEndDates.Keys.First();
+            EndDate = startEndDates.Values.First();
         }
 
         private void GetSessions()
         {
             var sessionService = new SessionService();
             var selectedBoat = BoatsCollection[SelectedIndexBoat];
-            if(selectedBoat != null)
-                SessionCollection = new ObservableCollection<SessionDto>(sessionService.GetSessions(StartDate, EndDate,selectedBoat.IdBoat));
+            SessionCollection = new ObservableCollection<SessionDto>(sessionService.GetSessions(StartDate, EndDate,selectedBoat.IdBoat));
         }
 
         private void GetData()
         {
             var dataService = new GpsDataService();
             var selectedSession = SessionCollection[SelectedIndexSession];
-            if(selectedSession != null)
-                DataCollection = new ObservableCollection<DataGps>(dataService.GetSessions(selectedSession.IdSession));
+            DataCollection = new ObservableCollection<DataGps>(dataService.GetSessions(selectedSession.IdSession));
+            if (DataCollection.Count != 0)
+                isDataComplete = true;
+            else
+                isDataComplete = false;
+
+
         }
+
+        private void AcceptData(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool IsDataComplete(object obj)
+        {
+            return isDataComplete;
+        }
+
 
         private void DrawChart()
         {
+
             var readExcel = new ReadExcelService();
             var list = readExcel.LoadData(@"C:\Users\malgo\Downloads\DaneDoOptymalizacjiŁodzi.xlsx");
             var listToInterpolate = new List<PointD>();
-            double apparentWind = 0, newApparentWind = 0, 
-                distaceFromAxisStart = 0,maxDistance = 0, optimalDirection = 0;
+            double apparentWind = 0, newApparentWind = 0;
+
+            
             foreach (var x in list)
             {
                 var direction = x.WindDirection - x.BoatDirection;
@@ -161,21 +185,11 @@ namespace Gui.ViewModel
                 double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * (x.BoatSpeed - (apparentWind - newApparentWind)); //odejmuję różnicę siły wiatru pozornego poprzedniego od nowego
                 double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * (x.BoatSpeed - (apparentWind - newApparentWind)); //a potem tą różnicę odejmuję od prędkości łodzi
                 listToInterpolate.Add(new PointD(pointX, pointY));
-          
-                // liczy odległość od początku ukłądu współrzędnych
-                // tam gdzie odległość jest największa kurs jest optymalny
-                distaceFromAxisStart = Math.Sqrt(Math.Pow(pointX,2) + Math.Pow(pointY, 2));
-                if (distaceFromAxisStart > maxDistance)
-                {
-                    maxDistance = distaceFromAxisStart;
-                    optimalDirection = x.BoatDirection;
-                }
             }
 
             //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
-            //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!
+            //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate); na razie nie działa!
 
-            OptimalDirection = optimalDirection;
             ChartViewModel = new ChartViewModel(listToInterpolate);
         }
     }
