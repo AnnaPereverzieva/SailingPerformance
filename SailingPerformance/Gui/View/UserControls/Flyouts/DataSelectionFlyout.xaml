@@ -19,6 +19,7 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
 
@@ -44,9 +45,26 @@
                 <ComboBox x:Name="CbxSession"
                       Grid.Row="7"
                       VerticalAlignment="Top"
-                      ItemsSource="{Binding Session}"
+                      ItemsSource="{Binding SessionCollection}"
                       DisplayMemberPath="IdSession"
-                      SelectedIndex="{Binding SelectedIndexDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22"/>
+                      SelectedIndex="{Binding SelectedIndexSession, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22"/>
+                <Label Grid.Row="8" VerticalAlignment="Bottom" Content="Brak danych w podanej sesji" HorizontalAlignment="Center" Height="20"  Padding="2" FontStyle="Italic" FontWeight="Bold" TextOptions.TextFormattingMode="Display" Foreground="Red" >
+                    <Label.Style>
+                        <Style TargetType="Label">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding isDataComplete}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+                <Button x:Name="BtnAcceptData"
+                        Grid.Row="9"
+                        Content="Zatwierdź"
+                        Command="{Binding AcceptDataCommand}"
+                        Style="{StaticResource AccentedSquareButtonStyle}"/>
             </Grid>
         </DockPanel>
     </Grid>

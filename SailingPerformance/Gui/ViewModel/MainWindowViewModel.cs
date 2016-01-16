@@ -10,6 +10,7 @@ using Gui.Common;
 using Microsoft.Expression.Interactivity.Core;
 using PropertyChanged;
 using Microsoft.Win32;
+using Dal.Repositories;
 
 namespace Gui.ViewModel
 {
@@ -21,11 +22,21 @@ namespace Gui.ViewModel
         private int _selectedIndexBoat;
         private int _selectedIndexSession;
 
-        public ChartViewModel ChartViewModel { get; set; }
-        public ICommand DrawAction { get; set; }
+        public bool isDataComplete { get; set; }
 
+
+        public ChartViewModel ChartViewModel { get; set; }
+
+        public ObservableCollection<BoatDto> BoatsCollection { get; set; }
+        public ObservableCollection<SessionDto> SessionCollection { get; set; }
+        public ObservableCollection<DataGps> DataCollection { get; set; }
+
+        public ICommand DrawAction { get; set; }
+        public ICommand GetBoatsCommand { get; set; }
         public ICommand ImportExcelDataCommand { get; set; }
         public ICommand SaveToExcelCommand { get; set; }
+        public ICommand AcceptDataCommand { get; set; }
+
         public double WindSpeed { get; set; }
         public double WindDirection { get; set; }
         public double OptimalDirection { get; set; }
@@ -33,20 +44,12 @@ namespace Gui.ViewModel
         public DateTime EndDate
         {
             get { return _endDate; }
-            set
-            {
-                _endDate = value;
-                GetSessions();
-            }
+            set { _endDate = value; }
         }
 
         public DateTime StartDate {
             get { return _startDate; }
-            set
-            {
-                _startDate = value;
-                GetSessions();
-            }
+            set { _startDate = value; }
         }
 
         public int SelectedIndexBoat {
@@ -54,6 +57,7 @@ namespace Gui.ViewModel
             set
             {
                 _selectedIndexBoat = value;
+                GetStartEndDates();
                 GetSessions();
             }
         }
@@ -63,22 +67,28 @@ namespace Gui.ViewModel
             get { return _selectedIndexSession; }
             set
             {
-                _selectedIndexSession = value;
+                if (value < 0)
+                    _selectedIndexSession = 0;
+                else
+                    _selectedIndexSession = value;
                 GetData();
             }
         }
 
         public MainWindowViewModel()
         {
-            DrawAction=new ActionCommand(DrawChart);
+            DrawAction =new ActionCommand(DrawChart);
             ImportExcelDataCommand = new ActionCommand(ImportExcel);
             SaveToExcelCommand = new ActionCommand(SaveExcel);
             DrawAction = new ActionCommand(DrawChart);
             GetBoatsCommand = new ActionCommand(GetBoats);
+            AcceptDataCommand = new RelayCommand(AcceptData, IsDataComplete);
             GetBoats();
             SelectedIndexBoat = 0;
-            EndDate = DateTime.Now;
-            StartDate = DateTime.Now.AddMonths(-1);
+            GetStartEndDates();
+            GetSessions();
+            SelectedIndexSession = 0;
+            GetData();
             WindDirection = 10;
             WindSpeed = 2;
         }
@@ -100,22 +110,20 @@ namespace Gui.ViewModel
             if (openFileDialog.ShowDialog() == true)
                 filePath = openFileDialog.FileName;
         }
-
-
-
-
-        public ICommand GetBoatsCommand { get; set; }
-        public ObservableCollection<BoatDto> BoatsCollection { get; set; }
-        public ObservableCollection<SessionDto> SessionCollection { get; set; }
-        public ObservableCollection<DataGps> DataCollection { get; set; }
-
-    
-
+                
         private void GetBoats()
         {
             var boatService = new BoatService();
-
             BoatsCollection = new ObservableCollection<BoatDto>(boatService.GetBoats());
+        }
+
+        private void GetStartEndDates()
+        {
+            var sessionService = new SessionService();
+            var selectedBoat = BoatsCollection[SelectedIndexBoat];
+            Dictionary<DateTime, DateTime> startEndDates = new Dictionary<DateTime, DateTime>(sessionService.GetStartEndDates(selectedBoat.IdBoat));
+            StartDate = startEndDates.Keys.First();
+            EndDate = startEndDates.Values.First();
         }
 
         private void GetSessions()
@@ -130,7 +138,24 @@ namespace Gui.ViewModel
             var dataService = new GpsDataService();
             var selectedSession = SessionCollection[SelectedIndexSession];
             DataCollection = new ObservableCollection<DataGps>(dataService.GetSessions(selectedSession.IdSession));
+            if (DataCollection.Count != 0)
+                isDataComplete = true;
+            else
+                isDataComplete = false;
+
+
         }
+
+        private void AcceptData(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool IsDataComplete(object obj)
+        {
+            return isDataComplete;
+        }
+
 
         private void DrawChart()
         {

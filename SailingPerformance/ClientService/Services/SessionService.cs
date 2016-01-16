@@ -20,5 +20,13 @@ namespace ClientService.Services
             List<Session> list = repository.GetSessions( start, stop, idBoat);
             return Mapper.Map<List<SessionDto>>(list);
         }
+
+        public Dictionary<DateTime, DateTime> GetStartEndDates(Guid idBoat)
+        {
+            var repository = new SessionRepository();
+            Dictionary<DateTime, DateTime> startEndDates = new Dictionary<DateTime, DateTime>(repository.GetStartEndDate(idBoat));
+            return startEndDates;
+        }
+
     }
 }
