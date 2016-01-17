@@ -75,7 +75,6 @@
         </Grid.RowDefinitions>
         <Border Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="3" BorderBrush="Red" Margin="7">
         <oxy:PlotView x:Name="Plot1"
-                  Title="A Graph"
                   Margin="10"
                   Model="{Binding ChartViewModel.PlotModel,
                                   UpdateSourceTrigger=PropertyChanged,

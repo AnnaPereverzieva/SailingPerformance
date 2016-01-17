@@ -22,7 +22,6 @@ namespace Gui.ViewModel
         private DateTime _startDate;
         private int _selectedIndexBoat;
         private int _selectedIndexSession;
-        private string _dataOrigin;
         private double _windSpeed;
         private double _windDirection;
 
@@ -55,42 +54,8 @@ namespace Gui.ViewModel
             }
         }
 
-        private void CheckTotalNumberOfRecords()
-        {
-            AvailableRecords = DataCollection.Where(x => x.WindDirection == AvailableWindDirection && x.WindSpeed == AvailableWindSpeed).Count();
-        }
-
-        //sprawdza czy istnieje wystarczjaca ilosc rekordow dla podanych parametrow wiatru (minimalNoRecords ustawia min ilosc rekordow)
-        private double CheckAvailableWindRecords(List<double> availableWindList, double windValue)
-        {
-            double closest = 0;
-            int minimalNoRecords = 3;
-
-            if (availableWindList.Where(x => x.Equals(windValue)).Count() > minimalNoRecords)
-            {
-                return windValue;
-            }
-            else
-            {
-                List<double> windValues = new List<double>(availableWindList.Distinct());
-                windValues.Sort();
-                int noOccurances = 0;
-                do
-                {
-                    closest = windValues.Aggregate((x, y) => Math.Abs(x - windValue) < Math.Abs(y - windValue) ? x : y);
-                    noOccurances = availableWindList.Where(x => x.Equals(closest)).Count();
-                    windValues.Remove(closest);
-                    if (!windValues.Any())
-                    {
-                        return 0;
-                    }
-                } while (noOccurances < minimalNoRecords);
-            }
-            return closest;
-        }
-
-        public float WindSpeedMin { get; set; }
-        public float WindSpeedMax { get; set; }
+        public double WindSpeedMin { get; set; }
+        public double WindSpeedMax { get; set; }
 
         public double AvailableWindSpeed { get; set; }
 
@@ -105,16 +70,14 @@ namespace Gui.ViewModel
             }
         }
 
-        public float WindDirectionMin { get; set; }
-        public float WindDirectionMax { get; set; }
+        public double WindDirectionMin { get; set; }
+        public double WindDirectionMax { get; set; }
         public double AvailableWindDirection { get; set; }
 
         public List<double> AvalableWindSpeedList { get; set; }
         public List<double> AvalableWindDirectionList { get; set; }
 
         public double OptimalDirection { get; set; }
-
-        List<DataGps> DataGpsList { get; set; }
 
         public DateTime EndDate
         {
@@ -165,22 +128,68 @@ namespace Gui.ViewModel
             GetData();
         }
 
+        private void CheckTotalNumberOfRecords()
+        {
+            AvailableRecords = DataCollection.Where(x => x.WindDirection == AvailableWindDirection && x.WindSpeed == AvailableWindSpeed).Count();
+        }
+
+        //sprawdza czy istnieje wystarczjaca ilosc rekordow dla podanych parametrow wiatru (minimalNoRecords ustawia min ilosc rekordow)
+        private double CheckAvailableWindRecords(List<double> availableWindList, double windValue)
+        {
+            double closest = 0;
+            int minimalNoRecords = 3;
+
+            if (availableWindList.Where(x => x.Equals(windValue)).Count() > minimalNoRecords)
+            {
+                return windValue;
+            }
+            else
+            {
+                List<double> windValues = new List<double>(availableWindList.Distinct());
+                windValues.Sort();
+                int noOccurances = 0;
+                do
+                {
+                    closest = windValues.Aggregate((x, y) => Math.Abs(x - windValue) < Math.Abs(y - windValue) ? x : y);
+                    noOccurances = availableWindList.Where(x => x.Equals(closest)).Count();
+                    windValues.Remove(closest);
+                    if (!windValues.Any())
+                    {
+                        return 0;
+                    }
+                } while (noOccurances < minimalNoRecords);
+            }
+            return closest;
+        }
+
+
         private void SaveExcel()
         {
             string filePath = string.Empty;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;xlsx";
+            saveFileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;*.xlsx";
             if (saveFileDialog.ShowDialog() == true)
                 filePath = saveFileDialog.FileName;
+
         }
 
         private void ImportExcel()
         {
             string filePath = string.Empty;
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;xlsx|All files (*.*)| *.*";
+            openFileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;*.xlsx|All files (*.*)| *.*";
             if (openFileDialog.ShowDialog() == true)
+            {
                 filePath = openFileDialog.FileName;
+                ReadExcelService readExcel = new ReadExcelService();
+                DataCollection = new ObservableCollection<DataGps>(readExcel.LoadData(filePath));
+                GetWindParameters();
+            }
+        }
+
+        private void AcceptData(object obj)
+        {
+            GetWindParameters();
         }
                 
         private void GetBoats()
@@ -221,20 +230,13 @@ namespace Gui.ViewModel
             return isDataComplete;
         }
 
-        private void AcceptData(object obj)
+        private void GetWindParameters()
         {
-            _dataOrigin = "selectedData";
+            WindSpeedMin = DataCollection.Select(x => x.WindSpeed).Min();
+            WindSpeedMax = DataCollection.Select(x => x.WindSpeed).Max();
+            WindDirectionMin = DataCollection.Select(x => x.WindDirection).Min();
+            WindDirectionMax = DataCollection.Select(x => x.WindDirection).Max();
 
-            var gpsDataService = new GpsDataService();
-            var selectedSession = SessionCollection[SelectedIndexSession];
-            Dictionary<float, float> windSpeedMinMax = new Dictionary<float, float>(gpsDataService.GetWindSpeedMinMax(selectedSession.IdSession));
-            WindSpeedMin = windSpeedMinMax.Keys.First();
-            WindSpeedMax = windSpeedMinMax.Values.First();
-            
-            Dictionary<float, float> windDirectionMinMax = new Dictionary<float, float>(gpsDataService.GetWindDirectionMinMax(selectedSession.IdSession));
-            WindDirectionMin = windDirectionMinMax.Keys.First();
-            WindDirectionMax = windDirectionMinMax.Values.First();
-            
             AvalableWindSpeedList = new List<double>(DataCollection.Select(x => x.WindSpeed));
             AvalableWindDirectionList = new List<double>(DataCollection.Select(x => x.WindDirection));
             AvalableWindSpeedList.Sort();
@@ -244,54 +246,20 @@ namespace Gui.ViewModel
             WindDirection = WindDirectionMin;
         }
 
-        private void LoadSelectedData()
-        {
-            foreach (var item in DataCollection)
-            {
-                var dataGps = new DataGps();
-                dataGps.BoatDirection = item.BoatDirection;
-                dataGps.BoatSpeed = item.BoatSpeed;
-                DataGpsList.Add(dataGps);
-            }
-        }
-
         private void DrawChart(object obj)
-        {
-
-            DataGpsList = new List<DataGps>();
-            ReadExcelService readExcel;
-
-            switch (_dataOrigin)
-            {
-                case "excel":
-                    readExcel = new ReadExcelService();
-                    DataGpsList = readExcel.LoadData(@"K:\Jasiek\Desctop\III_Rok\Projekt_zespolowy\SalingPerformance\SailingPerformance\DaneDoOptymalizacjiŁodzi.xlsx");
-                    CalculatePoints();
-                    break;
-                case "selectedData":
-                    LoadSelectedData();
-                    CalculatePoints();
-                    break;
-                default:
-                    break;
-            }        
-        }
-
-
-        private void CalculatePoints()
         {
             var listToInterpolate = new List<PointD>();
 
             double distaceFromAxisStart = 0, maxDistance = 0, optimalDirection = 0;
 
-            foreach (var x in DataGpsList)
+            foreach (var x in DataCollection)
             {
 
                 double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
                 double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
 
                 listToInterpolate.Add(new PointD(pointX, pointY));
-                
+
                 // liczy odległość od początku ukłądu współrzędnych
                 // tam gdzie odległość jest największa kurs jest optymalny
                 distaceFromAxisStart = Math.Sqrt(Math.Pow(pointX, 2) + Math.Pow(pointY, 2));
@@ -301,7 +269,7 @@ namespace Gui.ViewModel
                     optimalDirection = x.BoatDirection;
                 }
             }
-            
+
 
             //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
             //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!

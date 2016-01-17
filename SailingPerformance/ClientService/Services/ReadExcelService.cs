@@ -12,17 +12,19 @@ namespace ClientService.Services
         {
             Workbook workbook = new Workbook();
             List<DataGps> DataGpsList=new List<DataGps>();
-            workbook.LoadFromFile(path, ExcelVersion.Version2013);
+            workbook.LoadFromFile(path, ExcelVersion.Version97to2003);
             Worksheet sheet = workbook.Worksheets[0];
 
             DataTable dataTable = sheet.ExportDataTable();
-            for (int i = 0; i < 19; i++)
+            for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 var dataGps=new DataGps();
                 dataGps.BoatSpeed = Convert.ToDouble(dataTable.Rows[i]["predkosc"]);
                 dataGps.BoatDirection = Convert.ToDouble(dataTable.Rows[i]["kurs"]);
-                // dataGps.WindDirection = Convert.ToDouble(dataTable.Rows[i]["kierunek_wiatru"]);
-                // dataGps.WindSpeed = Convert.ToDouble(dataTable.Rows[i]["sila_wiatru"]);
+                dataGps.WindDirection = Convert.ToDouble(dataTable.Rows[i]["kierunek_wiatru"]);
+                dataGps.WindSpeed = Convert.ToDouble(dataTable.Rows[i]["sila_wiatru"]);
+                dataGps.GeoWidth = dataTable.Rows[i]["szerokosc"].ToString();
+                dataGps.GeoHeight = dataTable.Rows[i]["dlugosc"].ToString();
                 DataGpsList.Add(dataGps);
             }
             return DataGpsList;
