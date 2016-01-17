@@ -11,6 +11,7 @@ using Microsoft.Expression.Interactivity.Core;
 using PropertyChanged;
 using Microsoft.Win32;
 using Dal.Repositories;
+using MahApps.Metro.Controls;
 
 namespace Gui.ViewModel
 {
@@ -22,6 +23,8 @@ namespace Gui.ViewModel
         private int _selectedIndexBoat;
         private int _selectedIndexSession;
         private string _dataOrigin;
+        private decimal _windSpeed;
+        private decimal _windDirection;
 
         public bool isDataComplete { get; set; }
 
@@ -39,10 +42,21 @@ namespace Gui.ViewModel
         public ICommand SaveToExcelCommand { get; set; }
         public ICommand AcceptDataCommand { get; set; }
 
-        public double WindSpeedMin { get; set; }
-        public double WindSpeedMax { get; set; }
-        public double WindDirectionMin { get; set; }
-        public double WindDirectionMax { get; set; }
+        public decimal WindSpeed
+        {
+            get { return Math.Round((decimal)_windSpeed, 2); }
+            set { _windSpeed = value; }
+        }
+        public float WindSpeedMin { get; set; }
+        public float WindSpeedMax { get; set; }
+
+        public decimal WindDirection
+        {
+            get { return Math.Round((decimal)_windDirection, 2); }
+            set { _windDirection = value; }
+        }
+        public float WindDirectionMin { get; set; }
+        public float WindDirectionMax { get; set; }
 
         public double OptimalDirection { get; set; }
 

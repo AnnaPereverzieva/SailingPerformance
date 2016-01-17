@@ -40,21 +40,24 @@
             <controls:Flyout x:Name="FlyoutDataSelection"
                              Position="Right"
                              Header="Filtrowanie danych"
-                             Width="Auto">
+                             Width="Auto"
+                             IsPinned="False">
                 <localFlyouts:DataSelectionFlyout/>
             </controls:Flyout>
 
             <controls:Flyout x:Name="FlyoutWindSelection"
                              Position="Right"
                              Header="Kierunek i siła wiatru"
-                             Width="350">
+                             Width="350"
+                             IsPinned="False">
                 <localFlyouts:WindSelectionFlyout/>
             </controls:Flyout>
 
             <controls:Flyout x:Name="FlyoutExportImport"
                              Position="Right"
                              Header="Export i import danych"
-                             Width="Auto">
+                             Width="Auto"
+                             IsPinned="False">
                 <localFlyouts:ExportImportFlyout/>
             </controls:Flyout>
         </controls:FlyoutsControl>

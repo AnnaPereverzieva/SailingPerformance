@@ -34,7 +34,7 @@
                 <DatePicker HorizontalAlignment="Left"
                             Margin="0" Grid.Row="3" 
                             SelectedDate="{Binding StartDate,Mode=TwoWay}"
-                            VerticalAlignment="Top"/>  
+                            VerticalAlignment="Top"/>
                 <Label Grid.Row="4" VerticalAlignment="Bottom" Content="Data, zakres do:"/>
                 <DatePicker HorizontalAlignment="Left"
                             Margin="0" Grid.Row="5" 
@@ -64,6 +64,7 @@
                         Content="Zatwierdź"
                         Command="{Binding AcceptDataCommand}"
                         Style="{StaticResource AccentedSquareButtonStyle}"/>
+
             </Grid>
         </DockPanel>
     </Grid>

@@ -25,6 +25,8 @@
                 VerticalAlignment="Center"
                 Cursor="Hand"
                 Value="{Binding WindSpeed}"
+                Minimum="{Binding WindSpeedMin}"
+                Maximum="{Binding WindSpeedMax}"
                 Style="{DynamicResource FlatSlider}"/>
         <Label Grid.Column="0" HorizontalAlignment="Left" 
                VerticalAlignment="Center"
@@ -39,7 +41,7 @@
                Content="Siła wiatru [m/s]: "
                Margin="20,0,0,0"/>
 
-        <controls:NumericUpDown Grid.Column="1" Grid.Row="1"/>
+        <controls:NumericUpDown Grid.Column="1" Grid.Row="1" Interval="1" Value="{Binding WindSpeed}" Minimum="{Binding WindSpeedMin}" Maximum="{Binding WindSpeedMax}"/>
 
         <Separator Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
 
@@ -48,8 +50,9 @@
                 VerticalAlignment="Center"
                 Cursor="Hand"
                 Value ="{Binding WindDirection}"
-                Style="{DynamicResource FlatSlider}" 
-                Maximum="180"/>
+                Minimum="{Binding WindDirectionMin}"
+                Maximum="{Binding WindDirectionMax}"
+                Style="{DynamicResource FlatSlider}"/>
 
         <Label Grid.Column="0" Grid.Row="3"
                HorizontalAlignment="Left" 
@@ -64,8 +67,8 @@
                VerticalAlignment="Center"
                Content="Kierunek wiatru [stopnie]: "
                Margin="20,0,0,0"/>
-        
-        <controls:NumericUpDown Grid.Column="1" Grid.Row="4"/>
+
+        <controls:NumericUpDown Grid.Column="1" Grid.Row="4" Interval="1" Value="{Binding WindDirection}" Minimum="{Binding WindDirectionMin}" Maximum="{Binding WindDirectionMax}"/>
 
     </Grid>
 
