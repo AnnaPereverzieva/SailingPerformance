@@ -17,6 +17,12 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="10*"/>
 
         </Grid.RowDefinitions>
@@ -69,6 +75,21 @@
                Margin="20,0,0,0"/>
 
         <controls:NumericUpDown Grid.Column="1" Grid.Row="4" Interval="1" Value="{Binding WindDirection}" Minimum="{Binding WindDirectionMin}" Maximum="{Binding WindDirectionMax}"/>
+
+        <Label Grid.Row="5" Height="20"/>
+
+        <Label Grid.Row="6" VerticalAlignment="Bottom" Content="Dostępne najbiższe wartości: " HorizontalAlignment="Center" Height="20"  Padding="2" />
+
+        <Label Grid.Row="7" VerticalAlignment="Bottom" Content="Siła wiatru: " HorizontalAlignment="Right" Height="20"  Padding="2" />
+        <Label Grid.Row="7"  Grid.Column="1" VerticalAlignment="Bottom" Content="{Binding AvailableWindSpeed}" HorizontalAlignment="Left" Height="20"  Padding="2" Foreground="Green" FontWeight="Bold" />
+        <Label Grid.Row="8" VerticalAlignment="Bottom" Content="Kierunek wiatru: " HorizontalAlignment="Right" Height="20"  Padding="2" />
+        <Label Grid.Row="8"  Grid.Column="1" VerticalAlignment="Bottom" Content="{Binding AvailableWindDirection}" HorizontalAlignment="Left" Height="20"  Padding="2" Foreground="Green" FontWeight="Bold" />
+        <Label Grid.Row="9" VerticalAlignment="Bottom" Content="Całkowita ilość rekordów: " HorizontalAlignment="Right" Height="20"  Padding="2" />
+        <Label Grid.Row="9"  Grid.Column="1" VerticalAlignment="Bottom" Content="{Binding AvailableRecords}" HorizontalAlignment="Left" Height="20"  Padding="2" Foreground="Green" FontWeight="Bold" />
+        
+        
+
+
 
     </Grid>
 

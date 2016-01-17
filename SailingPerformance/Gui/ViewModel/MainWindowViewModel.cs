@@ -23,8 +23,8 @@ namespace Gui.ViewModel
         private int _selectedIndexBoat;
         private int _selectedIndexSession;
         private string _dataOrigin;
-        private decimal _windSpeed;
-        private decimal _windDirection;
+        private double _windSpeed;
+        private double _windDirection;
 
         public bool isDataComplete { get; set; }
 
@@ -42,21 +42,75 @@ namespace Gui.ViewModel
         public ICommand SaveToExcelCommand { get; set; }
         public ICommand AcceptDataCommand { get; set; }
 
-        public decimal WindSpeed
+
+        public int AvailableRecords { get; set; }
+        public double WindSpeed
         {
-            get { return Math.Round((decimal)_windSpeed, 2); }
-            set { _windSpeed = value; }
+            get { return Math.Round(_windSpeed, 2); }
+            set
+            {
+                _windSpeed = value;
+                AvailableWindSpeed = CheckAvailableWindRecords(AvalableWindSpeedList, _windSpeed);
+                CheckTotalNumberOfRecords();
+            }
         }
+
+        private void CheckTotalNumberOfRecords()
+        {
+            AvailableRecords = DataCollection.Where(x => x.WindDirection == AvailableWindDirection && x.WindSpeed == AvailableWindSpeed).Count();
+        }
+
+        //sprawdza czy istnieje wystarczjaca ilosc rekordow dla podanych parametrow wiatru (minimalNoRecords ustawia min ilosc rekordow)
+        private double CheckAvailableWindRecords(List<double> availableWindList, double windValue)
+        {
+            double closest = 0;
+            int minimalNoRecords = 3;
+
+            if (availableWindList.Where(x => x.Equals(windValue)).Count() > minimalNoRecords)
+            {
+                return windValue;
+            }
+            else
+            {
+                List<double> windValues = new List<double>(availableWindList.Distinct());
+                windValues.Sort();
+                int noOccurances = 0;
+                do
+                {
+                    closest = windValues.Aggregate((x, y) => Math.Abs(x - windValue) < Math.Abs(y - windValue) ? x : y);
+                    noOccurances = availableWindList.Where(x => x.Equals(closest)).Count();
+                    windValues.Remove(closest);
+                    if (!windValues.Any())
+                    {
+                        return 0;
+                    }
+                } while (noOccurances < minimalNoRecords);
+            }
+            return closest;
+        }
+
         public float WindSpeedMin { get; set; }
         public float WindSpeedMax { get; set; }
 
-        public decimal WindDirection
+        public double AvailableWindSpeed { get; set; }
+
+        public double WindDirection
         {
-            get { return Math.Round((decimal)_windDirection, 2); }
-            set { _windDirection = value; }
+            get { return Math.Round(_windDirection, 2); }
+            set
+            {
+                _windDirection = value;
+                AvailableWindDirection = CheckAvailableWindRecords(AvalableWindDirectionList, _windDirection);
+                CheckTotalNumberOfRecords();
+            }
         }
+
         public float WindDirectionMin { get; set; }
         public float WindDirectionMax { get; set; }
+        public double AvailableWindDirection { get; set; }
+
+        public List<double> AvalableWindSpeedList { get; set; }
+        public List<double> AvalableWindDirectionList { get; set; }
 
         public double OptimalDirection { get; set; }
 
@@ -160,9 +214,8 @@ namespace Gui.ViewModel
                 isDataComplete = true;
             else
                 isDataComplete = false;
-
-
         }
+
         private bool IsDataComplete(object obj)
         {
             return isDataComplete;
@@ -177,9 +230,18 @@ namespace Gui.ViewModel
             Dictionary<float, float> windSpeedMinMax = new Dictionary<float, float>(gpsDataService.GetWindSpeedMinMax(selectedSession.IdSession));
             WindSpeedMin = windSpeedMinMax.Keys.First();
             WindSpeedMax = windSpeedMinMax.Values.First();
+            
             Dictionary<float, float> windDirectionMinMax = new Dictionary<float, float>(gpsDataService.GetWindDirectionMinMax(selectedSession.IdSession));
             WindDirectionMin = windDirectionMinMax.Keys.First();
             WindDirectionMax = windDirectionMinMax.Values.First();
+            
+            AvalableWindSpeedList = new List<double>(DataCollection.Select(x => x.WindSpeed));
+            AvalableWindDirectionList = new List<double>(DataCollection.Select(x => x.WindDirection));
+            AvalableWindSpeedList.Sort();
+            AvalableWindDirectionList.Sort();
+            
+            WindSpeed = WindSpeedMin;
+            WindDirection = WindDirectionMin;
         }
 
         private void LoadSelectedData()
