@@ -80,12 +80,20 @@ namespace Gui.ViewModel
         public DateTime EndDate
         {
             get { return _endDate; }
-            set { _endDate = value; }
+            set
+            {
+                _endDate = value;
+                GetSessions();
+            }
         }
 
         public DateTime StartDate {
             get { return _startDate; }
-            set { _startDate = value; }
+            set
+            {
+                _startDate = value;
+                GetSessions();
+            }
         }
 
         public int SelectedIndexBoat {
@@ -275,7 +283,6 @@ namespace Gui.ViewModel
 
             foreach (var x in DataCollection)
             {
-
                 double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
                 double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
 
@@ -290,7 +297,6 @@ namespace Gui.ViewModel
                     optimalDirection = x.BoatDirection;
                 }
             }
-
 
             //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
             //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!

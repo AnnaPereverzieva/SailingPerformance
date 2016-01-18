@@ -54,7 +54,7 @@
                       Grid.Row="8"
                       VerticalAlignment="Top"
                       ItemsSource="{Binding SessionCollection}"
-                      DisplayMemberPath="IdSession"
+                      DisplayMemberPath="StartDate"
                       SelectedIndex="{Binding SelectedIndexSession, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22"/>
                 <Label Grid.Row="9" VerticalAlignment="Bottom" Content="Brak danych w podanej sesji" HorizontalAlignment="Center" Height="20"  Padding="2" FontStyle="Italic" FontWeight="Bold" TextOptions.TextFormattingMode="Display" Foreground="Red" >
                     <Label.Style>
