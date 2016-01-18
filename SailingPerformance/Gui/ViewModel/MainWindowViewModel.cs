@@ -27,8 +27,6 @@ namespace Gui.ViewModel
 
         public bool isDataComplete { get; set; }
 
-
-
         public ChartViewModel ChartViewModel { get; set; }
 
         public ObservableCollection<BoatDto> BoatsCollection { get; set; }
@@ -40,7 +38,7 @@ namespace Gui.ViewModel
         public ICommand ImportExcelDataCommand { get; set; }
         public ICommand SaveToExcelCommand { get; set; }
         public ICommand AcceptDataCommand { get; set; }
-
+        public ICommand RefreshDataCommand { get; set; }
 
         public int AvailableRecords { get; set; }
         public double WindSpeed
@@ -120,11 +118,19 @@ namespace Gui.ViewModel
             DrawAction = new RelayCommand(DrawChart, IsDataComplete);
             GetBoatsCommand = new ActionCommand(GetBoats);
             AcceptDataCommand = new RelayCommand(AcceptData, IsDataComplete);
+            RefreshDataCommand = new ActionCommand(RefreshData);
             GetBoats();
             SelectedIndexBoat = 0;
             GetStartEndDates();
             GetSessions();
-            SelectedIndexSession = 0;
+            GetData();
+        }
+
+        private void RefreshData()
+        {
+            GetBoats();
+            GetStartEndDates();
+            GetSessions();
             GetData();
         }
 
@@ -200,29 +206,44 @@ namespace Gui.ViewModel
 
         private void GetStartEndDates()
         {
-            var sessionService = new SessionService();
-            var selectedBoat = BoatsCollection[SelectedIndexBoat];
-            Dictionary<DateTime, DateTime> startEndDates = new Dictionary<DateTime, DateTime>(sessionService.GetStartEndDates(selectedBoat.IdBoat));
-            StartDate = startEndDates.Keys.First();
-            EndDate = startEndDates.Values.First();
+            try
+            {
+                var sessionService = new SessionService();
+                var selectedBoat = BoatsCollection[SelectedIndexBoat];
+                Dictionary<DateTime, DateTime> startEndDates = new Dictionary<DateTime, DateTime>(sessionService.GetStartEndDates(selectedBoat.IdBoat));
+                StartDate = startEndDates.Keys.First();
+                EndDate = startEndDates.Values.First();
+            }
+            catch (Exception)
+            { }
         }
 
         private void GetSessions()
         {
-            var sessionService = new SessionService();
-            var selectedBoat = BoatsCollection[SelectedIndexBoat];
-            SessionCollection = new ObservableCollection<SessionDto>(sessionService.GetSessions(StartDate, EndDate,selectedBoat.IdBoat));
+            try
+            {
+                var sessionService = new SessionService();
+                var selectedBoat = BoatsCollection[SelectedIndexBoat];
+                SessionCollection = new ObservableCollection<SessionDto>(sessionService.GetSessions(StartDate, EndDate, selectedBoat.IdBoat));
+            }
+            catch (Exception)
+            { }
         }
 
         private void GetData()
         {
-            var dataService = new GpsDataService();
-            var selectedSession = SessionCollection[SelectedIndexSession];
-            DataCollection = new ObservableCollection<DataGps>(dataService.GetSessions(selectedSession.IdSession));
-            if (DataCollection.Count != 0)
-                isDataComplete = true;
-            else
-                isDataComplete = false;
+            try
+            {
+                var dataService = new GpsDataService();
+                var selectedSession = SessionCollection[SelectedIndexSession];
+                DataCollection = new ObservableCollection<DataGps>(dataService.GetSessions(selectedSession.IdSession));
+                if (DataCollection.Count != 0)
+                    isDataComplete = true;
+                else
+                    isDataComplete = false;
+            }
+            catch (Exception)
+            { }
         }
 
         private bool IsDataComplete(object obj)

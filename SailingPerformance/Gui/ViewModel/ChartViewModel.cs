@@ -44,18 +44,23 @@ namespace Gui.ViewModel
             foreach (var point in list)
             {
                LineSeries.Points.Add(new DataPoint(point.X, point.Y));
+
             }
             PlotModel.Series.Add(LineSeries);
+
 
         }
 
         public void SetUpModel(List<PointD> list)
         {
+            MainWindowViewModel mv = new MainWindowViewModel(); 
             LineSeries = new LineSeries();
-            PlotModel.LegendTitle = "Legend";
+            LineSeries.Title = mv.BoatsCollection[mv.SelectedIndexBoat].Name;
+
+            PlotModel.LegendTitle = "Legenda";
             PlotModel.LegendOrientation = LegendOrientation.Horizontal;
             PlotModel.LegendPlacement = LegendPlacement.Inside;
-            PlotModel.LegendPosition = LegendPosition.RightMiddle;
+            PlotModel.LegendPosition = LegendPosition.RightTop;
             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
             PlotModel.LegendBorder = OxyColors.Black;
             //var dateAxis = new DateTimeAxis(AxisPosition.Bottom, "Date", "HH:mm") { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };

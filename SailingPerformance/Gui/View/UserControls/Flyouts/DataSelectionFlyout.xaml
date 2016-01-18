@@ -19,35 +19,44 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" VerticalAlignment="Bottom" Content="Nazwa łodzi:"/>
-                <ComboBox Grid.Row="1"
+                <Button x:Name="BtnRefresh"
+                        Grid.Row="0"
+                        Content="Odśwież dane z bazy"
+                        Command="{Binding RefreshDataCommand}"
+                        Style="{StaticResource AccentedSquareButtonStyle}">                     
+                </Button>
+
+
+                    <Label Grid.Row="1" VerticalAlignment="Bottom" Content="Nazwa łodzi:"/>
+                <ComboBox Grid.Row="2"
                       VerticalAlignment="Top"
                       x:Name="CbxBoat"
                       ItemsSource="{Binding BoatsCollection}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="IdBoat"
                       SelectedIndex="{Binding SelectedIndexBoat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Grid.Row="2" VerticalAlignment="Bottom" Content="Data, zakres od:"/>
+                <Label Grid.Row="3" VerticalAlignment="Bottom" Content="Data, zakres od:"/>
                 <DatePicker HorizontalAlignment="Left"
-                            Margin="0" Grid.Row="3" 
+                            Margin="0" Grid.Row="4" 
                             SelectedDate="{Binding StartDate,Mode=TwoWay}"
                             VerticalAlignment="Top"/>
-                <Label Grid.Row="4" VerticalAlignment="Bottom" Content="Data, zakres do:"/>
+                <Label Grid.Row="5" VerticalAlignment="Bottom" Content="Data, zakres do:"/>
                 <DatePicker HorizontalAlignment="Left"
-                            Margin="0" Grid.Row="5" 
+                            Margin="0" Grid.Row="6" 
                             SelectedDate="{Binding EndDate,Mode=TwoWay}"
                             VerticalAlignment="Top"/>
-                <Label Grid.Row="6" VerticalAlignment="Bottom" Content="Nr sesji:"/>
+                <Label Grid.Row="7" VerticalAlignment="Bottom" Content="Nr sesji:"/>
                 <ComboBox x:Name="CbxSession"
-                      Grid.Row="7"
+                      Grid.Row="8"
                       VerticalAlignment="Top"
                       ItemsSource="{Binding SessionCollection}"
                       DisplayMemberPath="IdSession"
                       SelectedIndex="{Binding SelectedIndexSession, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22"/>
-                <Label Grid.Row="8" VerticalAlignment="Bottom" Content="Brak danych w podanej sesji" HorizontalAlignment="Center" Height="20"  Padding="2" FontStyle="Italic" FontWeight="Bold" TextOptions.TextFormattingMode="Display" Foreground="Red" >
+                <Label Grid.Row="9" VerticalAlignment="Bottom" Content="Brak danych w podanej sesji" HorizontalAlignment="Center" Height="20"  Padding="2" FontStyle="Italic" FontWeight="Bold" TextOptions.TextFormattingMode="Display" Foreground="Red" >
                     <Label.Style>
                         <Style TargetType="Label">
                             <Setter Property="Visibility" Value="Hidden"/>
@@ -60,11 +69,10 @@
                     </Label.Style>
                 </Label>
                 <Button x:Name="BtnAcceptData"
-                        Grid.Row="9"
+                        Grid.Row="10"
                         Content="Zatwierdź"
                         Command="{Binding AcceptDataCommand}"
                         Style="{StaticResource AccentedSquareButtonStyle}"/>
-
             </Grid>
         </DockPanel>
     </Grid>
