@@ -25,57 +25,7 @@ namespace Gui.ViewModel
         private double _windSpeed;
         private double _windDirection;
 
-        public bool isDataComplete { get; set; }
-
-        public ChartViewModel ChartViewModel { get; set; }
-
-        public ObservableCollection<BoatDto> BoatsCollection { get; set; }
-        public ObservableCollection<SessionDto> SessionCollection { get; set; }
-        public ObservableCollection<DataGps> DataCollection { get; set; }
-
-        public ICommand DrawAction { get; set; }
-        public ICommand GetBoatsCommand { get; set; }
-        public ICommand ImportExcelDataCommand { get; set; }
-        public ICommand SaveToExcelCommand { get; set; }
-        public ICommand AcceptDataCommand { get; set; }
-        public ICommand RefreshDataCommand { get; set; }
-
-        public int AvailableRecords { get; set; }
-        public double WindSpeed
-        {
-            get { return Math.Round(_windSpeed, 2); }
-            set
-            {
-                _windSpeed = value;
-                AvailableWindSpeed = CheckAvailableWindRecords(AvalableWindSpeedList, _windSpeed);
-                CheckTotalNumberOfRecords();
-            }
-        }
-
-        public double WindSpeedMin { get; set; }
-        public double WindSpeedMax { get; set; }
-
-        public double AvailableWindSpeed { get; set; }
-
-        public double WindDirection
-        {
-            get { return Math.Round(_windDirection, 2); }
-            set
-            {
-                _windDirection = value;
-                AvailableWindDirection = CheckAvailableWindRecords(AvalableWindDirectionList, _windDirection);
-                CheckTotalNumberOfRecords();
-            }
-        }
-
-        public double WindDirectionMin { get; set; }
-        public double WindDirectionMax { get; set; }
-        public double AvailableWindDirection { get; set; }
-
-        public List<double> AvalableWindSpeedList { get; set; }
-        public List<double> AvalableWindDirectionList { get; set; }
-
-        public double OptimalDirection { get; set; }
+        private int _minX, _minY, _maxX, _maxY;
 
         public DateTime EndDate
         {
@@ -86,8 +36,8 @@ namespace Gui.ViewModel
                 GetSessions();
             }
         }
-
-        public DateTime StartDate {
+        public DateTime StartDate
+        {
             get { return _startDate; }
             set
             {
@@ -95,8 +45,8 @@ namespace Gui.ViewModel
                 GetSessions();
             }
         }
-
-        public int SelectedIndexBoat {
+        public int SelectedIndexBoat
+        {
             get { return _selectedIndexBoat; }
             set
             {
@@ -105,7 +55,6 @@ namespace Gui.ViewModel
                 GetSessions();
             }
         }
-    
         public int SelectedIndexSession
         {
             get { return _selectedIndexSession; }
@@ -119,11 +68,59 @@ namespace Gui.ViewModel
             }
         }
 
+        public bool isDataComplete { get; set; }
+        
+        public int AvailableRecords { get; set; }
+        public double WindSpeed
+        {
+            get { return Math.Round(_windSpeed, 2); }
+            set
+            {
+                _windSpeed = value;
+                AvailableWindSpeed = CheckAvailableWindRecords(AvalableWindSpeedList, _windSpeed);
+                CheckTotalNumberOfRecords();
+            }
+        }
+        public double WindSpeedMin { get; set; }
+        public double WindSpeedMax { get; set; }
+        public double AvailableWindSpeed { get; set; }
+        public double WindDirection
+        {
+            get { return Math.Round(_windDirection, 2); }
+            set
+            {
+                _windDirection = value;
+                AvailableWindDirection = CheckAvailableWindRecords(AvalableWindDirectionList, _windDirection);
+                CheckTotalNumberOfRecords();
+            }
+        }
+        public double WindDirectionMin { get; set; }
+        public double WindDirectionMax { get; set; }
+        public double AvailableWindDirection { get; set; }
+        public List<double> AvalableWindSpeedList { get; set; }
+        public List<double> AvalableWindDirectionList { get; set; }
+
+        public double OptimalDirection { get; set; }
+        public ChartViewModel ChartViewModel { get; set; }
+        public ObservableCollection<BoatDto> BoatsCollection { get; set; }
+        public ObservableCollection<SessionDto> SessionCollection { get; set; }
+        public ObservableCollection<DataGps> DataCollection { get; set; }
+
+        public ICommand DrawPlotCommand { get; set; }
+        public ICommand ClearPlotCommand { get; set; }
+        public ICommand GetBoatsCommand { get; set; }
+        public ICommand ImportExcelDataCommand { get; set; }
+        public ICommand SaveToExcelCommand { get; set; }
+        public ICommand AcceptDataCommand { get; set; }
+        public ICommand RefreshDataCommand { get; set; }
+
         public MainWindowViewModel()
         {
+            ChartViewModel = new ChartViewModel();
             ImportExcelDataCommand = new ActionCommand(ImportExcel);
             SaveToExcelCommand = new ActionCommand(SaveExcel);
-            DrawAction = new RelayCommand(DrawChart, IsDataComplete);
+            DrawPlotCommand = new RelayCommand(DrawChart, IsDataComplete);
+            ClearPlotCommand = new ActionCommand(ClearPlot);
             GetBoatsCommand = new ActionCommand(GetBoats);
             AcceptDataCommand = new RelayCommand(AcceptData, IsDataComplete);
             RefreshDataCommand = new ActionCommand(RefreshData);
@@ -132,6 +129,21 @@ namespace Gui.ViewModel
             GetStartEndDates();
             GetSessions();
             GetData();
+            InitiateAxisValues();
+        }
+
+        private void InitiateAxisValues()
+        {
+            _minX = 0;
+            _minY = 0;
+            _maxX = 0;
+            _maxY = 0;
+        }
+
+        private void ClearPlot()
+        {
+            ChartViewModel = new ChartViewModel();
+
         }
 
         private void RefreshData()
@@ -288,6 +300,8 @@ namespace Gui.ViewModel
 
                 listToInterpolate.Add(new PointD(pointX, pointY));
 
+                FindMinMaxAxis(listToInterpolate);
+
                 // liczy odległość od początku ukłądu współrzędnych
                 // tam gdzie odległość jest największa kurs jest optymalny
                 distaceFromAxisStart = Math.Sqrt(Math.Pow(pointX, 2) + Math.Pow(pointY, 2));
@@ -302,7 +316,21 @@ namespace Gui.ViewModel
             //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!
 
             OptimalDirection = optimalDirection;
-            ChartViewModel = new ChartViewModel(listToInterpolate);
+            ChartViewModel.AddNewSeries(listToInterpolate, BoatsCollection, SelectedIndexBoat, OptimalDirection,
+                _minX, _maxX, _minY, _maxY);
+        }
+
+        private void FindMinMaxAxis(List<PointD> listToInterpolate)
+        {
+            int tempMinX = (int)listToInterpolate.Select(m => m.X).Min();
+            int tempMaxX = (int)listToInterpolate.Select(m => m.X).Max();
+            int tempMinY = (int)listToInterpolate.Select(m => m.Y).Min();
+            int tempMaxY = (int)listToInterpolate.Select(m => m.Y).Max();
+
+            _minX = _minX > tempMinX ? tempMinX : _minX;
+            _minY = _minY > tempMinY ? tempMinY : _minY;
+            _maxX = _maxX < tempMaxX ? tempMaxX : _maxX;
+            _maxY = _maxY < tempMaxY ? tempMaxY : _maxY;
         }
 
         //private void CalculatePoints()

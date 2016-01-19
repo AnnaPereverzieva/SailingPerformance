@@ -7,6 +7,7 @@ using OxyPlot.Axes;
 using OxyPlot.Extensions;
 using OxyPlot.Series;
 using PropertyChanged;
+using System.Collections.ObjectModel;
 
 namespace Gui.ViewModel
 {
@@ -33,61 +34,65 @@ namespace Gui.ViewModel
                                                        MarkerType.Cross
                                                    };
 
-        public ChartViewModel(List<PointD> list)
+        public ChartViewModel()
         {
-            PlotModel = new PlotModel();
-            SetUpModel(list);
-        }
+            SetUpModel();
+        } 
 
         public void DrawChart(List<PointD> list)
         {
             foreach (var point in list)
             {
                LineSeries.Points.Add(new DataPoint(point.X, point.Y));
-
             }
             PlotModel.Series.Add(LineSeries);
+            PlotModel.InvalidatePlot(true);
+        }
 
+        public void AddNewSeries(List<PointD> list, ObservableCollection<BoatDto> boatsCollection, 
+            int selectedIndexBoat, double optimalDirection, int minX, int maxX, int minY, int maxY)
+        {
+            LineSeries = new LineSeries();
+            LineSeries.Title = boatsCollection[selectedIndexBoat].Name + ", kurs optymalny: " + optimalDirection.ToString();
+            AddAxes(minX-1, maxX+1, minY-1, maxY+1);
+            DrawChart(list);
 
         }
 
-        public void SetUpModel(List<PointD> list)
+        public void AddAxes(int minX, int maxX, int minY, int maxY)
         {
-            MainWindowViewModel mv = new MainWindowViewModel(); 
-            LineSeries = new LineSeries();
-            LineSeries.Title = mv.BoatsCollection[mv.SelectedIndexBoat].Name;
+            PlotModel.Axes.Clear();
+            PlotModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
 
+                Minimum = minX,
+                Maximum = maxX
+            });
+
+            PlotModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Minimum = minY,
+                Maximum = maxY
+            });
+        }
+
+        public void SetUpModel()
+        {
+            PlotModel = new PlotModel();
             PlotModel.LegendTitle = "Legenda";
             PlotModel.LegendOrientation = LegendOrientation.Horizontal;
             PlotModel.LegendPlacement = LegendPlacement.Inside;
             PlotModel.LegendPosition = LegendPosition.RightTop;
             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
             PlotModel.LegendBorder = OxyColors.Black;
+
+            AddAxes(0, 4, 0, 4);
             //var dateAxis = new DateTimeAxis(AxisPosition.Bottom, "Date", "HH:mm") { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
             //PlotModel.Axes.Add(dateAxis);
             //var valueAxis = new LinearAxis(AxisPosition.Left, 0) { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
             //PlotModel.Axes.Add(valueAxis);
-
-           // PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, 0, 4));
-            PlotModel.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Bottom,
-                Minimum = 0,
-                Maximum = 4
-
-            });
-            //PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, -4, 4));
-            PlotModel.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Left,
-                Minimum = -4,
-                Maximum = 4
-            });
-
-            DrawChart(list);
-
-     
-
 
 
             //  PlotModel.Series.Add(new FunctionSeries(Math.Cos, -20, 40, 0.1, "cos(x)"));

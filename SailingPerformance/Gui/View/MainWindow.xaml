@@ -122,16 +122,23 @@
             <Button x:Name="BtnDrawGraph"  
                     Grid.Column="2" Grid.Row="3"
                     Margin="35,15,35,15"
-                        Command="{Binding DrawAction}"
+                        Command="{Binding DrawPlotCommand}"
                         Style="{StaticResource AccentedSquareButtonStyle}">
                 <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Rysuj wykres</TextBlock>
             </Button>
+        <Button x:Name="BtnClearGraph"  
+                    Grid.Column="1" Grid.Row="3"
+                    Margin="35,15,35,15"
+                        Command="{Binding ClearPlotCommand}"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+            <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Wyczyść wykres</TextBlock>
+        </Button>
 
-        <DockPanel Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" >
+        <!--<DockPanel Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <Label Content="Optymalny kurs [deg]:"/>
             <TextBox x:Name="TxbOptCourse" Width="37"
                      Text="{Binding OptimalDirection}" IsReadOnly="True" RenderTransformOrigin="0.5,0.5"/>
-        </DockPanel>
+        </DockPanel>-->
  
 
     </Grid>
