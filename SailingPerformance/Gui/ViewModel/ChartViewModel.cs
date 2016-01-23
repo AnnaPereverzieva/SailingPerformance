@@ -49,30 +49,38 @@ namespace Gui.ViewModel
             PlotModel.InvalidatePlot(true);
         }
 
-        public void AddNewSeries(List<PointD> list, ObservableCollection<BoatDto> boatsCollection, 
-            int selectedIndexBoat, double optimalDirection, int minX, int maxX, int minY, int maxY)
+        public void AddNewSeries(List<PointD> list, ObservableCollection<BoatDto> boatsCollection, int selectedIndexBoat, 
+            ObservableCollection<SessionDto> sessionCollection, double minX, double maxX, double minY, double maxY, double windSpeed, double windDirection)
         {
+            string sessionDate = sessionCollection[selectedIndexBoat].StartDate.Year.ToString()+ "/" + sessionCollection[selectedIndexBoat].StartDate.Month.ToString() + "/" + sessionCollection[selectedIndexBoat].StartDate.Day.ToString();
             LineSeries = new LineSeries();
-            LineSeries.Title = boatsCollection[selectedIndexBoat].Name + ", kurs optymalny: " + optimalDirection.ToString();
+            LineSeries.Title = boatsCollection[selectedIndexBoat].Name + ", sesja: " + sessionDate +
+                ", kurs optymalny z wiatrem: " + Math.Round(maxY, 2).ToString() + ", kurs optymalny pod wiatr; " + Math.Round(minY, 2).ToString();
             AddAxes(minX-1, maxX+1, minY-1, maxY+1);
+
+            PlotModel.Title = "Siła wiatru: " + windSpeed.ToString() + ", kierunek wiatru: " + windDirection.ToString();
+                        
             DrawChart(list);
 
         }
 
-        public void AddAxes(int minX, int maxX, int minY, int maxY)
+        public void AddAxes(double minX, double maxX, double minY, double maxY)
         {
             PlotModel.Axes.Clear();
             PlotModel.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Bottom,
-
+                
+                Title = "X",
                 Minimum = minX,
-                Maximum = maxX
+                Maximum = maxX,
+                
             });
 
             PlotModel.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Left,
+                Title = "Y",
                 Minimum = minY,
                 Maximum = maxY
             });
@@ -87,7 +95,6 @@ namespace Gui.ViewModel
             PlotModel.LegendPosition = LegendPosition.RightTop;
             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
             PlotModel.LegendBorder = OxyColors.Black;
-
             AddAxes(0, 4, 0, 4);
             //var dateAxis = new DateTimeAxis(AxisPosition.Bottom, "Date", "HH:mm") { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
             //PlotModel.Axes.Add(dateAxis);

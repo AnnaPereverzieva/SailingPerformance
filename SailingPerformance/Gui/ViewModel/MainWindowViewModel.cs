@@ -26,7 +26,7 @@ namespace Gui.ViewModel
         private double _windDirection;
         private bool _allRecords;
 
-        private int _minX, _minY, _maxX, _maxY;
+        private double _minX, _minY, _maxX, _maxY;
 
         public bool WindValuesChanged { get; set; }
         public bool AllRecords
@@ -133,7 +133,7 @@ namespace Gui.ViewModel
             ChartViewModel = new ChartViewModel();
             ImportExcelDataCommand = new ActionCommand(ImportExcel);
             SaveToExcelCommand = new ActionCommand(SaveExcel);
-            DrawPlotCommand = new RelayCommand(DrawChart, IsDataComplete);
+            DrawPlotCommand = new RelayCommand(DrawChart, CheckDataComplete);
             ClearPlotCommand = new ActionCommand(ClearPlot);
             GetBoatsCommand = new ActionCommand(GetBoats);
             AcceptDataCommand = new RelayCommand(AcceptData, IsDataComplete);
@@ -145,6 +145,7 @@ namespace Gui.ViewModel
             GetData();
             InitiateAxisValues();
         }
+
 
         private void InitiateAxisValues()
         {
@@ -283,6 +284,15 @@ namespace Gui.ViewModel
         {
             return isDataComplete;
         }
+        private bool CheckDataComplete(object obj)
+        {
+            if (AvailableRecords > 0)
+                return true;
+
+            return false;                     
+        }
+
+
 
         private void GetWindParameters()
         {
@@ -338,16 +348,16 @@ namespace Gui.ViewModel
             //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
             //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!
             OptimalDirection = optimalDirection;
-            ChartViewModel.AddNewSeries(listToInterpolate, BoatsCollection, SelectedIndexBoat, OptimalDirection,
-                _minX, _maxX, _minY, _maxY);
+            ChartViewModel.AddNewSeries(listToInterpolate, BoatsCollection, SelectedIndexBoat, SessionCollection,
+                _minX, _maxX, _minY, _maxY, AvailableWindSpeed, AvailableWindDirection);
         }
 
         private void FindMinMaxAxis(List<PointD> listToInterpolate)
         {
-            int tempMinX = (int)listToInterpolate.Select(m => m.X).Min();
-            int tempMaxX = (int)listToInterpolate.Select(m => m.X).Max();
-            int tempMinY = (int)listToInterpolate.Select(m => m.Y).Min();
-            int tempMaxY = (int)listToInterpolate.Select(m => m.Y).Max();
+            double tempMinX = listToInterpolate.Select(m => m.X).Min();
+            double tempMaxX = listToInterpolate.Select(m => m.X).Max();
+            double tempMinY = listToInterpolate.Select(m => m.Y).Min();
+            double tempMaxY = listToInterpolate.Select(m => m.Y).Max();
 
             _minX = _minX > tempMinX ? tempMinX : _minX;
             _minY = _minY > tempMinY ? tempMinY : _minY;
