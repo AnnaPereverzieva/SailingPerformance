@@ -1,37 +1,37 @@
 ﻿<controls:MetroWindow x:Class="Gui.MainWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:localFlyouts="clr-namespace:Gui.View.UserControls.Flyouts"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:oxy="http://oxyplot.org/wpf"
-                      xmlns:localFlyouts="clr-namespace:Gui.View.UserControls.Flyouts"
                       xmlns:s="clr-namespace:System;assembly=mscorlib"
                       Title="Sailing performance"
                       MinWidth="860"
                       MinHeight="560"
-                      mc:Ignorable="d"
-                      ShowIconOnTitleBar="True"
-                      BorderThickness="2"
                       BorderBrush="{StaticResource AccentColorBrush}"
+                      BorderThickness="2"
                       GlowBrush="{StaticResource AccentColorBrush}"
+                      ResizeMode="CanResize"
+                      ShowIconOnTitleBar="True"
                       WindowStartupLocation="CenterScreen"
-                      ResizeMode="CanResize">
+                      mc:Ignorable="d">
 
     <controls:MetroWindow.Resources>
 
         <Style x:Key="CbxProperties" TargetType="{x:Type Control}">
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Height" Value="20"/>
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Height" Value="20" />
         </Style>
         <Style x:Key="LblProperties" TargetType="{x:Type Control}">
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontSize" Value="12" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
-        <Style TargetType="ComboBox" BasedOn="{StaticResource CbxProperties}"/>
-        <Style TargetType="TextBox" BasedOn="{StaticResource CbxProperties}"/>
-        <Style TargetType="Label" BasedOn="{StaticResource LblProperties}"/>
+        <Style BasedOn="{StaticResource CbxProperties}" TargetType="ComboBox" />
+        <Style BasedOn="{StaticResource CbxProperties}" TargetType="TextBox" />
+        <Style BasedOn="{StaticResource LblProperties}" TargetType="Label" />
 
 
     </controls:MetroWindow.Resources>
@@ -39,124 +39,170 @@
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl>
             <controls:Flyout x:Name="FlyoutDataSelection"
-                             Position="Right"
-                             Header="Filtrowanie danych"
                              Width="Auto"
-                             IsPinned="False">
-                <localFlyouts:DataSelectionFlyout/>
+                             Header="Filtrowanie danych"
+                             IsPinned="False"
+                             Position="Right">
+                <localFlyouts:DataSelectionFlyout />
             </controls:Flyout>
 
             <controls:Flyout x:Name="FlyoutWindSelection"
-                             Position="Right"
-                             Header="Kierunek i siła wiatru"
                              Width="350"
-                             IsPinned="False">
-                <localFlyouts:WindSelectionFlyout/>
+                             Header="Kierunek i siła wiatru"
+                             IsPinned="False"
+                             Position="Right">
+                <localFlyouts:WindSelectionFlyout />
             </controls:Flyout>
 
             <controls:Flyout x:Name="FlyoutExportImport"
-                             Position="Right"
-                             Header="Export i import danych"
                              Width="Auto"
-                             IsPinned="False">
-                <localFlyouts:ExportImportFlyout/>
+                             Header="Export i import danych"
+                             IsPinned="False"
+                             Position="Right">
+                <localFlyouts:ExportImportFlyout />
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".4*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width=".4*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="1.5*" />
         </Grid.RowDefinitions>
-        <Border Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="3" BorderBrush="Red" Margin="7">
-            <oxy:PlotView x:Name="Plot1"
-                  Margin="10"
-                  Model="{Binding ChartViewModel.PlotModel,
-                                  UpdateSourceTrigger=PropertyChanged,
-                                  Mode=TwoWay}" />
-        </Border>
-        <DockPanel Grid.Column="0" Grid.RowSpan="4" Margin="0,0,15,0" >
+        <DockPanel Grid.RowSpan="4"
+                   Grid.Column="0"
+                   Margin="0,0,15,0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <ToggleButton x:Name="BtnDataSelection"
                               Grid.Row="0"
                               Content="Wybór danych"
+                              Cursor="Hand"
                               FontSize="12"
-                              IsChecked="{Binding ElementName=FlyoutDataSelection, Path=IsOpen}" Cursor="Hand">
+                              IsChecked="{Binding ElementName=FlyoutDataSelection,
+                                                  Path=IsOpen}">
 
                     <ToggleButton.LayoutTransform>
-                        <RotateTransform Angle="-90"/>
+                        <RotateTransform Angle="-90" />
                     </ToggleButton.LayoutTransform>
                 </ToggleButton>
-                <ToggleButton Grid.Row="1"
-                              x:Name="BtnWindSelection"
+                <ToggleButton x:Name="BtnWindSelection"
+                              Grid.Row="1"
                               Content="Parametry wiatru"
+                              Cursor="Hand"
                               FontSize="12"
-                              IsChecked="{Binding ElementName=FlyoutWindSelection, Path=IsOpen}" Cursor="Hand">
+                              IsChecked="{Binding ElementName=FlyoutWindSelection,
+                                                  Path=IsOpen}">
                     <ToggleButton.LayoutTransform>
-                        <RotateTransform Angle="-90"/>
+                        <RotateTransform Angle="-90" />
                     </ToggleButton.LayoutTransform>
 
                 </ToggleButton>
-                <ToggleButton Grid.Row="2"
-                              x:Name="BtnExportImport"
+                <ToggleButton x:Name="BtnExportImport"
+                              Grid.Row="2"
+                              Cursor="Hand"
                               FontSize="12"
-                              IsChecked="{Binding ElementName=FlyoutExportImport, Path=IsOpen}" Cursor="Hand">
-                    <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold" Text="{Binding StringFormat='Export/Import danych{0}Generuj Raport', Source={x:Static s:Environment.NewLine}}"/>
+                              IsChecked="{Binding ElementName=FlyoutExportImport,
+                                                  Path=IsOpen}">
+                    <TextBlock FontSize="12"
+                               FontWeight="Bold"
+                               Text="{Binding StringFormat='Export/Import danych{0}Generuj Raport',
+                                              Source={x:Static s:Environment.NewLine}}"
+                               TextWrapping="Wrap" />
                     <ToggleButton.LayoutTransform>
-                        <RotateTransform Angle="-90"/>
+                        <RotateTransform Angle="-90" />
                     </ToggleButton.LayoutTransform>
 
                 </ToggleButton>
             </Grid>
         </DockPanel>
-        <Label Grid.Column="2" Grid.Row="3" VerticalAlignment="Top" Content="Brak danych, wybierz odpowiednie paratery wiatru" HorizontalAlignment="Center" Height="20"  Padding="2" FontStyle="Italic" FontWeight="Bold" TextOptions.TextFormattingMode="Display" Foreground="Red" >
+        <Border Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="7"
+                BorderBrush="Red"
+                BorderThickness="3">
+            <oxy:PlotView x:Name="Plot1"
+                          Margin="10"
+                          Model="{Binding ChartViewModel.PlotModel,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          Mode=TwoWay}" />
+        </Border>
+        <Button x:Name="BtnClearGraph"
+                Grid.Row="3"
+                Grid.Column="1"
+                Margin="35,20,35,20"
+                Command="{Binding ClearPlotCommand}"
+                Style="{StaticResource AccentedSquareButtonStyle}">
+            <TextBlock FontSize="12"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap">
+                Wyczyść wykres
+            </TextBlock>
+        </Button>
+        <Label Grid.Row="3"
+               Grid.Column="2"
+               Height="20"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Content="Brak danych, wybierz odpowiednie paratery wiatru"
+               FontStyle="Italic"
+               FontWeight="Bold"
+               Foreground="Red"
+               Padding="2"
+               TextOptions.TextFormattingMode="Display">
             <Label.Style>
                 <Style TargetType="Label">
-                    <Setter Property="Visibility" Value="Hidden"/>
+                    <Setter Property="Visibility" Value="Hidden" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding AvailableRecords}" Value="0">
-                            <Setter Property="Visibility" Value="Visible"/>
+                            <Setter Property="Visibility" Value="Visible" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Label.Style>
         </Label>
-        <Label Grid.Column="2" Grid.Row="3" VerticalAlignment="Top" Content="Brak danych, wybierz odpowiednie paratery wiatru" HorizontalAlignment="Center" Height="20"  Padding="2" FontStyle="Italic" FontWeight="Bold" TextOptions.TextFormattingMode="Display" Foreground="Red" >
+        <Label Grid.Row="3"
+               Grid.Column="2"
+               Height="20"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Content="Brak danych, wybierz odpowiednie paratery wiatru"
+               FontStyle="Italic"
+               FontWeight="Bold"
+               Foreground="Red"
+               Padding="2"
+               TextOptions.TextFormattingMode="Display">
             <Label.Style>
                 <Style TargetType="Label">
-                    <Setter Property="Visibility" Value="Hidden"/>
+                    <Setter Property="Visibility" Value="Hidden" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding AvailableRecords}" Value="0">
-                            <Setter Property="Visibility" Value="Visible"/>
+                            <Setter Property="Visibility" Value="Visible" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Label.Style>
         </Label>
         <Button x:Name="BtnDrawGraph"
-                    Grid.Column="2" Grid.Row="3"
-                    Margin="35,20,35,20"
-                        Command="{Binding DrawPlotCommand}"
-                        Style="{StaticResource AccentedSquareButtonStyle}">
-            <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Rysuj wykres</TextBlock>
-        </Button>
-        <Button x:Name="BtnClearGraph"  
-                    Grid.Column="1" Grid.Row="3"
-                    Margin="35,20,35,20"
-                        Command="{Binding ClearPlotCommand}"
-                        Style="{StaticResource AccentedSquareButtonStyle}">
-            <TextBlock TextWrapping="Wrap" FontSize="12" FontWeight="Bold">Wyczyść wykres</TextBlock>
+                Grid.Row="3"
+                Grid.Column="2"
+                Margin="35,20,35,20"
+                Command="{Binding DrawPlotCommand}"
+                Style="{StaticResource AccentedSquareButtonStyle}">
+            <TextBlock FontSize="12"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap">
+                Rysuj wykres
+            </TextBlock>
         </Button>
 
         <!--<DockPanel Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" >
