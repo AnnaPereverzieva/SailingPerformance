@@ -48,13 +48,13 @@
                 <Button x:Name="BtnSaveToExcel"
                         Margin="5"
                         VerticalAlignment="Stretch"
-                        Command="{Binding SaveToExlsCommand}"
+                        Command="{Binding SaveToPdfCommand}"
                         DockPanel.Dock="Top"
                         Style="{StaticResource AccentedSquareButtonStyle}">
                     <TextBlock FontSize="12"
                                FontWeight="Bold"
                                TextWrapping="Wrap">
-                        Generuj raport .doc
+                        Generuj raport .pdf
                     </TextBlock>
                 </Button>
             </Border>

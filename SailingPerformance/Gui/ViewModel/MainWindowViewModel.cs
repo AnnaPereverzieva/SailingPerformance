@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -9,6 +10,7 @@ using ClientService.Model;
 using ClientService.Services;
 using Gui.Common;
 using Microsoft.Expression.Interactivity.Core;
+using OxyPlot;
 using PropertyChanged;
 using Spire.Xls;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
@@ -149,6 +151,7 @@ namespace Gui.ViewModel
         public ICommand SaveToExcelCommand { get; set; }
         public ICommand AcceptDataCommand { get; set; }
         public ICommand RefreshDataCommand { get; set; }
+        public ICommand SaveToPdfCommand { get; set; }
 
         public MainWindowViewModel()
         {
@@ -160,12 +163,26 @@ namespace Gui.ViewModel
             GetBoatsCommand = new ActionCommand(GetBoats);
             AcceptDataCommand = new RelayCommand(AcceptData, DataComplete);
             RefreshDataCommand = new ActionCommand(RefreshData);
+            SaveToPdfCommand = new ActionCommand(SaveToPdf);
             GetBoats();
             SelectedIndexBoat = 0;
             GetStartEndDates();
             GetSessions();
             GetData();
             InitiateAxisValues();
+        }
+
+        private void SaveToPdf()
+        {
+            string filePath = string.Empty;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Pdf files (*.pdf)|*.pdf";
+            if (saveFileDialog.ShowDialog() == true)
+                filePath = saveFileDialog.FileName;
+            using (var stream = File.Create(filePath))
+            {
+                PdfExporter.Export(ChartViewModel.PlotModel, stream, 600, 400);
+            }
         }
 
 
