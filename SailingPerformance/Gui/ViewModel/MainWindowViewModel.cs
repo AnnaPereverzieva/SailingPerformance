@@ -24,8 +24,25 @@ namespace Gui.ViewModel
         private int _selectedIndexSession;
         private double _windSpeed;
         private double _windDirection;
+        private bool _allRecords;
 
-        private int _minX, _minY, _maxX, _maxY;
+        private double _minX, _minY, _maxX, _maxY;
+
+        public bool WindValuesChanged { get; set; }
+        public bool AllRecords
+        {
+            get { return _allRecords; }
+            set
+            {
+                _allRecords = value;
+                WindValuesChanged = true;
+                GetData();
+                AvailableRecords = DataCollection.Count();
+                IsDataChanged = true;
+            }
+        }
+
+        public bool IsDataChanged { get; set; }
 
         public DateTime EndDate
         {
@@ -50,9 +67,13 @@ namespace Gui.ViewModel
             get { return _selectedIndexBoat; }
             set
             {
-                _selectedIndexBoat = value;
-                GetStartEndDates();
-                GetSessions();
+                if (_selectedIndexBoat != value)
+                {
+                    _selectedIndexBoat = value;
+                    GetStartEndDates();
+                    GetSessions();
+                    IsDataChanged = true;
+                }           
             }
         }
         public int SelectedIndexSession
@@ -63,7 +84,14 @@ namespace Gui.ViewModel
                 if (value < 0)
                     _selectedIndexSession = 0;
                 else
-                    _selectedIndexSession = value;
+                {
+                    if (_selectedIndexSession != value)
+                    {
+                        _selectedIndexSession = value;
+                        IsDataChanged = true;
+                    }
+                }
+                    
                 GetData();
             }
         }
@@ -77,8 +105,10 @@ namespace Gui.ViewModel
             set
             {
                 _windSpeed = value;
+                WindValuesChanged = true;
                 AvailableWindSpeed = CheckAvailableWindRecords(AvalableWindSpeedList, _windSpeed);
                 CheckTotalNumberOfRecords();
+                IsDataChanged = true;
             }
         }
         public double WindSpeedMin { get; set; }
@@ -90,8 +120,10 @@ namespace Gui.ViewModel
             set
             {
                 _windDirection = value;
+                WindValuesChanged = true;
                 AvailableWindDirection = CheckAvailableWindRecords(AvalableWindDirectionList, _windDirection);
                 CheckTotalNumberOfRecords();
+                IsDataChanged = true;
             }
         }
         public double WindDirectionMin { get; set; }
@@ -119,7 +151,7 @@ namespace Gui.ViewModel
             ChartViewModel = new ChartViewModel();
             ImportExcelDataCommand = new ActionCommand(ImportExcel);
             SaveToExcelCommand = new ActionCommand(SaveExcel);
-            DrawPlotCommand = new RelayCommand(DrawChart, IsDataComplete);
+            DrawPlotCommand = new RelayCommand(DrawChart, CheckDataComplete);
             ClearPlotCommand = new ActionCommand(ClearPlot);
             GetBoatsCommand = new ActionCommand(GetBoats);
             AcceptDataCommand = new RelayCommand(AcceptData, IsDataComplete);
@@ -132,6 +164,7 @@ namespace Gui.ViewModel
             InitiateAxisValues();
         }
 
+
         private void InitiateAxisValues()
         {
             _minX = 0;
@@ -143,7 +176,6 @@ namespace Gui.ViewModel
         private void ClearPlot()
         {
             ChartViewModel = new ChartViewModel();
-
         }
 
         private void RefreshData()
@@ -270,6 +302,15 @@ namespace Gui.ViewModel
         {
             return isDataComplete;
         }
+        private bool CheckDataComplete(object obj)
+        {
+            if (AvailableRecords > 0 && IsDataChanged)
+                return true;         
+
+            return false;                     
+        }
+
+
 
         private void GetWindParameters()
         {
@@ -282,22 +323,31 @@ namespace Gui.ViewModel
             AvalableWindDirectionList = new List<double>(DataCollection.Select(x => x.WindDirection));
             AvalableWindSpeedList.Sort();
             AvalableWindDirectionList.Sort();
-            
-            WindSpeed = WindSpeedMin;
-            WindDirection = WindDirectionMin;
         }
 
         private void DrawChart(object obj)
         {
+            IsDataChanged = false;
+            if (WindValuesChanged)
+                ClearPlot();
+
+            WindDirection = AvailableWindDirection;
+            WindSpeed = AvailableWindSpeed;
+            WindValuesChanged = false;
+
             var listToInterpolate = new List<PointD>();
 
             double distaceFromAxisStart = 0, maxDistance = 0, optimalDirection = 0;
 
+            if (!AllRecords)
+                DataCollection = new ObservableCollection<DataGps>(DataCollection.Where(x => x.WindSpeed == WindSpeed && x.WindDirection == WindDirection));
+
+       
             foreach (var x in DataCollection)
             {
                 double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
                 double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
-
+               
                 listToInterpolate.Add(new PointD(pointX, pointY));
 
                 FindMinMaxAxis(listToInterpolate);
@@ -311,21 +361,20 @@ namespace Gui.ViewModel
                     optimalDirection = x.BoatDirection;
                 }
             }
-
+           
             //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
             //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!
-
             OptimalDirection = optimalDirection;
-            ChartViewModel.AddNewSeries(listToInterpolate, BoatsCollection, SelectedIndexBoat, OptimalDirection,
-                _minX, _maxX, _minY, _maxY);
+            ChartViewModel.AddNewSeries(listToInterpolate, BoatsCollection, SelectedIndexBoat, SessionCollection,
+                _minX, _maxX, _minY, _maxY, AvailableWindSpeed, AvailableWindDirection, AllRecords);
         }
 
         private void FindMinMaxAxis(List<PointD> listToInterpolate)
         {
-            int tempMinX = (int)listToInterpolate.Select(m => m.X).Min();
-            int tempMaxX = (int)listToInterpolate.Select(m => m.X).Max();
-            int tempMinY = (int)listToInterpolate.Select(m => m.Y).Min();
-            int tempMaxY = (int)listToInterpolate.Select(m => m.Y).Max();
+            double tempMinX = listToInterpolate.Select(m => m.X).Min();
+            double tempMaxX = listToInterpolate.Select(m => m.X).Max();
+            double tempMinY = listToInterpolate.Select(m => m.Y).Min();
+            double tempMaxY = listToInterpolate.Select(m => m.Y).Max();
 
             _minX = _minX > tempMinX ? tempMinX : _minX;
             _minY = _minY > tempMinY ? tempMinY : _minY;
