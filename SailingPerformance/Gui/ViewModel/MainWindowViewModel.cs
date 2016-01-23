@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using ClientService.Model;
 using ClientService.Services;
-using Eto.Drawing;
 using Gui.Common;
 using Microsoft.Expression.Interactivity.Core;
 using PropertyChanged;
-using Microsoft.Win32;
-using Dal.Repositories;
-using MahApps.Metro.Controls;
+using Spire.Xls;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace Gui.ViewModel
 {
@@ -226,11 +226,39 @@ namespace Gui.ViewModel
 
         private void SaveExcel()
         {
+
+
+
+        //    char c = (char)65;
+
+
+            MessageBox.Show("Hello, world.");
+
+            Workbook workbook = new Workbook();
+            Worksheet sheet = workbook.Worksheets[0];
+            sheet.Range["A1"].Text = "This is a sample Excel dcouemnt and created by Spire.XLS for .NET";
+
+
+
+            for (int i = 65; i < 67; i++)
+            {
+                sheet.Range["" + i.ToString()].Text = "Hello " + i.ToString();
+            }
+            for (int i = 1; i < 10; i++)
+            {
+                sheet.Range["A" + i.ToString()].Text = "Hello " + i.ToString();
+            }
+
             string filePath = string.Empty;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;*.xlsx";
             if (saveFileDialog.ShowDialog() == true)
                 filePath = saveFileDialog.FileName;
+
+
+            workbook.SaveToFile(filePath);
+
+            System.Diagnostics.Process.Start(workbook.FileName);
 
         }
 
