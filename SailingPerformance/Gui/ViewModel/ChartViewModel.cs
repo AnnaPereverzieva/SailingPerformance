@@ -15,7 +15,7 @@ namespace Gui.ViewModel
     public class ChartViewModel
     {
         public PlotModel PlotModel { get; set; }
-        public LineSeries LineSeries  { get; set; }
+        public LineSeries LineSeries { get; set; }
         private readonly List<OxyColor> Colors = new List<OxyColor>
                                             {
                                                 OxyColors.Green,
@@ -37,32 +37,42 @@ namespace Gui.ViewModel
         public ChartViewModel()
         {
             SetUpModel();
-        } 
+        }
 
         public void DrawChart(List<PointD> list)
         {
             foreach (var point in list)
             {
-               LineSeries.Points.Add(new DataPoint(point.X, point.Y));
+                LineSeries.Points.Add(new DataPoint(point.X, point.Y));
             }
             PlotModel.Series.Add(LineSeries);
             PlotModel.InvalidatePlot(true);
         }
 
-        public void AddNewSeries(List<PointD> list, ObservableCollection<BoatDto> boatsCollection, int selectedIndexBoat, 
-            ObservableCollection<SessionDto> sessionCollection, double minX, double maxX, double minY, double maxY, double windSpeed, double windDirection, bool allRecords)
+        public void AddNewSeries(List<PointD> list, ObservableCollection<BoatDto> boatsCollection, int selectedIndexBoat,
+            ObservableCollection<SessionDto> sessionCollection, int selectedSession, double minX, double maxX, double minY, double maxY,
+            double windSpeed, double windDirection, bool allRecords, bool isDataFromExcel)
         {
-            string sessionDate = sessionCollection[selectedIndexBoat].StartDate.Year.ToString()+ "/" + sessionCollection[selectedIndexBoat].StartDate.Month.ToString() + "/" + sessionCollection[selectedIndexBoat].StartDate.Day.ToString();
+            
             LineSeries = new LineSeries();
-            LineSeries.Title = boatsCollection[selectedIndexBoat].Name + ", sesja: " + sessionDate +
-                ", kurs opt. z wiatrem: " + Math.Round(maxY, 2).ToString() + ", kurs opt. pod wiatr; " + Math.Round(minY, 2).ToString();
-            AddAxes(minX-1, maxX+1, minY-1, maxY+1);
+
+            if (isDataFromExcel)
+                LineSeries.Title = "Dane z excela" + ", kurs opt. z wiatrem: " + Math.Round(maxY, 2).ToString() + ", kurs opt. pod wiatr; " + Math.Round(minY, 2).ToString();
+            else
+            {
+                string sessionDate = sessionCollection[selectedSession].StartDate.Year.ToString() + "/" + sessionCollection[selectedSession].StartDate.Month.ToString() + "/" + sessionCollection[selectedSession].StartDate.Day.ToString();
+                LineSeries.Title = boatsCollection[selectedIndexBoat].Name + ", sesja: " + sessionDate +
+                                ", kurs opt. z wiatrem: " + Math.Round(maxY, 2).ToString() + ", kurs opt. pod wiatr; " + Math.Round(minY, 2).ToString();
+            }
+                
+
+            AddAxes(minX - 1, maxX + 1, minY - 1, maxY + 1);
 
             if (allRecords)
                 PlotModel.Title = "Siła wiatru: wszystkie wartości, kierunek wiatru: wszystkie wartości";
             else
                 PlotModel.Title = "Siła wiatru: " + windSpeed.ToString() + ", kierunek wiatru: " + windDirection.ToString();
-                        
+
             DrawChart(list);
 
         }
@@ -73,11 +83,11 @@ namespace Gui.ViewModel
             PlotModel.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Bottom,
-                
+
                 Title = "X",
                 Minimum = minX,
                 Maximum = maxX,
-                
+
             });
 
             PlotModel.Axes.Add(new LinearAxis

@@ -25,6 +25,7 @@ namespace Gui.ViewModel
         private double _windSpeed;
         private double _windDirection;
         private bool _allRecords;
+        private bool _isDataFromExcel;
 
         private double _minX, _minY, _maxX, _maxY;
 
@@ -36,7 +37,9 @@ namespace Gui.ViewModel
             {
                 _allRecords = value;
                 WindValuesChanged = true;
-                GetData();
+                if (!_isDataFromExcel)
+                    GetData();
+                                
                 AvailableRecords = DataCollection.Count();
                 IsDataChanged = true;
             }
@@ -96,7 +99,7 @@ namespace Gui.ViewModel
             }
         }
 
-        public bool isDataComplete { get; set; }
+        public bool IsDataComplete { get; set; }
         
         public int AvailableRecords { get; set; }
         public double WindSpeed
@@ -154,7 +157,7 @@ namespace Gui.ViewModel
             DrawPlotCommand = new RelayCommand(DrawChart, CheckDataComplete);
             ClearPlotCommand = new ActionCommand(ClearPlot);
             GetBoatsCommand = new ActionCommand(GetBoats);
-            AcceptDataCommand = new RelayCommand(AcceptData, IsDataComplete);
+            AcceptDataCommand = new RelayCommand(AcceptData, DataComplete);
             RefreshDataCommand = new ActionCommand(RefreshData);
             GetBoats();
             SelectedIndexBoat = 0;
@@ -242,6 +245,8 @@ namespace Gui.ViewModel
                 ReadExcelService readExcel = new ReadExcelService();
                 DataCollection = new ObservableCollection<DataGps>(readExcel.LoadData(filePath));
                 GetWindParameters();
+                _isDataFromExcel = true;
+                ClearPlot();
             }
         }
 
@@ -289,28 +294,28 @@ namespace Gui.ViewModel
                 var dataService = new GpsDataService();
                 var selectedSession = SessionCollection[SelectedIndexSession];
                 DataCollection = new ObservableCollection<DataGps>(dataService.GetSessions(selectedSession.IdSession));
-                if (DataCollection.Count != 0)
-                    isDataComplete = true;
-                else
-                    isDataComplete = false;
             }
             catch (Exception)
             { }
         }
 
-        private bool IsDataComplete(object obj)
+        private bool DataComplete(object obj)
         {
-            return isDataComplete;
+            if (DataCollection.Count != 0)
+                IsDataComplete = true;
+            else
+                IsDataComplete = false;
+
+            return IsDataComplete;
         }
+
         private bool CheckDataComplete(object obj)
         {
-            if (AvailableRecords > 0 && IsDataChanged)
+            if (AvailableRecords > 0 && IsDataChanged && IsDataComplete)
                 return true;         
 
             return false;                     
         }
-
-
 
         private void GetWindParameters()
         {
@@ -365,8 +370,9 @@ namespace Gui.ViewModel
             //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
             //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!
             OptimalDirection = optimalDirection;
-            ChartViewModel.AddNewSeries(listToInterpolate, BoatsCollection, SelectedIndexBoat, SessionCollection,
-                _minX, _maxX, _minY, _maxY, AvailableWindSpeed, AvailableWindDirection, AllRecords);
+            ChartViewModel.AddNewSeries(listToInterpolate, BoatsCollection, SelectedIndexBoat, SessionCollection, SelectedIndexSession,
+                _minX, _maxX, _minY, _maxY, AvailableWindSpeed, AvailableWindDirection, AllRecords, _isDataFromExcel);
+            _isDataFromExcel = false;
         }
 
         private void FindMinMaxAxis(List<PointD> listToInterpolate)
