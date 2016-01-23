@@ -12,6 +12,7 @@ using PropertyChanged;
 using Microsoft.Win32;
 using Dal.Repositories;
 using MahApps.Metro.Controls;
+using System.Windows;
 
 namespace Gui.ViewModel
 {
@@ -165,6 +166,7 @@ namespace Gui.ViewModel
             GetSessions();
             GetData();
             InitiateAxisValues();
+
         }
 
 
