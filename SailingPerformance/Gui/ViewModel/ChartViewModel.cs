@@ -50,15 +50,18 @@ namespace Gui.ViewModel
         }
 
         public void AddNewSeries(List<PointD> list, ObservableCollection<BoatDto> boatsCollection, int selectedIndexBoat, 
-            ObservableCollection<SessionDto> sessionCollection, double minX, double maxX, double minY, double maxY, double windSpeed, double windDirection)
+            ObservableCollection<SessionDto> sessionCollection, double minX, double maxX, double minY, double maxY, double windSpeed, double windDirection, bool allRecords)
         {
             string sessionDate = sessionCollection[selectedIndexBoat].StartDate.Year.ToString()+ "/" + sessionCollection[selectedIndexBoat].StartDate.Month.ToString() + "/" + sessionCollection[selectedIndexBoat].StartDate.Day.ToString();
             LineSeries = new LineSeries();
             LineSeries.Title = boatsCollection[selectedIndexBoat].Name + ", sesja: " + sessionDate +
-                ", kurs optymalny z wiatrem: " + Math.Round(maxY, 2).ToString() + ", kurs optymalny pod wiatr; " + Math.Round(minY, 2).ToString();
+                ", kurs opt. z wiatrem: " + Math.Round(maxY, 2).ToString() + ", kurs opt. pod wiatr; " + Math.Round(minY, 2).ToString();
             AddAxes(minX-1, maxX+1, minY-1, maxY+1);
 
-            PlotModel.Title = "Siła wiatru: " + windSpeed.ToString() + ", kierunek wiatru: " + windDirection.ToString();
+            if (allRecords)
+                PlotModel.Title = "Siła wiatru: wszystkie wartości, kierunek wiatru: wszystkie wartości";
+            else
+                PlotModel.Title = "Siła wiatru: " + windSpeed.ToString() + ", kierunek wiatru: " + windDirection.ToString();
                         
             DrawChart(list);
 

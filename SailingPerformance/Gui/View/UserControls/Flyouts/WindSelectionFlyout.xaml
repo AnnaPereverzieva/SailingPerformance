@@ -31,8 +31,9 @@
 
         </Grid.RowDefinitions>
 
-        <CheckBox Content="Wszystkie rekordy" x:Name="cbxAllRecords" IsChecked="{Binding Path=AllRecords, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <CheckBox Content="Wszystkie rekordy" x:Name="cbxAllRecords" IsChecked="{Binding AllRecords, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <Separator Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+       
         <Slider Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                 Width="200"
                 VerticalAlignment="Center"
