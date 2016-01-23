@@ -34,7 +34,7 @@ namespace Dal.Repositories
             List<GPSData> data;
             using (_sailingDbContext = new SailingDbContext())
             {
-                data = _sailingDbContext.GPSData.Where(x=>x.IdSession==idSession).ToList();
+                data = _sailingDbContext.GPSData.Where(x => x.IdSession == idSession).ToList();
             }
             return data;
         }
