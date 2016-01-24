@@ -6,11 +6,13 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using ClientService.Model;
 using ClientService.Services;
 using Gui.Common;
 using Microsoft.Expression.Interactivity.Core;
 using OxyPlot;
+using OxyPlot.Wpf;
 using PropertyChanged;
 using Spire.Xls;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
@@ -176,12 +178,16 @@ namespace Gui.ViewModel
         {
             string filePath = string.Empty;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Pdf files (*.pdf)|*.pdf";
+            saveFileDialog.Filter = "PNG Files (*.png)|*.png";
             if (saveFileDialog.ShowDialog() == true)
                 filePath = saveFileDialog.FileName;
+            //using (var stream = File.Create(filePath)) // pdf file zle zapisuje, nie zna polskich znakow, encodingu niema 
+            //{
+            //    PdfExporter.Export(ChartViewModel.PlotModel, stream, 600, 400);
+            //}
             using (var stream = File.Create(filePath))
             {
-                PdfExporter.Export(ChartViewModel.PlotModel, stream, 600, 400);
+                PngExporter.Export(ChartViewModel.PlotModel, stream, 750, 550, OxyColor.FromArgb(250, 250, 250, 250));
             }
         }
 

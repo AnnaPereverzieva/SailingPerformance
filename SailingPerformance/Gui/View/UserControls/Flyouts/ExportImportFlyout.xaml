@@ -54,7 +54,7 @@
                     <TextBlock FontSize="12"
                                FontWeight="Bold"
                                TextWrapping="Wrap">
-                        Generuj raport .pdf
+                        Generuj raport .png
                     </TextBlock>
                 </Button>
             </Border>
