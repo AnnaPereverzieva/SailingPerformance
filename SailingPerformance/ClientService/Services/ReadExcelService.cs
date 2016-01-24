@@ -18,7 +18,7 @@ namespace ClientService.Services
             if (fileExtension == "xls")
                 workbook.LoadFromFile(path, ExcelVersion.Version97to2003);
             else if (fileExtension == "xlsx")
-                workbook.LoadFromFile(path, ExcelVersion.Version2013);
+                workbook.LoadFromFile(path, ExcelVersion.Version2010);
 
 
             Worksheet sheet = workbook.Worksheets[0];
