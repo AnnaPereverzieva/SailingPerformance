@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using ClientService.Model;
 using ClientService.Services;
 using Gui.Common;
 using Microsoft.Expression.Interactivity.Core;
+using OxyPlot;
+using OxyPlot.Wpf;
 using PropertyChanged;
 using Spire.Xls;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
@@ -39,7 +44,7 @@ namespace Gui.ViewModel
                 WindValuesChanged = true;
                 if (!_isDataFromExcel)
                     GetData();
-                                
+
                 AvailableRecords = DataCollection.Count();
                 IsDataChanged = true;
             }
@@ -76,7 +81,7 @@ namespace Gui.ViewModel
                     GetStartEndDates();
                     GetSessions();
                     IsDataChanged = true;
-                }           
+                }
             }
         }
         public int SelectedIndexSession
@@ -94,13 +99,13 @@ namespace Gui.ViewModel
                         IsDataChanged = true;
                     }
                 }
-                    
+
                 GetData();
             }
         }
 
         public bool IsDataComplete { get; set; }
-        
+
         public int AvailableRecords { get; set; }
         public double WindSpeed
         {
@@ -148,6 +153,7 @@ namespace Gui.ViewModel
         public ICommand SaveToExcelCommand { get; set; }
         public ICommand AcceptDataCommand { get; set; }
         public ICommand RefreshDataCommand { get; set; }
+        public ICommand SaveToPdfCommand { get; set; }
 
         public MainWindowViewModel()
         {
@@ -159,6 +165,7 @@ namespace Gui.ViewModel
             GetBoatsCommand = new ActionCommand(GetBoats);
             AcceptDataCommand = new RelayCommand(AcceptData, DataComplete);
             RefreshDataCommand = new ActionCommand(RefreshData);
+            SaveToPdfCommand = new ActionCommand(SaveToPdf);
             GetBoats();
             SelectedIndexBoat = 0;
             GetStartEndDates();
@@ -166,6 +173,23 @@ namespace Gui.ViewModel
             GetData();
             InitiateAxisValues();
 
+        }
+
+        private void SaveToPdf()
+        {
+            string filePath = string.Empty;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PNG Files (*.png)|*.png";
+            if (saveFileDialog.ShowDialog() == true)
+                filePath = saveFileDialog.FileName;
+            //using (var stream = File.Create(filePath)) // pdf file zle zapisuje, nie zna polskich znakow, encodingu niema 
+            //{
+            //    PdfExporter.Export(ChartViewModel.PlotModel, stream, 600, 400);
+            //}
+            using (var stream = File.Create(filePath))
+            {
+                PngExporter.Export(ChartViewModel.PlotModel, stream, 750, 550, OxyColor.FromArgb(250, 250, 250, 250));
+            }
         }
 
 
@@ -227,38 +251,37 @@ namespace Gui.ViewModel
 
         private void SaveExcel()
         {
-
-
-
-        //    char c = (char)65;
-
-
-            MessageBox.Show("Hello, world.");
-
             Workbook workbook = new Workbook();
             Worksheet sheet = workbook.Worksheets[0];
-            sheet.Range["A1"].Text = "This is a sample Excel dcouemnt and created by Spire.XLS for .NET";
+            int row = 2;
+            var obj = DataCollection.FirstOrDefault();
+            if (obj == null) return;
+            sheet.Range["A" + 1].Text = nameof(obj.GeoHeight);
+            sheet.Range["B" + 1].Text = nameof(obj.GeoWidth);
+            sheet.Range["C" + 1].Text = nameof(obj.BoatDirection);
+            sheet.Range["D" + 1].Text = nameof(obj.BoatSpeed);
+            sheet.Range["E" + 1].Text = nameof(obj.WindDirection);
+            sheet.Range["F" + 1].Text = nameof(obj.WindSpeed);
+            sheet.Range["G" + 1].Text = nameof(obj.SecondsFromStart);
 
-
-
-            for (int i = 65; i < 67; i++)
+            foreach (var item in DataCollection)
             {
-                sheet.Range["" + i.ToString()].Text = "Hello " + i.ToString();
+                sheet.Range["A" + row].Text = item.GeoHeight;
+                sheet.Range["B" + row].Text = item.GeoWidth;
+                sheet.Range["C" + row].Text = item.BoatDirection.ToString(CultureInfo.InvariantCulture);
+                sheet.Range["D" + row].Text = item.BoatSpeed.ToString(CultureInfo.InvariantCulture);
+                sheet.Range["E" + row].Text = item.WindDirection.ToString(CultureInfo.InvariantCulture);
+                sheet.Range["F" + row].Text = item.WindDirection.ToString(CultureInfo.InvariantCulture);
+                sheet.Range["G" + row].Text = item.SecondsFromStart.ToString(CultureInfo.InvariantCulture);
+                row++;
             }
-            for (int i = 1; i < 10; i++)
-            {
-                sheet.Range["A" + i.ToString()].Text = "Hello " + i.ToString();
-            }
-
             string filePath = string.Empty;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;*.xlsx";
             if (saveFileDialog.ShowDialog() == true)
                 filePath = saveFileDialog.FileName;
 
-
             workbook.SaveToFile(filePath);
-
             System.Diagnostics.Process.Start(workbook.FileName);
 
         }
@@ -283,7 +306,7 @@ namespace Gui.ViewModel
         {
             GetWindParameters();
         }
-                
+
         private void GetBoats()
         {
             var boatService = new BoatService();
@@ -341,9 +364,9 @@ namespace Gui.ViewModel
         private bool CheckDataComplete(object obj)
         {
             if (AvailableRecords > 0 && IsDataChanged && IsDataComplete)
-                return true;         
+                return true;
 
-            return false;                     
+            return false;
         }
 
         private void GetWindParameters()
@@ -376,12 +399,12 @@ namespace Gui.ViewModel
             if (!AllRecords)
                 DataCollection = new ObservableCollection<DataGps>(DataCollection.Where(x => x.WindSpeed == WindSpeed && x.WindDirection == WindDirection));
 
-       
+
             foreach (var x in DataCollection)
             {
                 double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
                 double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * x.BoatSpeed;
-               
+
                 listToInterpolate.Add(new PointD(pointX, pointY));
 
                 FindMinMaxAxis(listToInterpolate);
@@ -395,7 +418,7 @@ namespace Gui.ViewModel
                     optimalDirection = x.BoatDirection;
                 }
             }
-           
+
             //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
             //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!
             OptimalDirection = optimalDirection;
