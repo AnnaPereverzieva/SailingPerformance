@@ -155,7 +155,7 @@ namespace Gui.ViewModel
         public ICommand AcceptDataCommand { get; set; }
         public ICommand RefreshDataCommand { get; set; }
         public ICommand SaveToPdfCommand { get; set; }
-        
+
 
         public MainWindowViewModel()
         {
@@ -189,17 +189,25 @@ namespace Gui.ViewModel
         {
             string filePath = string.Empty;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "PNG Files (*.png)|*.png";
+            saveFileDialog.Filter = "PNG Files (*.png)|*.png|PDF Files (*.pdf)|*.pdf ";
             if (saveFileDialog.ShowDialog() == true)
                 filePath = saveFileDialog.FileName;
-            //using (var stream = File.Create(filePath)) // pdf file zle zapisuje, nie zna polskich znakow, encodingu niema 
-            //{
-            //    PdfExporter.Export(ChartViewModel.PlotModel, stream, 600, 400);
-            //}
-            using (var stream = File.Create(filePath))
+            if (filePath.Contains("pdf"))
             {
-                PngExporter.Export(ChartViewModel.PlotModel, stream, 750, 550, OxyColor.FromArgb(250, 250, 250, 250));
+                using (var stream = File.Create(filePath))
+                {
+                    string tmp = ChartViewModel.PlotModel.Title;
+                    tmp = tmp.Replace("ł", "l");
+                    tmp = tmp.Replace("ś", "s");
+                    ChartViewModel.PlotModel.Title = tmp;
+                    PdfExporter.Export(ChartViewModel.PlotModel, stream, 600, 400);
+                }
             }
+            else
+                using (var stream = File.Create(filePath))
+                {
+                    PngExporter.Export(ChartViewModel.PlotModel, stream, 750, 550, OxyColor.FromArgb(250, 250, 250, 250));
+                }
         }
 
         private void SaveExcel()
@@ -256,9 +264,9 @@ namespace Gui.ViewModel
                 ClearPlot();
                 if (DataCollection.Count != 0)
                     IsAccepted = true;
-                
+
             }
-        }      
+        }
 
         private void ClearPlot()
         {
@@ -306,7 +314,7 @@ namespace Gui.ViewModel
             }
             return closest;
         }
-        
+
         private void GetBoats()
         {
             var boatService = new BoatService();
@@ -366,9 +374,9 @@ namespace Gui.ViewModel
                 CheckTotalNumberOfRecords();
                 if (AvailableRecords == 0)
                 {
-                   MessageBoxResult result = MessageBox.Show("Podana sesja nie zawiera parametrów wiatru podanych dla wcześniejszej sejsi."+ 
-                       " Niemożliwe jest dodanie wykresu do obecnie istniejącego. Potwierdzenie oznacza wykasowanie obecengo wykresu.", 
-                       "Uwaga", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show("Podana sesja nie zawiera parametrów wiatru podanych dla wcześniejszej sejsi." +
+                        " Niemożliwe jest dodanie wykresu do obecnie istniejącego. Potwierdzenie oznacza wykasowanie obecengo wykresu.",
+                        "Uwaga", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
                     if (result == MessageBoxResult.OK)
                     {
@@ -421,7 +429,7 @@ namespace Gui.ViewModel
                 _isWindSelected = true;
             }
         }
-        
+
         private void DrawChart(object obj)
         {
             IsDataChanged = false;
