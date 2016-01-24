@@ -4,6 +4,7 @@ using System.Data;
 using ClientService.Model;
 using Spire.Xls;
 using System.Windows.Forms;
+using System.IO;
 
 namespace ClientService.Services
 {
@@ -13,7 +14,13 @@ namespace ClientService.Services
         {
             Workbook workbook = new Workbook();
             List<DataGps> DataGpsList=new List<DataGps>();
-            workbook.LoadFromFile(path, ExcelVersion.Version97to2003);
+            string fileExtension = Path.GetExtension(path).Replace(".", "");
+            if (fileExtension == "xls")
+                workbook.LoadFromFile(path, ExcelVersion.Version97to2003);
+            else if (fileExtension == "xlsx")
+                workbook.LoadFromFile(path, ExcelVersion.Version2013);
+
+
             Worksheet sheet = workbook.Worksheets[0];
 
 

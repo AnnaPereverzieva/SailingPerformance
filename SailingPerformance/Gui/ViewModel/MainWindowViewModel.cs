@@ -254,6 +254,9 @@ namespace Gui.ViewModel
                 GetWindParameters();
                 _isDataFromExcel = true;
                 ClearPlot();
+                if (DataCollection.Count != 0)
+                    IsAccepted = true;
+                
             }
         }      
 
