@@ -424,13 +424,15 @@ namespace Gui.ViewModel
         
         private void DrawChart(object obj)
         {
-            IsDataChanged = false;
+
             if (WindValuesChanged)
                 ClearPlot();
 
             WindDirection = AvailableWindDirection;
             WindSpeed = AvailableWindSpeed;
             WindValuesChanged = false;
+
+            IsDataChanged = false;
 
             var listToInterpolate = new List<PointD>();
 
