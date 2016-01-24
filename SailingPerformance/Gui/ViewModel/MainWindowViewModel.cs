@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using ClientService.Model;
 using ClientService.Services;
 using Gui.Common;
@@ -106,8 +105,6 @@ namespace Gui.ViewModel
                 GetData();
             }
         }
-
-
 
         public int AvailableRecords { get; set; }
         public double WindSpeed
@@ -358,7 +355,26 @@ namespace Gui.ViewModel
                 _isWindSelected = false;
                 _isDataFromExcel = false;
             }
+
             GetData();
+
+            if (_isWindSelected)
+            {
+                CheckTotalNumberOfRecords();
+                if (AvailableRecords == 0)
+                {
+                   MessageBoxResult result = MessageBox.Show("Podana sesja nie zawiera parametrów wiatru podanych dla wcześniejszej sejsi."+ 
+                       " Niemożliwe jest dodanie wykresu do obecnie istniejącego. Potwierdzenie oznacza wykasowanie obecengo wykresu.", 
+                       "Uwaga", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.OK)
+                    {
+                        ClearPlot();
+                        _isWindSelected = false;
+                    }
+                }
+            }
+
             GetWindParameters();
             IsAccepted = true;
         }
