@@ -13,7 +13,7 @@ namespace ClientService.Services
         {
             Workbook workbook = new Workbook();
             List<DataGps> DataGpsList=new List<DataGps>();
-            workbook.LoadFromFile(path, ExcelVersion.Version2013);
+            workbook.LoadFromFile(path, ExcelVersion.Version97to2003);
             Worksheet sheet = workbook.Worksheets[0];
 
 
