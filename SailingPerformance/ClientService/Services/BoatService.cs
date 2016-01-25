@@ -13,6 +13,10 @@ namespace ClientService.Services
         {
             AutoMapperConfiguration.ConfigureBoatMapping();
         }
+        /// <summary>
+        /// pobieranie listy łódek z bazy
+        /// </summary>
+        /// <returns></returns>
         public List<BoatDto> GetBoats()
         {
             var repository=new BoatRepository();

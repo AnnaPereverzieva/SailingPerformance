@@ -14,6 +14,11 @@ namespace ClientService.Services
         {
             AutoMapperConfiguration.ConfigureBoatMapping();
         }
+        /// <summary>
+        /// pobieranie listy sesje z bazy
+        /// </summary>
+        /// <param name="idSession"></param>
+        /// <returns></returns>
         public List<DataGps> GetSessions( Guid idSession)
         {
             var repository = new GpsDataRepository();

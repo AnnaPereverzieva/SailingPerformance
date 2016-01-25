@@ -7,8 +7,9 @@ using WcfService.AutoMapper;
 
 namespace WcfService.Services.BoatService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "BoatService" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select BoatService.svc or BoatService.svc.cs at the Solution Explorer and start debugging.
+    /// <summary>
+    ///  implementacja interfejsu
+    /// </summary>
     public class BoatService : IBoatService
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -20,6 +21,12 @@ namespace WcfService.Services.BoatService
             _unitOfWork = new UnitOfWork(context);
             AutoMapperConfiguration.Configuration();
         }
+        /// <summary>
+        /// udostępniona metoda dodania łódki do bazy
+        /// </summary>
+        /// <param name="boatRequest"></param>
+        /// <returns>zwracana odpowiedź czy udało się dodać lódkę do bazy
+        /// </returns>
         public BaseResponse AddBoat(BoatRequest boatRequest)
         {
             var response = new BaseResponse();
@@ -49,7 +56,11 @@ namespace WcfService.Services.BoatService
             }
             return response;
         }
-
+        /// <summary>
+        /// udostępniona metoda aktyalizacji danych o łódce
+        /// </summary>
+        /// <param name="boatRequest"></param>
+        /// <returns>zwracana odpowiedź czy udalo się zaktualizować dane</returns>
         public BaseResponse UpdateBoat(BoatRequest boatRequest)
         {
             var response = new BaseResponse();
@@ -78,7 +89,11 @@ namespace WcfService.Services.BoatService
             }
             return response;
         }
-
+        /// <summary>
+        /// udostępniona metoda pobierania Id łódki
+        /// </summary>
+        /// <param name="boatRequest"></param>
+        /// <returns>zwracana odpowiedź czy udało się pobrać Id</returns>
         public GetBoatResponse GetBoatId(BoatRequest boatRequest)
         {
             var response = new GetBoatResponse();
@@ -106,7 +121,11 @@ namespace WcfService.Services.BoatService
             }
             return response;
         }
-
+        /// <summary>
+        /// udostępniona metoda usunięcia łódki
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>zwracana odpowiedź czy udalo się usunąc łódkę</returns>
         public BaseResponse DeleteBoat(DeleteBoatRequest request)
         {
             var response = new BaseResponse();

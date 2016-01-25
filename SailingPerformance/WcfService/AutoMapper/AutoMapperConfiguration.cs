@@ -8,6 +8,9 @@ namespace WcfService.AutoMapper
 {
     public static class AutoMapperConfiguration
     {
+        /// <summary>
+        /// służy do mapowania obiektów, mapuje objekty requestu na obiekty bazy
+        /// </summary>
         public static void Configuration()
         {
             Mapper.CreateMap<BoatRequest, Boat>();
