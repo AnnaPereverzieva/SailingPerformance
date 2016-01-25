@@ -35,6 +35,7 @@ namespace Gui.ViewModel
 
         private double _minX, _minY, _maxX, _maxY;
 
+
         public bool IsAccepted { get; set; }
         public bool IsDataChanged { get; set; }
         public bool WindValuesChanged { get; set; }
@@ -156,7 +157,7 @@ namespace Gui.ViewModel
         public ICommand AcceptDataCommand { get; set; }
         public ICommand RefreshDataCommand { get; set; }
         public ICommand SaveToPdfCommand { get; set; }
-        
+
 
         public MainWindowViewModel()
         {
@@ -186,23 +187,37 @@ namespace Gui.ViewModel
             _maxY = 0;
         }
 
+        /// <summary>
+        /// Zapisuje wykres do PDFu
+        /// </summary>
         private void SaveToPdf()
         {
             string filePath = string.Empty;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "PNG Files (*.png)|*.png";
+            saveFileDialog.Filter = "PNG Files (*.png)|*.png|PDF Files (*.pdf)|*.pdf ";
             if (saveFileDialog.ShowDialog() == true)
                 filePath = saveFileDialog.FileName;
-            //using (var stream = File.Create(filePath)) // pdf file zle zapisuje, nie zna polskich znakow, encodingu niema 
-            //{
-            //    PdfExporter.Export(ChartViewModel.PlotModel, stream, 600, 400);
-            //}
-            using (var stream = File.Create(filePath))
+            if (filePath.Contains("pdf"))
             {
-                PngExporter.Export(ChartViewModel.PlotModel, stream, 750, 550, OxyColor.FromArgb(250, 250, 250, 250));
+                using (var stream = File.Create(filePath))
+                {
+                    string tmp = ChartViewModel.PlotModel.Title;
+                    tmp = tmp.Replace("ł", "l");
+                    tmp = tmp.Replace("ś", "s");
+                    ChartViewModel.PlotModel.Title = tmp;
+                    PdfExporter.Export(ChartViewModel.PlotModel, stream, 600, 400);
+                }
             }
+            else
+                using (var stream = File.Create(filePath))
+                {
+                    PngExporter.Export(ChartViewModel.PlotModel, stream, 750, 550, OxyColor.FromArgb(250, 250, 250, 250));
+                }
         }
 
+        /// <summary>
+        /// Zapisywanie danych do pliku excela
+        /// </summary>
         private void SaveExcel()
         {
             Workbook workbook = new Workbook();
@@ -239,7 +254,9 @@ namespace Gui.ViewModel
             System.Diagnostics.Process.Start(workbook.FileName);
 
         }
-
+        /// <summary>
+        /// Odczytywanie danych z pliku excel
+        /// </summary>
         private void ImportExcel()
         {
             string filePath = string.Empty;
@@ -257,15 +274,21 @@ namespace Gui.ViewModel
                 ClearPlot();
                 if (DataCollection.Count != 0)
                     IsAccepted = true;
-                
-            }
-        }      
 
+            }
+        }
+
+        /// <summary>
+        /// Usuwa wykres
+        /// </summary>
         private void ClearPlot()
         {
             ChartViewModel = new ChartViewModel();
         }
 
+        /// <summary>
+        /// Pobiera dane na nowo
+        /// </summary>
         private void RefreshData()
         {
             GetBoats();
@@ -274,12 +297,20 @@ namespace Gui.ViewModel
             GetData();
         }
 
+        /// <summary>
+        /// Sprawdza ilość rekordów dla danych prędkosci i kierunku wiatru
+        /// </summary>
         private void CheckTotalNumberOfRecords()
         {
             AvailableRecords = DataCollection.Where(x => x.WindDirection == AvailableWindDirection && x.WindSpeed == AvailableWindSpeed).Count();
         }
 
-        //sprawdza czy istnieje wystarczjaca ilosc rekordow dla podanych parametrow wiatru (minimalNoRecords ustawia min ilosc rekordow)
+        /// <summary>
+        /// Sprawdza czy istnieje wystarczjaca ilosc rekordow dla podanych parametrow wiatru 
+        /// (minimalNoRecords ustawia min ilosc rekordow) a jeżeli tak to zwraca najbliższą wartość
+        /// </summary>
+        /// <param name="availableWindList">Dostępne siły wiatru</param>
+        /// <param name="windValue">Wybrana wartość wiatru</param>
         private double CheckAvailableWindRecords(List<double> availableWindList, double windValue)
         {
             double closest = 0;
@@ -307,13 +338,19 @@ namespace Gui.ViewModel
             }
             return closest;
         }
-        
+
+        /// <summary>
+        /// Pobiera dane z bazy danych
+        /// </summary>
         private void GetBoats()
         {
             var boatService = new BoatService();
             BoatsCollection = new ObservableCollection<BoatDto>(boatService.GetBoats());
         }
 
+        /// <summary>
+        /// Pobiera początkową i końcowa datę dostępnych sesji dla danej łódki
+        /// </summary>
         private void GetStartEndDates()
         {
             try
@@ -328,6 +365,9 @@ namespace Gui.ViewModel
             { }
         }
 
+        /// <summary>
+        /// Pobiera sesje dla dla danej łódki w zależności od wybranej daty początkowej i końcowej
+        /// </summary>
         private void GetSessions()
         {
             try
@@ -340,6 +380,9 @@ namespace Gui.ViewModel
             { }
         }
 
+        /// <summary>
+        /// Pobiera dane dla wybranej sesji
+        /// </summary>
         private void GetData()
         {
             try
@@ -352,6 +395,10 @@ namespace Gui.ViewModel
             { }
         }
 
+        /// <summary>
+        /// Akcja obsługująca wczytywanie danych, validuje poprawną ilość wyników.
+        /// </summary>
+        /// <param name="obj"></param>
         private void AcceptData(object obj)
         {
             if (_isDataFromExcel)
@@ -367,9 +414,9 @@ namespace Gui.ViewModel
                 CheckTotalNumberOfRecords();
                 if (AvailableRecords == 0)
                 {
-                   MessageBoxResult result = MessageBox.Show("Podana sesja nie zawiera parametrów wiatru podanych dla wcześniejszej sejsi."+ 
-                       " Niemożliwe jest dodanie wykresu do obecnie istniejącego. Potwierdzenie oznacza wykasowanie obecengo wykresu.", 
-                       "Uwaga", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show("Podana sesja nie zawiera parametrów wiatru podanych dla wcześniejszej sejsi." +
+                        " Niemożliwe jest dodanie wykresu do obecnie istniejącego. Potwierdzenie oznacza wykasowanie obecengo wykresu.",
+                        "Uwaga", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
                     if (result == MessageBoxResult.OK)
                     {
@@ -383,6 +430,11 @@ namespace Gui.ViewModel
             IsAccepted = true;
         }
 
+        /// <summary>
+        /// Jeżeli coś się zmieni to sprawdza czy dane są kompletne
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         private bool DataComplete(object obj)
         {
             if (DataCollection.Count != 0 && IsDataChanged && !IsAccepted)
@@ -391,7 +443,11 @@ namespace Gui.ViewModel
                 return false;
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         private bool CheckDataComplete(object obj)
         {
             if (AvailableRecords > 0 && IsDataChanged && IsAccepted)
@@ -400,6 +456,9 @@ namespace Gui.ViewModel
             return false;
         }
 
+        /// <summary>
+        /// Pobiera dane wiatru z bazy danych
+        /// </summary>
         private void GetWindParameters()
         {
             WindSpeedMin = DataCollection.Select(x => x.WindSpeed).Min();
@@ -422,7 +481,11 @@ namespace Gui.ViewModel
                 _isWindSelected = true;
             }
         }
-        
+
+        /// <summary>
+        /// Rysuje wykres dla wybranych danych
+        /// </summary>
+        /// <param name="obj"></param>
         private void DrawChart(object obj)
         {
             if (WindValuesChanged)
@@ -461,6 +524,10 @@ namespace Gui.ViewModel
                 GetData();
         }
 
+        /// <summary>
+        /// Znajduje zakresy do rysowania wykresu
+        /// </summary>
+        /// <param name="listToInterpolate"></param>
         private void FindMinMaxAxis(List<PointD> listToInterpolate)
         {
             double tempMinX = listToInterpolate.Select(m => m.X).Min();
