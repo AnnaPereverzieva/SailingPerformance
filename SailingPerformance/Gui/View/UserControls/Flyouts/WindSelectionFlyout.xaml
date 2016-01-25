@@ -49,6 +49,7 @@
                 Minimum="{Binding WindSpeedMin}"
                 Style="{DynamicResource FlatSlider}"
                 Value="{Binding WindSpeed}" />
+            <!--Ustawianie siły wiatru-->
         <Label Grid.Row="2"
                Grid.Column="0"
                HorizontalAlignment="Left"
@@ -93,6 +94,7 @@
                 Minimum="{Binding WindDirectionMin}"
                 Style="{DynamicResource FlatSlider}"
                 Value="{Binding WindDirection}" />
+        <!--Ustawianie kierunku wiatru-->
 
         <Label Grid.Row="5"
                Grid.Column="0"

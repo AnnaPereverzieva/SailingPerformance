@@ -138,45 +138,6 @@ namespace Gui.ViewModel
             PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
             PlotModel.LegendBorder = OxyColors.Black;
             AddAxes(0, 4, 0, 4);
-            //var dateAxis = new DateTimeAxis(AxisPosition.Bottom, "Date", "HH:mm") { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
-            //PlotModel.Axes.Add(dateAxis);
-            //var valueAxis = new LinearAxis(AxisPosition.Left, 0) { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
-            //PlotModel.Axes.Add(valueAxis);
-
-
-            //  PlotModel.Series.Add(new FunctionSeries(Math.Cos, -20, 40, 0.1, "cos(x)"));
-
-            //List<double> ListX = new List<double> { 5, 2, 9, 8, 7, 3 };
-            //LineSeries ll = new LineSeries();
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    ll.Points.Add(new DataPoint(i, i + 6));
-            //}
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    ll.Points.Add(new DataPoint(i, i - 6));
-            //}
-
-            //PlotModel.Series.Add(ll);
-
-
-
-            //List<double> ListY = new List<double> { 5, 2, 9, 8, 7, 3 };
-            //  PlotModel.AddScatterSeries(ListX, ListY);
-
-
-            //var scatterSeries = new ScatterSeries { MarkerType = MarkerType.Circle };
-            //var r = new Random(314);
-            //for (int i = -20; i < 50; i++)
-            //{
-            //    var x = r.NextDouble();
-            //    var y = r.Next(-90, -50);
-            //    var size = r.Next(5, 15);
-            //    var colorValue = r.Next(100, 1000);
-            //    scatterSeries.Points.Add(new ScatterPoint(x, y, 10, colorValue));
-            //}
-            //PlotModel.Series.Add(scatterSeries);
         }
-
     }
 }

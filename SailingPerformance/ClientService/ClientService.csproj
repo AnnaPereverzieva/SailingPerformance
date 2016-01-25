@@ -81,7 +81,7 @@
     <Compile Include="Responses\UserResponse.cs" />
     <Compile Include="Services\BoatService.cs" />
     <Compile Include="Services\GpsDataService.cs" />
-    <Compile Include="Services\ReadExcelService.cs" />
+    <Compile Include="Services\ReadSaveExcelService.cs" />
     <Compile Include="Services\SessionService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -35,11 +34,13 @@ namespace Gui.ViewModel
 
         private double _minX, _minY, _maxX, _maxY;
 
-
         public bool IsAccepted { get; set; }
         public bool IsDataChanged { get; set; }
         public bool WindValuesChanged { get; set; }
 
+        /// <summary>
+        /// zmienna używana w przypadku wyboru danych dla wszystkich parametrów wiatru
+        /// </summary>
         public bool AllRecords
         {
             get { return _allRecords; }
@@ -54,7 +55,6 @@ namespace Gui.ViewModel
                 IsDataChanged = true;
             }
         }
-
 
         public DateTime EndDate
         {
@@ -74,6 +74,7 @@ namespace Gui.ViewModel
                 GetSessions();
             }
         }
+
         public int SelectedIndexBoat
         {
             get { return _selectedIndexBoat; }
@@ -142,7 +143,6 @@ namespace Gui.ViewModel
         public List<double> AvalableWindSpeedList { get; set; }
         public List<double> AvalableWindDirectionList { get; set; }
 
-        public double OptimalDirection { get; set; }
         public ChartViewModel ChartViewModel { get; set; }
         public ObservableCollection<BoatDto> BoatsCollection { get; set; }
         public ObservableCollection<SessionDto> SessionCollection { get; set; }
@@ -179,6 +179,9 @@ namespace Gui.ViewModel
             InitiateAxisValues();
         }
 
+        /// <summary>
+        /// Initcjuje wartości dla rysowania wykresu
+        /// </summary>
         private void InitiateAxisValues()
         {
             _minX = 0;
@@ -196,23 +199,25 @@ namespace Gui.ViewModel
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PNG Files (*.png)|*.png|PDF Files (*.pdf)|*.pdf ";
             if (saveFileDialog.ShowDialog() == true)
-                filePath = saveFileDialog.FileName;
-            if (filePath.Contains("pdf"))
             {
-                using (var stream = File.Create(filePath))
+                filePath = saveFileDialog.FileName;
+                if (filePath.Contains("pdf"))
                 {
-                    string tmp = ChartViewModel.PlotModel.Title;
-                    tmp = tmp.Replace("ł", "l");
-                    tmp = tmp.Replace("ś", "s");
-                    ChartViewModel.PlotModel.Title = tmp;
-                    PdfExporter.Export(ChartViewModel.PlotModel, stream, 600, 400);
+                    using (var stream = File.Create(filePath))
+                    {
+                        string tmp = ChartViewModel.PlotModel.Title;
+                        tmp = tmp.Replace("ł", "l");
+                        tmp = tmp.Replace("ś", "s");
+                        ChartViewModel.PlotModel.Title = tmp;
+                        PdfExporter.Export(ChartViewModel.PlotModel, stream, 600, 400);
+                    }
                 }
+                else
+                    using (var stream = File.Create(filePath))
+                    {
+                        PngExporter.Export(ChartViewModel.PlotModel, stream, 750, 550, OxyColor.FromArgb(250, 250, 250, 250));
+                    }
             }
-            else
-                using (var stream = File.Create(filePath))
-                {
-                    PngExporter.Export(ChartViewModel.PlotModel, stream, 750, 550, OxyColor.FromArgb(250, 250, 250, 250));
-                }
         }
 
         /// <summary>
@@ -220,38 +225,16 @@ namespace Gui.ViewModel
         /// </summary>
         private void SaveExcel()
         {
-            Workbook workbook = new Workbook();
-            Worksheet sheet = workbook.Worksheets[0];
-            int row = 2;
-            var obj = DataCollection.FirstOrDefault();
-            if (obj == null) return;
-            sheet.Range["A" + 1].Text = nameof(obj.GeoHeight);
-            sheet.Range["B" + 1].Text = nameof(obj.GeoWidth);
-            sheet.Range["C" + 1].Text = nameof(obj.BoatDirection);
-            sheet.Range["D" + 1].Text = nameof(obj.BoatSpeed);
-            sheet.Range["E" + 1].Text = nameof(obj.WindDirection);
-            sheet.Range["F" + 1].Text = nameof(obj.WindSpeed);
-            sheet.Range["G" + 1].Text = nameof(obj.SecondsFromStart);
-
-            foreach (var item in DataCollection)
-            {
-                sheet.Range["A" + row].Text = item.GeoHeight;
-                sheet.Range["B" + row].Text = item.GeoWidth;
-                sheet.Range["C" + row].Text = item.BoatDirection.ToString(CultureInfo.InvariantCulture);
-                sheet.Range["D" + row].Text = item.BoatSpeed.ToString(CultureInfo.InvariantCulture);
-                sheet.Range["E" + row].Text = item.WindDirection.ToString(CultureInfo.InvariantCulture);
-                sheet.Range["F" + row].Text = item.WindDirection.ToString(CultureInfo.InvariantCulture);
-                sheet.Range["G" + row].Text = item.SecondsFromStart.ToString(CultureInfo.InvariantCulture);
-                row++;
-            }
+            
             string filePath = string.Empty;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;*.xlsx";
             if (saveFileDialog.ShowDialog() == true)
+            {
                 filePath = saveFileDialog.FileName;
-
-            workbook.SaveToFile(filePath);
-            System.Diagnostics.Process.Start(workbook.FileName);
+                ReadSaveExcelService saveExcel = new ReadSaveExcelService();
+                saveExcel.SaveData(DataCollection, filePath);
+            }
 
         }
         /// <summary>
@@ -265,7 +248,7 @@ namespace Gui.ViewModel
             if (openFileDialog.ShowDialog() == true)
             {
                 filePath = openFileDialog.FileName;
-                ReadExcelService readExcel = new ReadExcelService();
+                ReadSaveExcelService readExcel = new ReadSaveExcelService();
                 ExcelDataCollection = new ObservableCollection<DataGps>(readExcel.LoadData(filePath));
                 DataCollection = new ObservableCollection<DataGps>(ExcelDataCollection);
                 _isWindSelected = false;
@@ -287,7 +270,7 @@ namespace Gui.ViewModel
         }
 
         /// <summary>
-        /// Pobiera dane na nowo
+        /// Odwierza dane z bazy danych
         /// </summary>
         private void RefreshData()
         {
@@ -431,7 +414,7 @@ namespace Gui.ViewModel
         }
 
         /// <summary>
-        /// Jeżeli coś się zmieni to sprawdza czy dane są kompletne
+        /// Włącza lub wyłącza przycisk akceptacji 
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -443,8 +426,9 @@ namespace Gui.ViewModel
                 return false;
 
         }
+
         /// <summary>
-        /// 
+        /// Włącza lub wyłącza przycisk rysowania wykresu
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>

@@ -9,6 +9,11 @@ namespace Gui.Interpolation
 {
     public static class SplineInterpolation
     {
+        /// <summary>
+        /// Glówna funkcja do interpolacji funkcji sklejanych
+        /// </summary>
+        /// <param name="listToInterpolate">lista wartosci x i y</param>
+        /// <returns>liste punktow wyznaczonych z interpolacji do rysowania wykresu</returns>
         public static List<PointD> FitGeometric(List<PointD> listToInterpolate)
         {
             int countList = listToInterpolate.Count;
