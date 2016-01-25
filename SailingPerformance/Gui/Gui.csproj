@@ -142,6 +142,9 @@
     <Compile Include="Common\Interpolation.cs" />
     <Compile Include="Common\PointD.cs" />
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Interpolation\CubicSpline.cs" />
+    <Compile Include="Interpolation\SplineInterpolation.cs" />
+    <Compile Include="Interpolation\TriDiagonalMatrixF.cs" />
     <Compile Include="ViewModel\ChartViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\UserControls\Flyouts\ExportImportFlyout.xaml.cs">
@@ -227,10 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\oneMore.jpg" />
-    <Resource Include="Images\oneLess.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />

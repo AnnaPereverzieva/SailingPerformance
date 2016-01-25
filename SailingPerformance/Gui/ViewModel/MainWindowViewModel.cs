@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using ClientService.Model;
 using ClientService.Services;
+using Gui.Interpolation;
 using Gui.Common;
 using Microsoft.Expression.Interactivity.Core;
 using OxyPlot;
@@ -424,7 +425,6 @@ namespace Gui.ViewModel
         
         private void DrawChart(object obj)
         {
-
             if (WindValuesChanged)
                 ClearPlot();
 
@@ -435,8 +435,6 @@ namespace Gui.ViewModel
             IsDataChanged = false;
 
             var listToInterpolate = new List<PointD>();
-
-            double distaceFromAxisStart = 0, maxDistance = 0, optimalDirection = 0;
 
             if (!AllRecords)
                 DataCollection = new ObservableCollection<DataGps>(DataCollection.Where(x => x.WindSpeed == WindSpeed && x.WindDirection == WindDirection));
@@ -450,20 +448,10 @@ namespace Gui.ViewModel
                 listToInterpolate.Add(new PointD(pointX, pointY));
 
                 FindMinMaxAxis(listToInterpolate);
-
-                // liczy odległość od początku ukłądu współrzędnych
-                // tam gdzie odległość jest największa kurs jest optymalny
-                distaceFromAxisStart = Math.Sqrt(Math.Pow(pointX, 2) + Math.Pow(pointY, 2));
-                if (distaceFromAxisStart > maxDistance)
-                {
-                    maxDistance = distaceFromAxisStart;
-                    optimalDirection = x.BoatDirection;
-                }
             }
 
-            //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
-            //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate,0.1); //nie działa!
-            OptimalDirection = optimalDirection;
+            listToInterpolate = new List<PointD>(SplineInterpolation.FitGeometric(listToInterpolate));
+
             ChartViewModel.AddNewSeries(listToInterpolate, BoatsCollection, SelectedIndexBoat, SessionCollection, SelectedIndexSession,
                 _minX, _maxX, _minY, _maxY, AvailableWindSpeed, AvailableWindDirection, AllRecords, _isDataFromExcel);
 
@@ -485,37 +473,5 @@ namespace Gui.ViewModel
             _maxX = _maxX < tempMaxX ? tempMaxX : _maxX;
             _maxY = _maxY < tempMaxY ? tempMaxY : _maxY;
         }
-
-        //private void CalculatePoints()
-        //{
-        //    var listToInterpolate = new List<PointD>();
-        //    double apparentWind = 0, newApparentWind = 0;
-
-        //    foreach (var x in DataGpsList)
-        //    {
-        //        var direction = x.WindDirection - x.BoatDirection;
-        //        if (direction < 0)
-        //            direction = direction * (-1);
-
-        //        //obliczanie wiatru pozornego dla obecnych danych
-        //        apparentWind = Math.Sqrt(Math.Pow(x.WindSpeed, 2) + Math.Pow(x.BoatSpeed, 2) + 2 * x.WindSpeed * x.BoatSpeed * Math.Cos(direction));
-
-        //        var newDirection = WindDirection - x.BoatDirection;
-        //        if (newDirection < 0)
-        //            newDirection = direction * (-1);
-
-        //        //obliczanie wiatru pozornego dla nowych danych
-        //        newApparentWind = Math.Sqrt(Math.Pow(WindSpeed, 2) + Math.Pow(x.BoatSpeed, 2) + 2 * WindSpeed * x.BoatSpeed * Math.Cos(newDirection));
-
-        //        double pointX = Math.Cos((90 - x.BoatDirection) / (180 / Math.PI)) * (x.BoatSpeed - (apparentWind - newApparentWind)); //odejmuję różnicę siły wiatru pozornego poprzedniego od nowego
-        //        double pointY = Math.Sin((90 - x.BoatDirection) / (180 / Math.PI)) * (x.BoatSpeed - (apparentWind - newApparentWind)); //a potem tą różnicę odejmuję od prędkości łodzi
-        //        listToInterpolate.Add(new PointD(pointX, pointY));
-        //    }
-
-        //    //SplineInterpolator interpolator = new SplineInterpolator(listToInterpolate);
-        //    //var interpolatedList = interpolator.InterpolateCoordinates(listToInterpolate); na razie nie działa!
-
-        //    ChartViewModel = new ChartViewModel(listToInterpolate);
-        //}
     }
 }
