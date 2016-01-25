@@ -39,6 +39,10 @@ namespace Gui.ViewModel
             SetUpModel();
         }
 
+        /// <summary>
+        /// Tworzy wykres
+        /// </summary>
+        /// <param name="list"></param>
         public void DrawChart(List<PointD> list)
         {
             foreach (var point in list)
@@ -49,6 +53,22 @@ namespace Gui.ViewModel
             PlotModel.InvalidatePlot(true);
         }
 
+        /// <summary>
+        /// Dodaje nową serię dla danych i opisuje wykres
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="boatsCollection"></param>
+        /// <param name="selectedIndexBoat"></param>
+        /// <param name="sessionCollection"></param>
+        /// <param name="selectedSession"></param>
+        /// <param name="minX"></param>
+        /// <param name="maxX"></param>
+        /// <param name="minY"></param>
+        /// <param name="maxY"></param>
+        /// <param name="windSpeed"></param>
+        /// <param name="windDirection"></param>
+        /// <param name="allRecords"></param>
+        /// <param name="isDataFromExcel"></param>
         public void AddNewSeries(List<PointD> list, ObservableCollection<BoatDto> boatsCollection, int selectedIndexBoat,
             ObservableCollection<SessionDto> sessionCollection, int selectedSession, double minX, double maxX, double minY, double maxY,
             double windSpeed, double windDirection, bool allRecords, bool isDataFromExcel)
@@ -76,7 +96,13 @@ namespace Gui.ViewModel
             DrawChart(list);
 
         }
-
+        /// <summary>
+        /// Dodaje układ współrzędych
+        /// </summary>
+        /// <param name="minX"></param>
+        /// <param name="maxX"></param>
+        /// <param name="minY"></param>
+        /// <param name="maxY"></param>
         public void AddAxes(double minX, double maxX, double minY, double maxY)
         {
             PlotModel.Axes.Clear();
@@ -99,6 +125,9 @@ namespace Gui.ViewModel
             });
         }
 
+        /// <summary>
+        /// Przygotowanie ViewModelu
+        /// </summary>
         public void SetUpModel()
         {
             PlotModel = new PlotModel();

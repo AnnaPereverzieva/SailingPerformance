@@ -34,6 +34,7 @@ namespace Gui.ViewModel
 
         private double _minX, _minY, _maxX, _maxY;
 
+
         public bool IsAccepted { get; set; }
         public bool IsDataChanged { get; set; }
         public bool WindValuesChanged { get; set; }
@@ -185,6 +186,9 @@ namespace Gui.ViewModel
             _maxY = 0;
         }
 
+        /// <summary>
+        /// Zapisuje wykres do PDFu
+        /// </summary>
         private void SaveToPdf()
         {
             string filePath = string.Empty;
@@ -210,6 +214,9 @@ namespace Gui.ViewModel
                 }
         }
 
+        /// <summary>
+        /// Zapisywanie danych do pliku excela
+        /// </summary>
         private void SaveExcel()
         {
             Workbook workbook = new Workbook();
@@ -246,7 +253,9 @@ namespace Gui.ViewModel
             System.Diagnostics.Process.Start(workbook.FileName);
 
         }
-
+        /// <summary>
+        /// Odczytywanie danych z pliku excel
+        /// </summary>
         private void ImportExcel()
         {
             string filePath = string.Empty;
@@ -268,11 +277,17 @@ namespace Gui.ViewModel
             }
         }
 
+        /// <summary>
+        /// Usuwa wykres
+        /// </summary>
         private void ClearPlot()
         {
             ChartViewModel = new ChartViewModel();
         }
 
+        /// <summary>
+        /// Pobiera dane na nowo
+        /// </summary>
         private void RefreshData()
         {
             GetBoats();
@@ -281,12 +296,20 @@ namespace Gui.ViewModel
             GetData();
         }
 
+        /// <summary>
+        /// Sprawdza ilość rekordów dla danych prędkosci i kierunku wiatru
+        /// </summary>
         private void CheckTotalNumberOfRecords()
         {
             AvailableRecords = DataCollection.Where(x => x.WindDirection == AvailableWindDirection && x.WindSpeed == AvailableWindSpeed).Count();
         }
 
-        //sprawdza czy istnieje wystarczjaca ilosc rekordow dla podanych parametrow wiatru (minimalNoRecords ustawia min ilosc rekordow)
+        /// <summary>
+        /// Sprawdza czy istnieje wystarczjaca ilosc rekordow dla podanych parametrow wiatru 
+        /// (minimalNoRecords ustawia min ilosc rekordow) a jeżeli tak to zwraca najbliższą wartość
+        /// </summary>
+        /// <param name="availableWindList">Dostępne siły wiatru</param>
+        /// <param name="windValue">Wybrana wartość wiatru</param>
         private double CheckAvailableWindRecords(List<double> availableWindList, double windValue)
         {
             double closest = 0;
@@ -315,12 +338,18 @@ namespace Gui.ViewModel
             return closest;
         }
 
+        /// <summary>
+        /// Pobiera dane z bazy danych
+        /// </summary>
         private void GetBoats()
         {
             var boatService = new BoatService();
             BoatsCollection = new ObservableCollection<BoatDto>(boatService.GetBoats());
         }
 
+        /// <summary>
+        /// Pobiera początkową i końcowa datę dostępnych sesji dla danej łódki
+        /// </summary>
         private void GetStartEndDates()
         {
             try
@@ -335,6 +364,9 @@ namespace Gui.ViewModel
             { }
         }
 
+        /// <summary>
+        /// Pobiera sesje dla dla danej łódki w zależności od wybranej daty początkowej i końcowej
+        /// </summary>
         private void GetSessions()
         {
             try
@@ -347,6 +379,9 @@ namespace Gui.ViewModel
             { }
         }
 
+        /// <summary>
+        /// Pobiera dane dla wybranej sesji
+        /// </summary>
         private void GetData()
         {
             try
@@ -359,6 +394,10 @@ namespace Gui.ViewModel
             { }
         }
 
+        /// <summary>
+        /// Akcja obsługująca wczytywanie danych, validuje poprawną ilość wyników.
+        /// </summary>
+        /// <param name="obj"></param>
         private void AcceptData(object obj)
         {
             if (_isDataFromExcel)
@@ -390,6 +429,11 @@ namespace Gui.ViewModel
             IsAccepted = true;
         }
 
+        /// <summary>
+        /// Jeżeli coś się zmieni to sprawdza czy dane są kompletne
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         private bool DataComplete(object obj)
         {
             if (DataCollection.Count != 0 && IsDataChanged && !IsAccepted)
@@ -398,7 +442,11 @@ namespace Gui.ViewModel
                 return false;
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         private bool CheckDataComplete(object obj)
         {
             if (AvailableRecords > 0 && IsDataChanged && IsAccepted)
@@ -407,6 +455,9 @@ namespace Gui.ViewModel
             return false;
         }
 
+        /// <summary>
+        /// Pobiera dane wiatru z bazy danych
+        /// </summary>
         private void GetWindParameters()
         {
             WindSpeedMin = DataCollection.Select(x => x.WindSpeed).Min();
@@ -430,6 +481,10 @@ namespace Gui.ViewModel
             }
         }
 
+        /// <summary>
+        /// Rysuje wykres dla wybranych danych
+        /// </summary>
+        /// <param name="obj"></param>
         private void DrawChart(object obj)
         {
 
@@ -481,6 +536,10 @@ namespace Gui.ViewModel
                 GetData();
         }
 
+        /// <summary>
+        /// Znajduje zakresy do rysowania wykresu
+        /// </summary>
+        /// <param name="listToInterpolate"></param>
         private void FindMinMaxAxis(List<PointD> listToInterpolate)
         {
             double tempMinX = listToInterpolate.Select(m => m.X).Min();
