@@ -12,6 +12,11 @@ namespace ClientService.Services
 {
     public class ReadSaveExcelService
     {
+        /// <summary>
+        /// Wczytuje dane z pliku excel
+        /// </summary>
+        /// <param name="path">scierzka pliku</param>
+        /// <returns>kolekcja danych gps</returns>
         public List<DataGps> LoadData(string path)
         {
             Workbook workbook = new Workbook();
@@ -41,6 +46,11 @@ namespace ClientService.Services
             return DataGpsList;
         }
 
+        /// <summary>
+        /// Zapisuje dane do pliku excel
+        /// </summary>
+        /// <param name="DataCollection">kolekcja danych gps </param>
+        /// <param name="filePath">scierzka pliku</param>
         public void SaveData(ObservableCollection<DataGps> DataCollection, string filePath)
         {
             Workbook workbook = new Workbook();

@@ -149,7 +149,7 @@
                FontWeight="Bold"
                Foreground="Green"
                Padding="2" 
-               IsEnabled="{c:Binding !IsChecked, ElementName=cbxAllRecords}"/>
+               Visibility="{c:Binding !IsChecked, ElementName=cbxAllRecords}"/>
         <Label Grid.Row="10"
                Height="20"
                HorizontalAlignment="Right"
@@ -166,7 +166,7 @@
                FontWeight="Bold"
                Foreground="Green"
                Padding="2" 
-               IsEnabled="{c:Binding !IsChecked, ElementName=cbxAllRecords}"/>
+               Visibility="{c:Binding !IsChecked, ElementName=cbxAllRecords}"/>
         <Label Grid.Row="11"
                Height="20"
                HorizontalAlignment="Right"

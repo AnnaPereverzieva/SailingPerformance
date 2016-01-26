@@ -50,8 +50,11 @@ namespace Gui.ViewModel
                 WindValuesChanged = true;
                 if (!_isDataFromExcel)
                     GetData();
+                if (_allRecords == true)
+                    AvailableRecords = DataCollection.Count();
+                else
+                    CheckTotalNumberOfRecords();                   
 
-                AvailableRecords = DataCollection.Count();
                 IsDataChanged = true;
             }
         }

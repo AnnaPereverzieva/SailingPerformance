@@ -14,6 +14,7 @@ namespace ClientService.Services
         {
             AutoMapperConfiguration.ConfigureBoatMapping();
         }
+
         public List<SessionDto> GetSessions(DateTime start, DateTime stop, Guid idBoat)
         {
             var repository = new SessionRepository();

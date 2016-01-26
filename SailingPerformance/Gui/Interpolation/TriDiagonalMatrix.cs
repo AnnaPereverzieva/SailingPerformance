@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Gui.Interpolation
+﻿namespace Gui.Interpolation
 {
-    public class TriDiagonalMatrixF
+    public class TriDiagonalMatrix
     {
         public double[] A;
 
@@ -23,7 +16,7 @@ namespace Gui.Interpolation
             get { return A.Length; }
         }
 
-        public TriDiagonalMatrixF(int n)
+        public TriDiagonalMatrix(int n)
         {
             A = new double[n];
             B = new double[n];

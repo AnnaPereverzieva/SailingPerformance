@@ -127,7 +127,7 @@ namespace Gui.Interpolation
             int n = x.Length;
             double[] r = new double[n];
 
-            TriDiagonalMatrixF m = new TriDiagonalMatrixF(n);
+            TriDiagonalMatrix m = new TriDiagonalMatrix(n);
 
             double dx1, dx2, dy1, dy2;
 
