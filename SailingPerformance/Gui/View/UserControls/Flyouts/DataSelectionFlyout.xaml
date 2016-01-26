@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="Gui.View.UserControls.Flyouts.DataSelectionFlyout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Grid>
+        <DockPanel Margin="20"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
+
+                <Button x:Name="BtnRefresh"
+                        Grid.Row="0"
+                        Command="{Binding RefreshDataCommand}"
+                        Content="Odśwież dane z bazy"
+                        Style="{StaticResource AccentedSquareButtonStyle}" />
+
+
+                <Label Grid.Row="1"
+                       VerticalAlignment="Bottom"
+                       Content="Nazwa łodzi:" />
+                <ComboBox x:Name="CbxBoat"
+                          Grid.Row="2"
+                          VerticalAlignment="Top"
+                          DisplayMemberPath="Name"
+                          ItemsSource="{Binding BoatsCollection}"
+                          SelectedIndex="{Binding SelectedIndexBoat,
+                                                  Mode=TwoWay,
+                                                  UpdateSourceTrigger=PropertyChanged}"
+                          SelectedValuePath="IdBoat" />
+                <Label Grid.Row="3"
+                       VerticalAlignment="Bottom"
+                       Content="Data, zakres od:" />
+                <DatePicker Grid.Row="4"
+                            Margin="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            SelectedDate="{Binding StartDate,
+                                                   Mode=TwoWay}" />
+                <Label Grid.Row="5"
+                       VerticalAlignment="Bottom"
+                       Content="Data, zakres do:" />
+                <DatePicker Grid.Row="6"
+                            Margin="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            SelectedDate="{Binding EndDate,
+                                                   Mode=TwoWay}" />
+                <Label Grid.Row="7"
+                       VerticalAlignment="Bottom"
+                       Content="Nr sesji:" />
+                <ComboBox x:Name="CbxSession"
+                          Grid.Row="8"
+                          Height="22"
+                          VerticalAlignment="Top"
+                          DisplayMemberPath="StartDate"
+                          ItemsSource="{Binding SessionCollection}"
+                          SelectedIndex="{Binding SelectedIndexSession,
+                                                  Mode=TwoWay,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+                <Label Grid.Row="9"
+                       Height="20"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Content="Brak danych w podanej sesji"
+                       FontStyle="Italic"
+                       FontWeight="Bold"
+                       Foreground="Red"
+                       Padding="2"
+                       TextOptions.TextFormattingMode="Display">
+                    <Label.Style>
+                        <Style TargetType="Label">
+                            <Setter Property="Visibility" Value="Hidden" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding isDataComplete}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+                <Button x:Name="BtnAcceptData"
+                        Grid.Row="10"
+                        Command="{Binding AcceptDataCommand}"
+                        Content="Zatwierdź"
+                        Style="{StaticResource AccentedSquareButtonStyle}" />
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

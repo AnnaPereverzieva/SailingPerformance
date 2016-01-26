@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Gui.View.UserControls.Flyouts.ExportImportFlyout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <DockPanel Margin="20"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Stretch">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Border>
+                <Button x:Name="BtnImportFromExcel"
+                        Grid.Row="0"
+                        Margin="5"
+                        VerticalAlignment="Stretch"
+                        Command="{Binding ImportExcelDataCommand}"
+                        DockPanel.Dock="Top"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+                    <TextBlock FontSize="12"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap">
+                        Importuj dane z Excela
+                    </TextBlock>
+
+                </Button>
+            </Border>
+            <Border Grid.Row="1">
+                <Button x:Name="BtnExportToExcel"
+                        Margin="5"
+                        VerticalAlignment="Stretch"
+                        Command="{Binding SaveToExcelCommand}"
+                        DockPanel.Dock="Top"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+                    <TextBlock FontSize="12"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap">
+                        Exportuj dane do Excela
+                    </TextBlock>
+                </Button>
+            </Border>
+            <Border Grid.Row="2">
+                <Button x:Name="BtnSaveToExcel"
+                        Margin="5"
+                        VerticalAlignment="Stretch"
+                        Command="{Binding SaveToPdfCommand}"
+                        DockPanel.Dock="Top"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+                    <TextBlock FontSize="12"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap">
+                        Generuj raport .png, .pdf
+                    </TextBlock>
+                </Button>
+            </Border>
+        </Grid>
+    </DockPanel>
+</UserControl>

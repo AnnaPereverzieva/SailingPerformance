@@ -1,0 +1,1484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="6c4f38f6-88aa-43c5-9888-0db6e9eea421"
+  name="Diagrams" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="846c6045-8199-40e7-83b6-5e7df6684656"
+        name="User"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="9db6d323-412c-4e9b-b56f-9b74cd9549e9"
+            isDerived="false"
+            sourceEndRoleName="User"
+            targetEndRoleName="rysuj wykres biegunowy dla wybranego jachtu"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="c8a36d2e-88f9-4084-8d83-7cd5ca1fbad0"
+              LastKnownName="rysuj wykres biegunowy dla wybranego jachtu"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bfa87453-ad84-403d-8d38-562529df7a39"
+                  name="User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ca496c17-f41f-4294-bf8c-91068a361020"
+                  name="rysuj wykres biegunowy dla wybranego jachtu"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="fc7f16e4-e786-460f-9409-49b133ef3b4d"
+            isDerived="false"
+            sourceEndRoleName="User"
+            targetEndRoleName="określ kurs optymalny "
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="a0c75f74-ff9d-4349-9307-1ade4b2a1167"
+              LastKnownName="określ kurs optymalny "
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="34fe1d53-41ae-4b42-9dd2-92c11e8f6ba5"
+                  name="User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6aca2d96-d271-45d1-b216-5e52a7405113"
+                  name="określ kurs optymalny "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="a036ec63-4504-4cde-98d8-8463e2b6f5d7"
+            isDerived="false"
+            sourceEndRoleName="User"
+            targetEndRoleName="exportuj raport do doc / excel"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="b194ad3d-7556-42ed-88a2-423c02268078"
+              LastKnownName="exportuj raport do doc / excel"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c0799beb-1045-42e6-9090-73cd156fd917"
+                  name="User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c9cdca90-c447-4893-8815-3c520014ebc4"
+                  name="exportuj raport do doc / excel"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="b8c5de01-60c2-4a84-8dd7-2f5c08c22e6e"
+            isDerived="false"
+            sourceEndRoleName="User"
+            targetEndRoleName="Importuj dane z excela do bazy danych"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="42e786c1-8309-4cef-b8f1-3c67fd34c86b"
+              LastKnownName="Importuj dane z excela do bazy danych"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ec337c58-dc38-4d10-b22a-3c8ea0ef9266"
+                  name="User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="be53f417-d897-4f14-9b4a-bc24d4c83848"
+                  name="Importuj dane z excela do bazy danych"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="9277fe30-1765-4bb4-85fd-edbf177fc899"
+        name="GPS / miernik wiatru"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="77e4279b-5bf9-42e6-b9b4-abf168fc25d7"
+            isDerived="false"
+            sourceEndRoleName="GPS"
+            targetEndRoleName="wysylanie danych do servisu"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="71d51c99-1aa8-43aa-a588-c3bab5ca2183"
+              LastKnownName="wysylanie danych do servisu"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5bb193ab-dc05-4d73-b1f3-af17e4ce6967"
+                  name="GPS"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="28f457d0-9133-4ee8-99ed-b58ede5b636d"
+                  name="wysylanie danych do servisu"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="df2fce33-c9d2-4c3e-9437-3bba68806704"
+        name="Application"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c8a36d2e-88f9-4084-8d83-7cd5ca1fbad0"
+        name="rysuj wykres biegunowy dla wybranego jachtu"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="08619b61-fa0d-4a51-a53e-bd6993083e3d"
+            LastKnownName="GUI"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="a0c75f74-ff9d-4349-9307-1ade4b2a1167"
+        name="określ kurs optymalny "
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="08619b61-fa0d-4a51-a53e-bd6993083e3d"
+            LastKnownName="GUI"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="b194ad3d-7556-42ed-88a2-423c02268078"
+        name="exportuj raport do doc / excel"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="08619b61-fa0d-4a51-a53e-bd6993083e3d"
+            LastKnownName="GUI"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="42e786c1-8309-4cef-b8f1-3c67fd34c86b"
+        name="Importuj dane z excela do bazy danych"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="08619b61-fa0d-4a51-a53e-bd6993083e3d"
+            LastKnownName="GUI"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="ed90abd9-e472-480a-a197-87b4b73d9757"
+        name="Zapis do bazy danych (Entity Framework - Database first) "
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="2032f2a3-f220-4b02-9ca6-882feb9f4fe9"
+            LastKnownName="Baza danych"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="d46406fb-ce0a-4767-a345-5839f9be0e02"
+        name="Service (WCF /WinApi)"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="48725ee7-05cc-48e3-9035-15cbaab8a993"
+            isDerived="false"
+            sourceEndRoleName="Servis (WCF /WinApi)"
+            targetEndRoleName="Zapis do bazy danych (Entity Framework) "
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="ed90abd9-e472-480a-a197-87b4b73d9757"
+              LastKnownName="Zapis do bazy danych (Entity Framework - Database first) "
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4d22914c-a630-4e51-a234-21bcd447993d"
+                  name="Servis (WCF /WinApi)"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3da8b2cb-cad3-4d4d-9e23-1d3b9c08673e"
+                  name="Zapis do bazy danych (Entity Framework) "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </subsystem>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="71d51c99-1aa8-43aa-a588-c3bab5ca2183"
+        name="wysylanie danych do servisu"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="d46406fb-ce0a-4767-a345-5839f9be0e02"
+            LastKnownName="Service (WCF /WinApi)"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="2032f2a3-f220-4b02-9ca6-882feb9f4fe9"
+        name="Baza danych"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="70238800-5d21-4160-9330-747660e47bbc"
+            isDerived="false"
+            sourceEndRoleName="Baza danych"
+            targetEndRoleName="Odczyt z bazy danych"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="08b6c612-db4f-49fd-89c9-e6c9c26fd98c"
+              LastKnownName="Odczyt z bazy danych"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="555d1870-5caa-4555-962d-40b298a41555"
+                  name="Baza danych"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7f556bac-4282-4d05-be66-58239e416a9b"
+                  name="Odczyt z bazy danych"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </subsystem>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="08619b61-fa0d-4a51-a53e-bd6993083e3d"
+        name="GUI"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="08b6c612-db4f-49fd-89c9-e6c9c26fd98c"
+        name="Odczyt z bazy danych"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="08619b61-fa0d-4a51-a53e-bd6993083e3d"
+            LastKnownName="GUI"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a5109823-f3c2-4006-a677-085c8580870a"
+        name="Jacht"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="03048709-830b-4f7e-8ed5-0195122084e6">
+            <interfaceMoniker
+              Id="74915be8-ab72-4ee3-afb7-f4a7e085246c"
+              LastKnownName="Wykres"
+              LastKnownLocation="Diagrams.uml" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="1700a0f0-478d-4746-93c8-c0882a297093"
+            isDerived="false"
+            sourceEndRoleName="Database"
+            targetEndRoleName="Class1"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="d13b6a4c-82f8-470a-981a-b78ca198a902"
+              LastKnownName="DaneGPS1"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c9f3da0f-2c08-440b-820e-5e6ad6306532"
+                  name="Database"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4355a655-a576-4f83-a45e-4a89dd45f50c"
+                  name="Class1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="e5766b76-85c5-49b9-8cf4-13e7f073efcf"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="69565919-59cc-4247-98c9-5e19be3c0f80"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="57c02585-de32-4a78-a6e8-f594e93ccc89"
+            isDerived="false"
+            sourceEndRoleName="Jacht"
+            targetEndRoleName="DaneGPS2"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="2b6c2a50-b888-430d-8969-317df9a49329"
+              LastKnownName="DaneGPS2"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6250ea55-6b8a-4985-81c8-fbb0260dd48b"
+                  name="Jacht"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6c81f756-03e3-4fcb-8741-4173331248c5"
+                  name="DaneGPS2"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="1664b74d-3b7d-4bc3-89c7-d63aacb8f3ab"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="6cb9b45a-de39-4bd8-8d93-ca61365bac92"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="b46a81c2-44f5-4c3e-b6b2-b08b2c0efa79"
+            isDerived="false"
+            sourceEndRoleName="Jacht"
+            targetEndRoleName="Sesje"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="a13d064e-ba81-40de-a9e5-5d1d56e3ccd1"
+              LastKnownName="Sesja"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3ae352b1-ea8d-4fe7-bb59-7c0c71b3793e"
+                  name="Jacht"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fe3dea18-4ceb-46cc-be92-60d9a8312df3"
+                  name="Sesje"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="964565c2-b194-410e-8189-d014bd7c2f54"
+            name="JachtID (GUID)"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="f118425e-4374-4aea-8f98-b3fcf98df94d"
+            name="nazwa"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="8a9fec4b-8712-4b17-a913-9da451d3d5c3"
+            name="Model"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="d13b6a4c-82f8-470a-981a-b78ca198a902"
+        name="DaneGPS1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="7888d5a3-b1f6-459b-8291-8a39ab72642b"
+            name="kurs"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="9886a8ab-489f-4b12-a4f6-5cb2d1172733"
+            name="predkosc"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="4e65c00d-283a-41aa-bc16-7eae191847ee"
+        name="Database"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="34fca8d3-ecbc-45cc-ab67-2293d961e3c3">
+            <interfaceMoniker
+              Id="74915be8-ab72-4ee3-afb7-f4a7e085246c"
+              LastKnownName="Wykres"
+              LastKnownLocation="Diagrams.uml" />
+          </interfaceRealization>
+          <dependency
+            Id="273bc849-ddba-4397-bf22-7b0da73cb394">
+            <interfaceMoniker
+              Id="49e7c1a2-2f1f-42e8-9d09-527c7358e4ce"
+              LastKnownName="ISerwis"
+              LastKnownLocation="Diagrams.uml" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="39b6e4ef-021a-4adb-a8fc-45fbca686ce0"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="d13b6a4c-82f8-470a-981a-b78ca198a902"
+              LastKnownName="DaneGPS1"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="27347367-af84-4976-aebc-b34d5a4741ce"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a37c90f7-95a8-45b1-b55f-e70680d36b1c"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="36d84620-659b-4fb4-8a8d-b86f8e2bfe1e"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="a0be06cb-cc98-4632-a008-654245a4ac23"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="e9ff6b3c-ab0e-49b0-aeaf-17708acab5b3"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="2b6c2a50-b888-430d-8969-317df9a49329"
+              LastKnownName="DaneGPS2"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b8a3eead-eccd-456f-91ff-df76ff5676a2"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="dc2324a9-df91-4f23-9116-c3598d86ed6d"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="59d21d14-752e-481e-90d2-3e217195313d"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="b4b0ed53-542a-4594-bbd6-514246495daa"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="67950294-abc3-4ea4-8890-3ba5f13f08a3"
+            isDerived="false"
+            sourceEndRoleName="Database"
+            targetEndRoleName="Sesje"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="a13d064e-ba81-40de-a9e5-5d1d56e3ccd1"
+              LastKnownName="Sesja"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e356162f-4c89-41db-903a-2cc5c49838f9"
+                  name="Database"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0236b69f-024e-43f2-a8da-efa71cdb7321"
+                  name="Sesje"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="658e7e55-3fb8-4346-bbde-b8240a7bc3f5"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="30b72120-ccca-4a65-a542-ac2c6b9823ae"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="41864fe1-cad8-4843-8a0c-dcf520500a4d"
+            name="Rysuj Wykres Biegunowy"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="cd11d418-4555-45d1-b472-d4962f8ee656"
+            name="Okresl Optymalny Kurs - min/max"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="1a564493-7590-41b0-a841-43942ee9124e"
+            name="Porównaj dane GPS"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="58b63804-88b8-4ddb-9152-b85be331bb13"
+            name="Eksportuj raport do excela/doc"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="ec5ba257-8e4d-43a1-b86e-e15f06393d22"
+            name="Generuj raport"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="73ae7653-4055-447f-a44d-129832217443"
+        name="Odczyt"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="55ef5f40-0b29-483c-9a7f-8b4627ec15e6"
+            name="wiatr sila"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="b98e9d09-23a0-4f9c-817e-a58324f5ab53"
+            name="wiatr kierunek"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="0068021f-5b55-42d8-a335-ba3957dbee31"
+            name="czas"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="4016400f-f63b-4348-ac4f-989cf91383cb"
+            name="kurs"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="87153f7e-3e52-409b-8e2f-c711f2bf542b"
+            name="predkosc"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="c01a8a77-5143-4c81-81c6-1e5a0a2e56b2"
+            name="geo dlugosc"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="e9c2f5fa-500d-4add-9527-16e9f36ad765"
+            name="geo szerokosc"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="b9b31c47-8c6c-4461-af3b-04e68474adf5"
+            name="geo wysokosc"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="29c9b921-fb04-4cff-ba73-1ab4200ab0db"
+            name="numer odczytu (GUID)"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="046896c0-7f31-48b5-822e-417f0323e5e0"
+            name="moment odczytu"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="74915be8-ab72-4ee3-afb7-f4a7e085246c"
+        name="Wykres"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="ce690292-7b84-459e-a0d9-317a2983e615"
+            name="Rysuj Wykres Biegunowy"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="e821def7-9f04-40a6-9978-83e09fe610ec"
+            name="Okresl Optymalny Kurs - min/max"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="a2c67165-2fd2-4f7a-ab44-1c05d2be0a4c"
+            name="Porównaj dane GPS"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="9dec12f5-2671-4580-b491-a8ff73dec216"
+            name="Eksportuj raport do excela/doc"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="9795cb6b-d973-4c0d-8426-511b44c47a0d"
+            name="Generuj raport"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="495fe83c-605e-4488-b59a-df78ccfa63cb"
+        name="Serwis"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="302efc5e-3c3c-4ac0-a082-1cc3033cb45d">
+            <interfaceMoniker
+              Id="49e7c1a2-2f1f-42e8-9d09-527c7358e4ce"
+              LastKnownName="ISerwis"
+              LastKnownLocation="Diagrams.uml" />
+          </interfaceRealization>
+          <dependency
+            Id="e76327f1-007b-4161-87e1-2bc151c89fa3">
+            <interfaceMoniker
+              Id="35f4c0eb-a059-4e5c-80d9-9ec432f745b1"
+              LastKnownName="IAplikacja urzadzen zewnetrznych"
+              LastKnownLocation="Diagrams.uml" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="bb1855d5-6843-4439-9e23-d853250be2c6"
+            name="DataContract"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="c0dcb8de-68c9-455b-a845-a558f9c14ef7"
+            name="ServiceContract"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="4f605310-41aa-404d-8249-af98b9005d92"
+            name="Zapisz dane do bazy"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="49e7c1a2-2f1f-42e8-9d09-527c7358e4ce"
+        name="ISerwis"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="1a2bf5c6-04ad-4fa6-a0ec-e0b01aeea213"
+            name="Zapisz dane do bazy"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="c3489498-65cc-4708-a950-90ba2f4e2e03"
+        name="GPS"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="20d9a72a-6eca-48c2-adab-a3a1af941c38">
+            <interfaceMoniker
+              Id="35f4c0eb-a059-4e5c-80d9-9ec432f745b1"
+              LastKnownName="IAplikacja urzadzen zewnetrznych"
+              LastKnownLocation="Diagrams.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="0c621c3a-6a48-43e6-b374-0d087ecac7af"
+            name="Dlugosc"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="a906c3b4-fb0a-4830-b5f5-a11e16de2c10"
+            name="Szerokosc"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="8110be8e-8cbd-4b82-9e54-f9bd16d68ceb"
+            name="Czas"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="7a563521-9b4b-4615-abcd-ab994cb2c4be"
+            name="kurs"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="83df5096-a4e0-4d5f-b597-9e8058ec8aad"
+            name="predkosc"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="c24ad8a8-2525-4356-bd87-1a8ddc4a4b44"
+            name="Wyslij dane do Serwisu"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="ba7bd2b6-b408-409d-b062-f6a0b669a2ab"
+            name="Konwertuj do XML"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="352a8661-b99c-4095-b5ac-8c2b9dcb5889"
+        name="Miernik Wiatru"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="ae4aaaab-2f19-48eb-982c-0887e92af1ca">
+            <interfaceMoniker
+              Id="35f4c0eb-a059-4e5c-80d9-9ec432f745b1"
+              LastKnownName="IAplikacja urzadzen zewnetrznych"
+              LastKnownLocation="Diagrams.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="5da248a5-0d9f-4b1a-bb55-fe996db411a7"
+            name="sila wiatru"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="5e1d0614-60eb-4525-9ab3-2cdc05c775ad"
+            name="kierunek wiatru"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="5e70197b-d44c-48ab-93ac-80255e765e87"
+            name="czas"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="a2b11481-704a-4904-898c-d9f789f83be5"
+            name="Wyslij dane do Serwisu"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="fcfb5e49-f17f-4373-ab75-39cc06f3bafe"
+            name="Konwertuj do XML"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="35f4c0eb-a059-4e5c-80d9-9ec432f745b1"
+        name="IAplikacja urzadzen zewnetrznych"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="830ebed2-d128-4497-987b-5a639b03b065"
+            name="Wyslij dane do Serwisu"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="2b6c2a50-b888-430d-8969-317df9a49329"
+        name="DaneGPS2"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="22fe6117-e776-4a07-bc6a-a19782b940bf"
+            name="Dlugosc"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="3b16e0f6-a62a-443b-a55d-c95798a615ae"
+            name="Szerokosc"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="08ef8b2c-638b-46c8-897c-dbfe440a5ae1"
+            name="Czas"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a13d064e-ba81-40de-a9e5-5d1d56e3ccd1"
+        name="Sesja"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="05a6ed15-c208-414c-a583-3022bac2bccc"
+            isDerived="false"
+            sourceEndRoleName="Sesje"
+            targetEndRoleName="Odczyty"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="73ae7653-4055-447f-a44d-129832217443"
+              LastKnownName="Odczyt"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a2dea4a6-63c6-4023-b242-d3371c2895b4"
+                  name="Sesje"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e7581954-a2a8-4dac-baa8-f9513dccab4b"
+                  name="Odczyty"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="71d00c26-072e-4823-9d51-f99304ec1f1a"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="af52ea7a-06a2-4720-ba9b-04a1a2873765"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="5c5dd8e1-de7e-44aa-a22f-e41749b9f055"
+            name="Numer sesji (GUID)"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="f9dc2d95-dae0-4a61-9b89-907e3e1a82af"
+            name="poczatek sesji (Unix time)"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>
