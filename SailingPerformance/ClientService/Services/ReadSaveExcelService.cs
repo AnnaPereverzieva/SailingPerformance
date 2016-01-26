@@ -13,10 +13,10 @@ namespace ClientService.Services
     public class ReadSaveExcelService
     {
         /// <summary>
-        /// Wczytuje dane z pliku excel
+        /// pobieranie danych z excelu
         /// </summary>
-        /// <param name="path">scierzka pliku</param>
-        /// <returns>kolekcja danych gps</returns>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public List<DataGps> LoadData(string path)
         {
             Workbook workbook = new Workbook();
@@ -45,9 +45,9 @@ namespace ClientService.Services
             }
             return DataGpsList;
         }
-
+		
         /// <summary>
-        /// Zapisuje dane do pliku excel
+        /// zapisywanie danych do excelu
         /// </summary>
         /// <param name="DataCollection">kolekcja danych gps </param>
         /// <param name="filePath">scierzka pliku</param>

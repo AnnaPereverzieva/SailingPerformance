@@ -18,7 +18,11 @@ namespace Tracker
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// przykładowa metoda dodania łódki. Wywoluje metody wcf dla sprawdzenia poprawnosci ich działania
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddBoat_Click(object sender, RoutedEventArgs e)
         {
            // var client=new BoatServiceClient();
@@ -39,6 +43,11 @@ namespace Tracker
           
             client.Close();
         }
+        /// <summary>
+        /// przykładowa metoda dodania danych gps. Wywoluje metody wcf dla sprawdzenia poprawnosci ich działania
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnAddData_Click(object sender, RoutedEventArgs e)
         {

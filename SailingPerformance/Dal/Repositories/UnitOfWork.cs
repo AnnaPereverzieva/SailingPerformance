@@ -11,6 +11,9 @@ namespace Dal.Repositories
         {
             _sailingDbContext = sailingDbContext;
         }
+        /// <summary>
+        /// początek transakcji
+        /// </summary>
         public void BeginTransaction()
         {
             if (_transaktion == null)
@@ -21,7 +24,9 @@ namespace Dal.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// koniec transakcji 
+        /// </summary>
         public void Commit()
         {
             if (_transaktion != null)

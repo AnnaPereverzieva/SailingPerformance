@@ -15,21 +15,37 @@ namespace Dal.Repositories
         {
             _sailingDbContext = sailingDbContext;
         }
+        /// <summary>
+        /// dodanie sesji do bazy
+        /// </summary>
+        /// <param name="entity"></param>
         public void Add(Session entity)
         {
             _sailingDbContext.Sessions.Add(entity);
         }
-
+        /// <summary>
+        /// aktualizacja sesji
+        /// </summary>
+        /// <param name="entity"></param>
         public void Update(Session entity)
         {
             _sailingDbContext.Sessions.AddOrUpdate(entity);
         }
-
+        /// <summary>
+        /// usuięcie sesji
+        /// </summary>
+        /// <param name="entity"></param>
         public void Delete(Session entity)
         {
             _sailingDbContext.Entry(entity).State = EntityState.Deleted;
         }
-
+        /// <summary>
+        /// pobierania listy sesje wg daty i Id sesji
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="stop"></param>
+        /// <param name="idBoat"></param>
+        /// <returns></returns>
         public List<Session> GetSessions(DateTime start, DateTime stop, Guid idBoat)
         {
             List<Session> listSessions;
@@ -39,7 +55,11 @@ namespace Dal.Repositories
             }
             return listSessions;
         }
-
+        /// <summary>
+        /// pobieranie zakresów dat wg Id łódki
+        /// </summary>
+        /// <param name="idBoat"></param>
+        /// <returns></returns>
         public Dictionary<DateTime, DateTime> GetStartEndDate(Guid idBoat)
         {
             DateTime startDate;
